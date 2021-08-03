@@ -1,0 +1,8 @@
+/.devcontainer
+/.github
+/.vscode
+/doc
+/src
+/.editorconfig
+/changelog.md
+/tsconfig.json

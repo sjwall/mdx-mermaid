@@ -1,0 +1,46 @@
+{
+  "name": "mdx-mermaid",
+  "version": "0.0.1",
+  "description": "Display mermaid diagrams in mdx files.",
+  "types": "index.d.ts",
+  "main": "lib/mdxast-mermaid.js",
+  "exports": {
+    ".": "./lib/mdxast-mermaid.js",
+    "./Mermaid": "./lib/Mermaid.js"
+  },
+  "author": "Sam Wall (oss@samuelwall.co.uk)",
+  "license": "MIT",
+  "scripts": {
+    "build": "rimraf lib && tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sjwall/mdx-mermaid.git"
+  },
+  "homepage": "https://sjwall.github.io/mdx-mermaid",
+  "bugs": "https://github.com/sjwall/mdx-mermaid/issues",
+  "keywords": [
+    "mdx",
+    "markdown",
+    "mermaid",
+    "docusaurus",
+    "mdxast",
+    "react",
+    "jsx"
+  ],
+  "peerDependencies": {
+    "mermaid": "^8.0.0",
+    "react": "^16.8.4 || ^17.0.0",
+    "unist-util-visit": "^2.0.0"
+  },
+  "devDependencies": {
+    "@types/mermaid": "^8.2.7",
+    "@types/react": "^17.0.15",
+    "@types/unist": "^2.0.6",
+    "mermaid": "^8.0.0",
+    "react": "^17.0.1",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.3.5",
+    "unist-util-visit": "^2.0.0"
+  }
+}

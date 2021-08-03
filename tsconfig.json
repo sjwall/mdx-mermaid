@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "declaration": true,
+        "esModuleInterop": true,
+        "jsx": "react",
+        "lib": ["ESNext", "DOM"],
+        "module": "CommonJS",
+        "moduleResolution": "node",
+        "outDir": "lib",
+        "rootDir": "src",
+        "sourceMap": true,
+        "strict": true,
+        "target": "ES2015"
+    },
+    "exclude": [
+        "node_modules",
+        "index.d.ts"
+    ]
+}
