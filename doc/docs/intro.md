@@ -19,7 +19,7 @@ yarn add mdx-mermaid
 ```
 
 ```shell title=PNPM
-pnpm add mdx-meraid
+pnpm add mdx-mermaid
 ```
 
 ## Configure in Docusaurus
