@@ -25,6 +25,7 @@ jobs:
         run: |
           yarn test
       - name: Build docs
+        run: |
           cd doc
           yarn install --frozen-lockfile
           yarn build
