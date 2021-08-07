@@ -24,7 +24,7 @@ jobs:
       - name: Test
         run: |
           yarn test
-      -name: Build docs
+      - name: Build docs
           cd doc
           yarn install --frozen-lockfile
           yarn build

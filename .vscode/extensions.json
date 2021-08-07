@@ -6,6 +6,7 @@
         "ms-azuretools.vscode-docker",
         "davidanson.vscode-markdownlint",
         "streetsidesoftware.code-spell-checker",
-        "silvenon.mdx"
+        "silvenon.mdx",
+        "redhat.vscode-yaml"
     ]
 }
