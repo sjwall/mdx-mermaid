@@ -6,6 +6,7 @@ Based off the answer [here][inspire] by unknown.
 
 [![npm version](https://badge.fury.io/js/mdx-mermaid.svg)][npm]
 [![GitHub license](https://img.shields.io/github/license/sjwall/mdx-mermaid)][license]
+[![build](https://github.com/sjwall/mdx-mermaid/actions/workflows/build.yml/badge.svg)](https://github.com/sjwall/mdx-mermaid/actions/workflows/build.yml)
 
 ## Quick start with Docusaurus
 
