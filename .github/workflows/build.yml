@@ -25,7 +25,7 @@ jobs:
           yarn install --frozen-lockfile
           npm run build
   gh-release:
-    if: github.event_name = 'release'
+    if: github.event_name == 'release'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
