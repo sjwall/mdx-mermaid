@@ -1,14 +1,16 @@
-name: documentation
+name: build
 
 on:
   pull_request:
     branches: [main]
   push:
     branches: [main]
+  release:
+    branches: [main]
 
 jobs:
   checks:
-    if: github.event_name != 'push'
+    if: github.event_name != 'release'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -23,7 +25,7 @@ jobs:
           yarn install --frozen-lockfile
           npm run build
   gh-release:
-    if: github.event_name != 'pull_request'
+    if: github.event_name = 'release'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
