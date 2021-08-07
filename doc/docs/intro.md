@@ -8,7 +8,7 @@ Setup mdx-mermaid in Docusaurus.
 
 ## Installing
 
-Use your preffered package manager to install.
+Use your preferred package manager to install.
 
 ```shell title=NPM
 npm i mdx-mermaid
@@ -58,7 +58,6 @@ graph TD;
 ## Admire your diagram
 
 Take the time to appreciate your diagram.
-
 
 ```mermaid
 graph TD;
