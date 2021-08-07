@@ -8,10 +8,22 @@
             "type": "node",
             "request": "launch",
             "name": "Build via yarn",
-            "cwd": "${workspaceFolder}/lib",
             "runtimeExecutable": "yarn",
             "runtimeArgs": [
                 "build"
+            ],
+            "port": 9229,
+            "skipFiles": [
+                "<node_internals>/**"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Test via yarn",
+            "runtimeExecutable": "yarn",
+            "runtimeArgs": [
+                "test"
             ],
             "port": 9229,
             "skipFiles": [

@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) Samuel Wall.
+ *
+ * This source code is licensed under the MIT license found in the
+ * license file in the root directory of this source tree.
+ */
+
 import visit from 'unist-util-visit'
 import { Literal, Parent, Node, Data } from 'unist'
 
@@ -11,9 +18,7 @@ function plugin () {
     // Find all the mermaid diagram code blocks. i.e. ```mermaid
     const instances: [Literal, number, Parent<Node<Data> | Literal, Data>][] = []
     visit<CodeMermaid>(ast, { type: 'code', lang: 'mermaid' }, (node, index, parent) => {
-      if (typeof parent !== 'undefined') {
-        instances.push([node, index, parent])
-      }
+      instances.push([node, index, parent as Parent<Node<Data>, Data>])
     })
 
     // If there are no diagrams return

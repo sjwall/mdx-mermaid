@@ -17,13 +17,22 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '16.x'
-      - name: Test Build
+      - name: Build
         run: |
           yarn install --frozen-lockfile
-          npm run build
+          yarn build
+      - name: Test
+        run: |
+          yarn test
+      -name: Build docs
           cd doc
           yarn install --frozen-lockfile
-          npm run build
+          yarn build
+          cd ..
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
   gh-release:
     if: github.event_name == 'release'
     runs-on: ubuntu-latest
@@ -43,7 +52,7 @@ jobs:
           git config --global user.email "oss@samuelwall.co.uk"
           git config --global user.name "sjwall"
           yarn install --frozen-lockfile
-          npm run build
+          yarn build
           cd doc
           yarn install --frozen-lockfile
           yarn deploy

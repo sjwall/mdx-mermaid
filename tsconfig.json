@@ -6,6 +6,7 @@
         "lib": ["ESNext", "DOM"],
         "module": "CommonJS",
         "moduleResolution": "node",
+        "noImplicitAny": false,
         "outDir": "lib",
         "rootDir": "src",
         "sourceMap": true,

@@ -11,7 +11,8 @@
   "author": "Sam Wall (oss@samuelwall.co.uk)",
   "license": "MIT",
   "scripts": {
-    "build": "rimraf lib && tsc"
+    "build": "rimraf lib && tsc",
+    "test": "jest --coverage"
   },
   "repository": {
     "type": "git",
@@ -34,6 +35,8 @@
     "unist-util-visit": "^2.0.0"
   },
   "devDependencies": {
+    "@mdx-js/mdx": "^1.6.22",
+    "@types/jest": "^26.0.24",
     "@types/mermaid": "^8.2.7",
     "@types/react": "^17.0.15",
     "@types/unist": "^2.0.6",
@@ -45,9 +48,11 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.0",
     "eslint-plugin-react": "^7.24.0",
+    "jest": "^27.0.6",
     "mermaid": "^8.0.0",
     "react": "^17.0.1",
     "rimraf": "^3.0.2",
+    "ts-jest": "^27.0.4",
     "typescript": "^4.3.5",
     "unist-util-visit": "^2.0.0"
   }

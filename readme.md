@@ -1,12 +1,16 @@
-# mdx-mermaid: Plug and play Mermaid in MDX
+# mdx-mermaid
 
-Use [Mermaid][mermaid] in `.mdx` files with ease.
-
-Based off the answer [here][inspire] by unknown.
+Plug and play Mermaid in MDX
 
 [![npm version](https://badge.fury.io/js/mdx-mermaid.svg)][npm]
 [![GitHub license](https://img.shields.io/github/license/sjwall/mdx-mermaid)][license]
 [![build](https://github.com/sjwall/mdx-mermaid/actions/workflows/build.yml/badge.svg)](https://github.com/sjwall/mdx-mermaid/actions/workflows/build.yml)
+[![codecov](https://codecov.io/gh/sjwall/mdx-mermaid/branch/main/graph/badge.svg?token=OBSGK4GGX8)](https://codecov.io/gh/sjwall/mdx-mermaid)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)][pr]
+
+Use [Mermaid][mermaid] in `.mdx`, `.jsx` and `.tsx` files with ease.
+
+Based off the answer [here][inspire] by unknown.
 
 ## Quick start with Docusaurus
 
@@ -39,7 +43,7 @@ graph TD;
 ```
 ````
 
-Use the component in `.mdx` files:
+Use the component in `.mdx`, `.jsx` or `.tsx` files:
 
 ```jsx
 import { Mermaid } from 'mdx-mermaid/Mermaid';
@@ -67,3 +71,5 @@ import { Mermaid } from 'mdx-mermaid/Mermaid';
 [mermaid]: http://mermaid-js.github.io/mermaid/
 
 [inspire]: https://github.com/facebook/docusaurus/issues/1258#issuecomment-594393744
+
+[pr]: http://makeapullrequest.com
