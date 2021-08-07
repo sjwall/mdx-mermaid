@@ -1,6 +1,11 @@
 # mdx-mermaid: Plug and play Mermaid in MDX
 
-Based off the answer [here](https://github.com/facebook/docusaurus/issues/1258#issuecomment-594393744) by unknown.
+Use [Mermaid][mermaid] in `.mdx` files with ease.
+
+Based off the answer [here][inspire] by unknown.
+
+[![npm version](https://badge.fury.io/js/mdx-mermaid.svg)][npm]
+[![GitHub license](https://img.shields.io/github/license/sjwall/mdx-mermaid)][license]
 
 ## Quick start with Docusaurus
 
@@ -52,6 +57,12 @@ import { Mermaid } from 'mdx-mermaid/Mermaid';
 
 <!-- Definitions -->
 
-[license]: https://github.com/remarkjs/remark/blob/main/license
+[license]: https://github.com/sjwall/mdx-mermaid/blob/main/license
 
 [author]: https://samuelwall.co.uk
+
+[npm]: https://www.npmjs.com/package/mdx-mermaid
+
+[mermaid]: http://mermaid-js.github.io/mermaid/
+
+[inspire]: https://github.com/facebook/docusaurus/issues/1258#issuecomment-594393744

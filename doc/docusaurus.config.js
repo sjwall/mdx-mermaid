@@ -10,6 +10,7 @@ module.exports = {
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
+  trailingSlash: true,
   organizationName: 'sjwall', // Usually your GitHub org/user name.
   projectName: 'mdx-mermaid', // Usually your repo name.
   themeConfig: {
