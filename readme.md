@@ -6,6 +6,7 @@ Plug and play Mermaid in MDX
 [![GitHub license](https://img.shields.io/github/license/sjwall/mdx-mermaid)][license]
 [![build](https://github.com/sjwall/mdx-mermaid/actions/workflows/build.yml/badge.svg)](https://github.com/sjwall/mdx-mermaid/actions/workflows/build.yml)
 [![codecov](https://codecov.io/gh/sjwall/mdx-mermaid/branch/main/graph/badge.svg?token=OBSGK4GGX8)](https://codecov.io/gh/sjwall/mdx-mermaid)
+[![Maintainability](https://api.codeclimate.com/v1/badges/9d89c7483bb1a906ecdf/maintainability)](https://codeclimate.com/github/sjwall/mdx-mermaid/maintainability)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)][pr]
 
 Use [Mermaid][mermaid] in `.mdx`, `.jsx` and `.tsx` files with ease.
