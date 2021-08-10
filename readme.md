@@ -15,10 +15,12 @@ Based off the answer [here][inspire] by unknown.
 
 ## Quick start with Docusaurus
 
-Install `mdx-mermaid`
+Install `mdx-mermaid` and `mermaid`
+
+`mermaid` is a peer dependency so you can specify the version to use
 
 ```bash
-yarn add mdx-mermaid
+yarn add mdx-mermaid mermaid
 ```
 
 Update `docusaurus.config.js`

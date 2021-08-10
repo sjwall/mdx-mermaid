@@ -11,15 +11,15 @@ Setup mdx-mermaid in Docusaurus.
 Use your preferred package manager to install.
 
 ```shell title=NPM
-npm i mdx-mermaid
+npm i mdx-mermaid mermaid
 ```
 
 ```shell title=Yarn
-yarn add mdx-mermaid
+yarn add mdx-mermaid mermaid
 ```
 
 ```shell title=PNPM
-pnpm add mdx-mermaid
+pnpm add mdx-mermaid mermaid
 ```
 
 ## Configure in Docusaurus
