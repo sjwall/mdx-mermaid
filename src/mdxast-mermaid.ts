@@ -31,6 +31,7 @@ function plugin () {
     visit(ast, { type: 'import' }, (node: Literal<string>) => {
       if (/\s*import\s*{\s*Mermaid\s*}\s*from\s*'mdx-mermaid\/Mermaid'\s*;?\s*/.test(node.value)) {
         importFound = true
+        return visit.EXIT
       }
     })
 
