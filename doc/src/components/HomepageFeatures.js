@@ -1,9 +1,8 @@
-import React from 'react';
-import clsx from 'clsx';
-import styles from './HomepageFeatures.module.css';
+import React from 'react'
+import styles from './HomepageFeatures.module.css'
 import { Mermaid } from 'mdx-mermaid/Mermaid'
 
-export default function HomepageFeatures() {
+export default function HomepageFeatures () {
   return (
     <section className={styles.features}>
       <div className="container">
@@ -15,9 +14,11 @@ graph LR;
     cm-->mdx[mdx-mermaid];
     mdx-->Mermaid;
     Mermaid-->SVG;
-`}/>
+`}
+// This isn't processed by the parser so needs config passing if it's to be configured
+config={{}}/>
         </div>
       </div>
     </section>
-  );
+  )
 }

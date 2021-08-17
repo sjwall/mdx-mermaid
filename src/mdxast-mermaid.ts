@@ -8,12 +8,20 @@
 import visit from 'unist-util-visit'
 import { Literal, Parent, Node, Data } from 'unist'
 
+import { Config } from './config.model'
+
 type CodeMermaid = Literal<string> & {
   type: 'code'
   lang: 'mermaid'
 }
 
-function plugin () {
+/**
+ * mdx-mermaid plugin.
+ *
+ * @param config Config passed in from parser.
+ * @returns Function to transform mdxast.
+ */
+function plugin (config?: Config) {
   /**
    * Insert the component import into the document.
    * @param ast The document to insert into.
@@ -48,6 +56,13 @@ function plugin () {
       // Look for any components
       visit<Literal<string> & { type: 'jsx' }>(ast, { type: 'jsx' }, (node, index, parent) => {
         if (/.*<Mermaid.*/.test(node.value)) {
+          // If the component doesn't have config
+          if (typeof config !== 'undefined' && !/.*config={.*/.test(node.value)) {
+            const index = node.value.indexOf('<Mermaid') + 8
+            node.value = node.value.substring(0, index) +
+              ` config={${JSON.stringify(config)}}` +
+              node.value.substring(index)
+          }
           insertImport(ast)
           return visit.EXIT
         }
@@ -55,11 +70,19 @@ function plugin () {
       return ast
     }
 
+    let first = true
     // Replace each Mermaid code block with the Mermaid component
     instances.forEach(([node, index, parent]) => {
+      // Pass the config to the component
+      let configString = ''
+      if (first && typeof config !== 'undefined') {
+        first = false
+        configString = ` config={${JSON.stringify(config)}}`
+      }
+
       parent.children.splice(index, 1, {
         type: 'jsx',
-        value: `<Mermaid chart={\`${node.value}\`} />`,
+        value: `<Mermaid chart={\`${node.value}\`}${configString}/>`,
         position: node.position
       })
     })

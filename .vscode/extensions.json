@@ -7,6 +7,7 @@
         "davidanson.vscode-markdownlint",
         "streetsidesoftware.code-spell-checker",
         "silvenon.mdx",
-        "redhat.vscode-yaml"
+        "redhat.vscode-yaml",
+        "orta.vscode-jest"
     ]
 }

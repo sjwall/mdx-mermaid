@@ -8,16 +8,27 @@
 import { createCompiler } from '@mdx-js/mdx'
 import mermaid from './mdxast-mermaid'
 
-const mdxCompiler = createCompiler({
-  remarkPlugins: [mermaid]
-})
+import { Config } from './config.model'
+
+function createTestCompiler (config?: Config) {
+  if (config) {
+    return createCompiler({
+      remarkPlugins: [[mermaid, config]]
+    })
+  }
+  return createCompiler({
+    remarkPlugins: [mermaid]
+  })
+}
 
 test('No mermaid', async () => {
+  const mdxCompiler = createTestCompiler()
   const result = await mdxCompiler.process('# Heading 1\n\nNo Mermaid diagram :(')
   expect(result.contents).toEqual("\n\n\nconst layoutProps = {\n  \n};\nconst MDXLayout = \"wrapper\"\nexport default function MDXContent({\n  components,\n  ...props\n}) {\n  return <MDXLayout {...layoutProps} {...props} components={components} mdxType=\"MDXLayout\">\n    <h1>{`Heading 1`}</h1>\n    <p>{`No Mermaid diagram :(`}</p>\n    </MDXLayout>;\n}\n\n;\nMDXContent.isMDXComponent = true;")
 })
 
 test('Basic', async () => {
+  const mdxCompiler = createTestCompiler()
   const result = await mdxCompiler.process(`# Heading 1\n
 \`\`\`mermaid
 graph TD;
@@ -30,6 +41,7 @@ graph TD;
 })
 
 test('Existing import', async () => {
+  const mdxCompiler = createTestCompiler()
   const result = await mdxCompiler.process(`import { Mermaid } from 'mdx-mermaid/Mermaid';\n\n# Heading 1\n
 \`\`\`mermaid
 graph TD;
@@ -42,6 +54,7 @@ graph TD;
 })
 
 test('Other imports', async () => {
+  const mdxCompiler = createTestCompiler()
   const result = await mdxCompiler.process(`import { A } from 'a';\n\n# Heading 1\n
 \`\`\`mermaid
 graph TD;
@@ -54,6 +67,7 @@ graph TD;
 })
 
 test('Other imports component', async () => {
+  const mdxCompiler = createTestCompiler()
   const result = await mdxCompiler.process(`import { A } from 'a';\n\n# Heading 1\n
 <Mermaid chart={\`graph TD;
       A-->B;
@@ -87,6 +101,7 @@ MDXContent.isMDXComponent = true;`)
 })
 
 test('Other imports with other component', async () => {
+  const mdxCompiler = createTestCompiler()
   const result = await mdxCompiler.process(`import { A } from 'a';
 
 # Heading 1
@@ -121,6 +136,80 @@ export default function MDXContent({
       A-->C;
       B-->D;
       C-->D;\`} mdxType="Mermaid" />
+    </MDXLayout>;
+}
+
+;
+MDXContent.isMDXComponent = true;`)
+})
+
+test('Config', async () => {
+  const mdxCompiler = createTestCompiler({ mermaid: { theme: 'dark' } })
+  const result = await mdxCompiler.process(`# Heading 1\n
+\`\`\`mermaid
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+\`\`\``)
+  expect(result.contents).toEqual(`import { Mermaid } from 'mdx-mermaid/Mermaid';
+
+
+const layoutProps = {\n  \n};
+const MDXLayout = "wrapper"
+export default function MDXContent({
+  components,
+  ...props
+}) {
+  return <MDXLayout {...layoutProps} {...props} components={components} mdxType="MDXLayout">
+
+    <h1>{\`Heading 1\`}</h1>
+    <Mermaid chart={\`graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;\`} config={{
+      "mermaid": {
+        "theme": "dark"
+      }
+    }} mdxType="Mermaid" />
+    </MDXLayout>;
+}
+
+;
+MDXContent.isMDXComponent = true;`)
+})
+
+test('Config component', async () => {
+  const mdxCompiler = createTestCompiler({ mermaid: { theme: 'dark' } })
+  const result = await mdxCompiler.process(`# Heading 1\n
+<Mermaid chart={\`graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;\`} />`)
+  expect(result.contents).toEqual(`import { Mermaid } from 'mdx-mermaid/Mermaid';
+
+
+const layoutProps = {\n  \n};
+const MDXLayout = "wrapper"
+export default function MDXContent({
+  components,
+  ...props
+}) {
+  return <MDXLayout {...layoutProps} {...props} components={components} mdxType="MDXLayout">
+
+    <h1>{\`Heading 1\`}</h1>
+    <Mermaid config={{
+      "mermaid": {
+        "theme": "dark"
+      }
+    }} chart={\`graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;\`} mdxType="Mermaid" />
     </MDXLayout>;
 }
 
