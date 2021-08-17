@@ -52,3 +52,78 @@ graph TD;
 \`\`\``)
   expect(result.contents).toEqual("import { Mermaid } from 'mdx-mermaid/Mermaid';\nimport { A } from 'a';\n\n\nconst layoutProps = {\n  \n};\nconst MDXLayout = \"wrapper\"\nexport default function MDXContent({\n  components,\n  ...props\n}) {\n  return <MDXLayout {...layoutProps} {...props} components={components} mdxType=\"MDXLayout\">\n\n\n    <h1>{`Heading 1`}</h1>\n    <Mermaid chart={`graph TD;\n    A-->B;\n    A-->C;\n    B-->D;\n    C-->D;`} mdxType=\"Mermaid\" />\n    </MDXLayout>;\n}\n\n;\nMDXContent.isMDXComponent = true;")
 })
+
+test('Other imports component', async () => {
+  const result = await mdxCompiler.process(`import { A } from 'a';\n\n# Heading 1\n
+<Mermaid chart={\`graph TD;
+      A-->B;
+      A-->C;
+      B-->D;
+      C-->D;\`} />`)
+  expect(result.contents).toEqual(`import { Mermaid } from 'mdx-mermaid/Mermaid';
+import { A } from 'a';
+
+
+const layoutProps = {\n  \n};
+const MDXLayout = "wrapper"
+export default function MDXContent({
+  components,
+  ...props
+}) {
+  return <MDXLayout {...layoutProps} {...props} components={components} mdxType="MDXLayout">
+
+
+    <h1>{\`Heading 1\`}</h1>
+    <Mermaid chart={\`graph TD;
+      A-->B;
+      A-->C;
+      B-->D;
+      C-->D;\`} mdxType="Mermaid" />
+    </MDXLayout>;
+}
+
+;
+MDXContent.isMDXComponent = true;`)
+})
+
+test('Other imports with other component', async () => {
+  const result = await mdxCompiler.process(`import { A } from 'a';
+
+# Heading 1
+
+<A>Hi</A>
+
+## Heading 2
+
+<Mermaid chart={\`graph TD;
+      A-->B;
+      A-->C;
+      B-->D;
+      C-->D;\`} />`)
+  expect(result.contents).toEqual(`import { Mermaid } from 'mdx-mermaid/Mermaid';
+import { A } from 'a';
+
+
+const layoutProps = {\n  \n};
+const MDXLayout = "wrapper"
+export default function MDXContent({
+  components,
+  ...props
+}) {
+  return <MDXLayout {...layoutProps} {...props} components={components} mdxType="MDXLayout">
+
+
+    <h1>{\`Heading 1\`}</h1>
+    <A mdxType="A">Hi</A>
+    <h2>{\`Heading 2\`}</h2>
+    <Mermaid chart={\`graph TD;
+      A-->B;
+      A-->C;
+      B-->D;
+      C-->D;\`} mdxType="Mermaid" />
+    </MDXLayout>;
+}
+
+;
+MDXContent.isMDXComponent = true;`)
+})

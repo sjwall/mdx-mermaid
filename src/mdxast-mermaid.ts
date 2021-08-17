@@ -14,18 +14,11 @@ type CodeMermaid = Literal<string> & {
 }
 
 function plugin () {
-  return async function transformer (ast: Parent<Node<Data> | Literal, Data>): Promise<Parent> {
-    // Find all the mermaid diagram code blocks. i.e. ```mermaid
-    const instances: [Literal, number, Parent<Node<Data> | Literal, Data>][] = []
-    visit<CodeMermaid>(ast, { type: 'code', lang: 'mermaid' }, (node, index, parent) => {
-      instances.push([node, index, parent as Parent<Node<Data>, Data>])
-    })
-
-    // If there are no diagrams return
-    if (!instances.length) {
-      return ast
-    }
-
+  /**
+   * Insert the component import into the document.
+   * @param ast The document to insert into.
+   */
+  function insertImport (ast: Parent<Node<Data> | Literal, Data>) {
     // See if there is already an import for the Mermaid component
     let importFound = false
     visit(ast, { type: 'import' }, (node: Literal<string>) => {
@@ -36,23 +29,43 @@ function plugin () {
     })
 
     // Add the Mermaid component import to the top
-    let indexModify = 0
     if (!importFound) {
       ast.children.splice(0, 0, {
         type: 'import',
         value: 'import { Mermaid } from \'mdx-mermaid/Mermaid\';'
       })
-      indexModify = 1
+    }
+  }
+
+  return async function transformer (ast: Parent<Node<Data> | Literal, Data>): Promise<Parent> {
+    // Find all the mermaid diagram code blocks. i.e. ```mermaid
+    const instances: [Literal, number, Parent<Node<Data> | Literal, Data>][] = []
+    visit<CodeMermaid>(ast, { type: 'code', lang: 'mermaid' }, (node, index, parent) => {
+      instances.push([node, index, parent as Parent<Node<Data>, Data>])
+    })
+    // If there are no code blocks return
+    if (!instances.length) {
+      // Look for any components
+      visit<Literal<string> & { type: 'jsx' }>(ast, { type: 'jsx' }, (node, index, parent) => {
+        if (/.*<Mermaid.*/.test(node.value)) {
+          insertImport(ast)
+          return visit.EXIT
+        }
+      })
+      return ast
     }
 
     // Replace each Mermaid code block with the Mermaid component
     instances.forEach(([node, index, parent]) => {
-      parent.children.splice(index + indexModify, 1, {
+      parent.children.splice(index, 1, {
         type: 'jsx',
         value: `<Mermaid chart={\`${node.value}\`} />`,
         position: node.position
       })
     })
+
+    insertImport(ast)
+
     return ast
   }
 }
