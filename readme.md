@@ -59,6 +59,8 @@ import { Mermaid } from 'mdx-mermaid/Mermaid';
 `} />
 ```
 
+There are more examples [here][examples]
+
 ## License
 
 [MIT][license] © [Samuel Wall][author]
@@ -76,3 +78,5 @@ import { Mermaid } from 'mdx-mermaid/Mermaid';
 [inspire]: https://github.com/facebook/docusaurus/issues/1258#issuecomment-594393744
 
 [pr]: http://makeapullrequest.com
+
+[examples]: https://sjwall.github.io/mdx-mermaid/docs/examples/
