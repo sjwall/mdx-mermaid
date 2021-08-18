@@ -9,7 +9,7 @@ Plug and play Mermaid in MDX
 [![Maintainability](https://api.codeclimate.com/v1/badges/9d89c7483bb1a906ecdf/maintainability)](https://codeclimate.com/github/sjwall/mdx-mermaid/maintainability)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)][pr]
 
-Use [Mermaid][mermaid] in `.mdx`, `.jsx` and `.tsx` files with ease.
+Use [Mermaid][mermaid] in `.md`, `.mdx`, `.jsx` and `.tsx` files with ease.
 
 Based off the answer [here][inspire] by unknown.
 
