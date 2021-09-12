@@ -30,7 +30,7 @@ function plugin (config?: Config) {
     // See if there is already an import for the Mermaid component
     let importFound = false
     visit(ast, { type: 'import' }, (node: Literal<string>) => {
-      if (/\s*import\s*{\s*Mermaid\s*}\s*from\s*'mdx-mermaid\/Mermaid'\s*;?\s*/.test(node.value)) {
+      if (/\s*import\s*{\s*Mermaid\s*}\s*from\s*'mdx-mermaid(\/lib)?\/Mermaid'\s*;?\s*/.test(node.value)) {
         importFound = true
         return visit.EXIT
       }
@@ -40,7 +40,7 @@ function plugin (config?: Config) {
     if (!importFound) {
       ast.children.splice(0, 0, {
         type: 'import',
-        value: 'import { Mermaid } from \'mdx-mermaid/Mermaid\';'
+        value: 'import { Mermaid } from \'mdx-mermaid/lib/Mermaid\';'
       })
     }
   }
