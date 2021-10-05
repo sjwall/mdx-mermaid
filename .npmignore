@@ -3,6 +3,7 @@
 /.vscode
 /coverage
 /doc
+/react-example-app
 /src
 /.editorconfig
 /.eslintrc.js
