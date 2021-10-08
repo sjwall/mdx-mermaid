@@ -6,7 +6,8 @@
   "main": "lib/mdxast-mermaid.js",
   "exports": {
     ".": "./lib/mdxast-mermaid.js",
-    "./Mermaid": "./lib/Mermaid.js"
+    "./Mermaid": "./lib/Mermaid.js",
+    "./lib/Mermaid": "./lib/Mermaid.js"
   },
   "author": "Sam Wall (oss@samuelwall.co.uk)",
   "license": "MIT",

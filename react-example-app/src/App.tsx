@@ -12,14 +12,6 @@ function App() {
           participant Mermaid
           participant React
           Mermaid->>React: Hello React, how are you?`} />
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
       </header>
     </div>
   );
