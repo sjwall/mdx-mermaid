@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmdx_mermaid_doc=self.webpackChunkmdx_mermaid_doc||[]).push([[755],{447:function(e){e.exports={blogPosts:[]}}}]);
