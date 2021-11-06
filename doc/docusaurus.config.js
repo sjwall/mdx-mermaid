@@ -1,8 +1,11 @@
+// @ts-check
+// Note: type annotations allow type checking and IDEs autocompletion
+
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
-/** @type {import('@docusaurus/types').DocusaurusConfig} */
-module.exports = {
+/** @type {import('@docusaurus/types').Config} */
+const config = {
   title: 'mdx-mermaid',
   tagline: 'Plug and play Mermaid in MDX',
   url: 'https://sjwall.github.io',
@@ -13,7 +16,9 @@ module.exports = {
   trailingSlash: true,
   organizationName: 'sjwall', // Usually your GitHub org/user name.
   projectName: 'mdx-mermaid', // Usually your repo name.
-  themeConfig: {
+  themeConfig:
+  /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
+  ({
     navbar: {
       title: 'mdx-mermaid',
       logo: {
@@ -71,11 +76,12 @@ module.exports = {
       theme: lightCodeTheme,
       darkTheme: darkCodeTheme,
     },
-  },
+  }),
   presets: [
     [
       '@docusaurus/preset-classic',
-      {
+      /** @type {import('@docusaurus/preset-classic').Options} */
+      ({
         docs: {
           remarkPlugins: [require('mdx-mermaid')],
           sidebarPath: require.resolve('./sidebars.js'),
@@ -86,7 +92,9 @@ module.exports = {
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
-      },
+      }),
     ],
   ],
 };
+
+module.exports = config;
