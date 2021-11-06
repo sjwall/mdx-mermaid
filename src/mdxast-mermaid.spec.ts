@@ -37,10 +37,23 @@ graph TD;
     B-->D;
     C-->D;
 \`\`\``)
-  expect(result.contents).toEqual("import { Mermaid } from 'mdx-mermaid/Mermaid';\n\n\nconst layoutProps = {\n  \n};\nconst MDXLayout = \"wrapper\"\nexport default function MDXContent({\n  components,\n  ...props\n}) {\n  return <MDXLayout {...layoutProps} {...props} components={components} mdxType=\"MDXLayout\">\n\n    <h1>{`Heading 1`}</h1>\n    <Mermaid chart={`graph TD;\n    A-->B;\n    A-->C;\n    B-->D;\n    C-->D;`} mdxType=\"Mermaid\" />\n    </MDXLayout>;\n}\n\n;\nMDXContent.isMDXComponent = true;")
+  expect(result.contents).toEqual("import { Mermaid } from 'mdx-mermaid/lib/Mermaid';\n\n\nconst layoutProps = {\n  \n};\nconst MDXLayout = \"wrapper\"\nexport default function MDXContent({\n  components,\n  ...props\n}) {\n  return <MDXLayout {...layoutProps} {...props} components={components} mdxType=\"MDXLayout\">\n\n    <h1>{`Heading 1`}</h1>\n    <Mermaid chart={`graph TD;\n    A-->B;\n    A-->C;\n    B-->D;\n    C-->D;`} mdxType=\"Mermaid\" />\n    </MDXLayout>;\n}\n\n;\nMDXContent.isMDXComponent = true;")
 })
 
 test('Existing import', async () => {
+  const mdxCompiler = createTestCompiler()
+  const result = await mdxCompiler.process(`import { Mermaid } from 'mdx-mermaid/lib/Mermaid';\n\n# Heading 1\n
+\`\`\`mermaid
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+\`\`\``)
+  expect(result.contents).toEqual("import { Mermaid } from 'mdx-mermaid/lib/Mermaid';\n\n\nconst layoutProps = {\n  \n};\nconst MDXLayout = \"wrapper\"\nexport default function MDXContent({\n  components,\n  ...props\n}) {\n  return <MDXLayout {...layoutProps} {...props} components={components} mdxType=\"MDXLayout\">\n\n    <h1>{`Heading 1`}</h1>\n    <Mermaid chart={`graph TD;\n    A-->B;\n    A-->C;\n    B-->D;\n    C-->D;`} mdxType=\"Mermaid\" />\n    </MDXLayout>;\n}\n\n;\nMDXContent.isMDXComponent = true;")
+})
+
+test('Existing import from ts exports(without /lib)', async () => {
   const mdxCompiler = createTestCompiler()
   const result = await mdxCompiler.process(`import { Mermaid } from 'mdx-mermaid/Mermaid';\n\n# Heading 1\n
 \`\`\`mermaid
@@ -63,7 +76,7 @@ graph TD;
     B-->D;
     C-->D;
 \`\`\``)
-  expect(result.contents).toEqual("import { Mermaid } from 'mdx-mermaid/Mermaid';\nimport { A } from 'a';\n\n\nconst layoutProps = {\n  \n};\nconst MDXLayout = \"wrapper\"\nexport default function MDXContent({\n  components,\n  ...props\n}) {\n  return <MDXLayout {...layoutProps} {...props} components={components} mdxType=\"MDXLayout\">\n\n\n    <h1>{`Heading 1`}</h1>\n    <Mermaid chart={`graph TD;\n    A-->B;\n    A-->C;\n    B-->D;\n    C-->D;`} mdxType=\"Mermaid\" />\n    </MDXLayout>;\n}\n\n;\nMDXContent.isMDXComponent = true;")
+  expect(result.contents).toEqual("import { Mermaid } from 'mdx-mermaid/lib/Mermaid';\nimport { A } from 'a';\n\n\nconst layoutProps = {\n  \n};\nconst MDXLayout = \"wrapper\"\nexport default function MDXContent({\n  components,\n  ...props\n}) {\n  return <MDXLayout {...layoutProps} {...props} components={components} mdxType=\"MDXLayout\">\n\n\n    <h1>{`Heading 1`}</h1>\n    <Mermaid chart={`graph TD;\n    A-->B;\n    A-->C;\n    B-->D;\n    C-->D;`} mdxType=\"Mermaid\" />\n    </MDXLayout>;\n}\n\n;\nMDXContent.isMDXComponent = true;")
 })
 
 test('Other imports component', async () => {
@@ -74,7 +87,7 @@ test('Other imports component', async () => {
       A-->C;
       B-->D;
       C-->D;\`} />`)
-  expect(result.contents).toEqual(`import { Mermaid } from 'mdx-mermaid/Mermaid';
+  expect(result.contents).toEqual(`import { Mermaid } from 'mdx-mermaid/lib/Mermaid';
 import { A } from 'a';
 
 
@@ -115,7 +128,7 @@ test('Other imports with other component', async () => {
       A-->C;
       B-->D;
       C-->D;\`} />`)
-  expect(result.contents).toEqual(`import { Mermaid } from 'mdx-mermaid/Mermaid';
+  expect(result.contents).toEqual(`import { Mermaid } from 'mdx-mermaid/lib/Mermaid';
 import { A } from 'a';
 
 
@@ -153,7 +166,7 @@ graph TD;
     B-->D;
     C-->D;
 \`\`\``)
-  expect(result.contents).toEqual(`import { Mermaid } from 'mdx-mermaid/Mermaid';
+  expect(result.contents).toEqual(`import { Mermaid } from 'mdx-mermaid/lib/Mermaid';
 
 
 const layoutProps = {\n  \n};
@@ -189,7 +202,7 @@ test('Config component', async () => {
     A-->C;
     B-->D;
     C-->D;\`} />`)
-  expect(result.contents).toEqual(`import { Mermaid } from 'mdx-mermaid/Mermaid';
+  expect(result.contents).toEqual(`import { Mermaid } from 'mdx-mermaid/lib/Mermaid';
 
 
 const layoutProps = {\n  \n};
