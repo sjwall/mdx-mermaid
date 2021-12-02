@@ -26,7 +26,7 @@ export default function plugin (config?: Config) {
    * Insert the component import into the document.
    * @param ast The document to insert into.
    */
-  function insertImport (ast: Parent<Node<Data> | Literal, Data>) {
+  function insertImport (ast: any) {
     // See if there is already an import for the Mermaid component
     let importFound = false
     visit(ast, { type: 'import' }, (node: Literal<string>) => {
@@ -45,16 +45,16 @@ export default function plugin (config?: Config) {
     }
   }
 
-  return async function transformer (ast: Parent<Node<Data> | Literal, Data>): Promise<Parent> {
+  return async function transformer (ast: any): Promise<Parent> {
     // Find all the mermaid diagram code blocks. i.e. ```mermaid
     const instances: [Literal, number, Parent<Node<Data> | Literal, Data>][] = []
-    visit<CodeMermaid>(ast, { type: 'code', lang: 'mermaid' }, (node, index, parent) => {
+    visit(ast, { type: 'code', lang: 'mermaid' }, (node: CodeMermaid, index, parent) => {
       instances.push([node, index!, parent as Parent<Node<Data>, Data>])
     })
     // If there are no code blocks return
     if (!instances.length) {
       // Look for any components
-      visit<Literal<string> & { type: 'jsx' }>(ast, { type: 'jsx' }, (node, index, parent) => {
+      visit(ast, { type: 'jsx' }, (node: Literal<string> & { type: 'jsx' }, index, parent) => {
         if (/.*<Mermaid.*/.test(node.value)) {
           // If the component doesn't have config
           if (typeof config !== 'undefined' && !/.*config={.*/.test(node.value)) {
