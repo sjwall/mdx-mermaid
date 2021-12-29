@@ -1,45 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders with config 1`] = `
+exports[`renders the output of mermaid into the div 1`] = `
 <div
-  className="mermaid"
->
-  graph TD;
-      A--&gt;B;
-      A--&gt;C;
-      B--&gt;D;
-      C--&gt;D;
-</div>
-`;
-
-exports[`renders with diagram 1`] = `
-<div
-  className="mermaid"
->
-  graph TD;
-      A--&gt;B;
-      A--&gt;C;
-      B--&gt;D;
-      C--&gt;D;
-</div>
-`;
-
-exports[`renders with mermaid config 1`] = `
-<div
-  className="mermaid"
->
-  graph TD;
-      A--&gt;B;
-      A--&gt;C;
-      B--&gt;D;
-      C--&gt;D;
-</div>
-`;
-
-exports[`renders without diagram 1`] = `
-<div
-  className="mermaid"
->
-  
-</div>
+  dangerouslySetInnerHTML={
+    Object {
+      "__html": "mermaid output",
+    }
+  }
+/>
 `;

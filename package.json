@@ -37,6 +37,7 @@
   },
   "devDependencies": {
     "@mdx-js/mdx": "^1.6.22",
+    "@types/dompurify": "^2.3.2",
     "@types/jest": "^26.0.24",
     "@types/mermaid": "^8.2.7",
     "@types/react": "^17.0.15",

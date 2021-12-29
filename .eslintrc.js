@@ -1,7 +1,8 @@
 module.exports = {
   env: {
     browser: true,
-    es2021: true
+    es2021: true,
+    jest: true
   },
   extends: [
     'plugin:react/recommended',
@@ -21,5 +22,7 @@ module.exports = {
     'jsdoc'
   ],
   rules: {
+    'no-use-before-define': 'off',
+    '@typescript-eslint/no-use-before-define': ['error']
   }
 }

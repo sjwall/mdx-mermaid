@@ -5,10 +5,17 @@
  * license file in the root directory of this source tree.
  */
 
-import React, { useEffect, ReactElement } from 'react'
+import React, { useEffect, useState, ReactElement } from 'react'
 import mermaid from 'mermaid'
+import mermaidAPI from 'mermaid/mermaidAPI'
 
 import { Config } from './config.model'
+
+/**
+ * Assign a unique ID to each mermaid svg as per requirements
+ * of `mermaid.render`.
+ */
+let id = 0
 
 /**
  * Properties for Mermaid component.
@@ -33,12 +40,40 @@ export type MermaidProps = {
  * @returns The component.
  */
 export const Mermaid = ({ chart, config }: MermaidProps): ReactElement<MermaidProps> => {
-  // init diagram once
+  // Due to Docusaurus not correctly parsing client-side from server-side modules, use the provided workaround
+  // found in the accompanying issue: https://github.com/facebook/docusaurus/issues/4268#issuecomment-783553084
+  if (typeof window === 'undefined') {
+    return <div></div>
+  }
+
+  const html: HTMLHtmlElement = document.querySelector('html')!
+
+  // Watch for changes in theme in the HTML attribute `data-theme`.
+  const [theme, setTheme] = useState<mermaidAPI.Theme>('default')
+  const observer = new MutationObserver((mutations) => {
+    for (const mutation of mutations) {
+      if (mutation.type !== 'attributes' && mutation.attributeName !== 'data-theme') {
+        continue
+      }
+
+      setTheme(html.getAttribute('data-theme') === 'dark' ? 'dark' : 'default')
+    }
+  })
+
+  observer.observe(html, { attributes: true })
+
+  // When theme updates, rerender the SVG.
+  const [svg, setSvg] = useState<string>('')
   useEffect(() => {
     if (config && config.mermaid) {
-      mermaid.initialize({ startOnLoad: true, ...config.mermaid })
+      mermaid.initialize({ startOnLoad: true, theme, ...config.mermaid })
+    } else {
+      mermaid.initialize({ startOnLoad: true, theme })
     }
-    mermaid.contentLoaded()
-  }, [])
-  return <div className="mermaid">{chart}</div>
+
+    mermaid.render(`mermaid-svg-${id.toString()}`, chart, (renderedSvg) => setSvg(renderedSvg))
+    id++
+  }, [theme])
+
+  return <div dangerouslySetInnerHTML={{ __html: svg }}></div>
 }
