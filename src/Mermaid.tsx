@@ -54,7 +54,7 @@ export const Mermaid = ({ chart, config }: MermaidProps): ReactElement<MermaidPr
   const [theme, setTheme] = useState<mermaidAPI.Theme>(getTheme(html, config))
   const observer = new MutationObserver((mutations) => {
     for (const mutation of mutations) {
-      if (mutation.type !== 'attributes' && mutation.attributeName !== 'data-theme') {
+      if (mutation.type !== 'attributes' || mutation.attributeName !== 'data-theme') {
         continue
       }
 

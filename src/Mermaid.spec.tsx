@@ -7,11 +7,23 @@
  * This source code is licensed under the MIT license found in the
  * license file in the root directory of this source tree.
  */
+import mermaid from 'mermaid'
 import React from 'react'
 import renderer from 'react-test-renderer'
-
-import mermaid from 'mermaid'
 import { Mermaid } from './Mermaid'
+import {
+  DARK_THEME_KEY,
+  HTML_THEME_ATTRIBUTE,
+  LIGHT_THEME_KEY
+} from './theme.helper'
+import * as ThemeHelper from './theme.helper'
+
+
+async function waitFor (ms: number) {
+  return new Promise<void>(resolve => {
+    setTimeout(() => resolve(), ms)
+  })
+}
 
 jest.mock('mermaid')
 
@@ -107,7 +119,7 @@ it('re-renders mermaid theme on html data-theme attribute change', async () => {
         </html>)
 
   // Time for mutation observer to notice change.
-  await new Promise((resolve) => setTimeout(resolve, 2000))
+  await waitFor(2000)
 
   expect(mermaid.render).toBeCalledTimes(2)
   expect(mermaid.initialize).toBeCalledTimes(2)
@@ -134,4 +146,58 @@ it('renders the output of mermaid into the div', async () => {
   expect(mermaid.initialize).toBeCalledTimes(1)
   expect(mermaid.render).toBeCalledTimes(1)
   expect(component.toJSON()).toMatchSnapshot()
+})
+
+describe('changing the theme at runtime', () => {
+  let useRefSpy: jest.SpyInstance
+  let html: HTMLHtmlElement
+
+  beforeEach(() => {
+    html = document.createElement('html')
+    html.setAttribute(HTML_THEME_ATTRIBUTE, LIGHT_THEME_KEY)
+    useRefSpy = jest.spyOn(document, 'querySelector').mockReturnValue(html)
+  })
+
+  afterEach(() => {
+    expect(useRefSpy).toHaveBeenCalled()
+  })
+
+  it('reacts to changed theme', async () => {
+    const getThemeSpy = jest.spyOn(ThemeHelper, 'getTheme')
+    renderer.act(() => {
+      renderer.create(
+        <Mermaid chart={`graph TD;
+              A-->B;
+              A-->C;
+              B-->D;
+              C-->D;`} />
+      )
+    })
+
+    await renderer.act(async () => {
+      html.setAttribute(HTML_THEME_ATTRIBUTE, DARK_THEME_KEY)
+      await waitFor(1000)
+    })
+
+    expect(getThemeSpy.mock.calls.length).toBeGreaterThan(2)
+  })
+
+  it('does not react to non-theme attribute changes of html', async () => {
+    const getThemeSpy = jest.spyOn(ThemeHelper, 'getTheme')
+    renderer.act(() => {
+      renderer.create(
+        <Mermaid chart={`graph TD;
+              A-->B;
+              A-->C;
+              B-->D;
+              C-->D;`} />
+      )
+    })
+
+    await renderer.act(async () => {
+      html.setAttribute('manifest', 'some-value')
+      await waitFor(1000)
+    })
+    expect(getThemeSpy).toHaveBeenCalledTimes(2)
+  })
 })
