@@ -10,6 +10,16 @@
 import mermaid from 'mermaid'
 import React from 'react'
 import renderer from 'react-test-renderer'
+
+import mermaid from 'mermaid'
+
+import { jest } from '@jest/globals'
+
+const spy = {
+  initialize: jest.spyOn(mermaid, 'initialize').mockImplementation(() => {}),
+  render: jest.spyOn(mermaid, 'render').mockImplementation(() => {})
+}
+
 import { Mermaid } from './Mermaid'
 import {
   DARK_THEME_KEY,
@@ -25,7 +35,6 @@ async function waitFor (ms: number) {
   })
 }
 
-jest.mock('mermaid')
 
 afterEach(() => {
   jest.clearAllMocks()
@@ -33,14 +42,15 @@ afterEach(() => {
 
 it('renders without diagram', () => {
   const component = renderer.create(<Mermaid chart={''} />)
-  expect(mermaid.initialize).toBeCalledTimes(0)
-  expect(mermaid.render).toBeCalledTimes(0)
+  expect(component.toJSON()).toMatchSnapshot()
+  expect(spy.initialize).toBeCalledTimes(0)
+  expect(spy.render).toBeCalledTimes(0)
   component.update()
-  expect(mermaid.render).toHaveBeenCalled()
-  expect(mermaid.initialize).toBeCalledTimes(1)
+  expect(spy.render).toHaveBeenCalled()
+  expect(spy.initialize).toBeCalledTimes(1)
   component.update()
-  expect(mermaid.render).toBeCalledTimes(1)
-  expect(mermaid.initialize).toBeCalledTimes(1)
+  expect(spy.render).toBeCalledTimes(1)
+  expect(spy.initialize).toBeCalledTimes(1)
 })
 
 it('renders with diagram', () => {
@@ -49,14 +59,15 @@ it('renders with diagram', () => {
       A-->C;
       B-->D;
       C-->D;`} />)
-  expect(mermaid.initialize).toBeCalledTimes(0)
-  expect(mermaid.render).toBeCalledTimes(0)
+  expect(component.toJSON()).toMatchSnapshot()
+  expect(spy.initialize).toBeCalledTimes(0)
+  expect(spy.render).toBeCalledTimes(0)
   component.update()
-  expect(mermaid.render).toBeCalledTimes(1)
-  expect(mermaid.initialize).toBeCalledTimes(1)
+  expect(spy.render).toBeCalledTimes(1)
+  expect(spy.initialize).toBeCalledTimes(1)
   component.update()
-  expect(mermaid.render).toBeCalledTimes(1)
-  expect(mermaid.initialize).toBeCalledTimes(1)
+  expect(spy.render).toBeCalledTimes(1)
+  expect(spy.initialize).toBeCalledTimes(1)
 })
 
 it('renders with config', () => {
@@ -65,14 +76,15 @@ it('renders with config', () => {
       A-->C;
       B-->D;
       C-->D;`} config={{}} />)
-  expect(mermaid.initialize).toBeCalledTimes(0)
-  expect(mermaid.render).toBeCalledTimes(0)
+  expect(component.toJSON()).toMatchSnapshot()
+  expect(spy.initialize).toBeCalledTimes(0)
+  expect(spy.render).toBeCalledTimes(0)
   component.update()
-  expect(mermaid.render).toHaveBeenCalled()
-  expect(mermaid.initialize).toBeCalledTimes(1)
+  expect(spy.render).toHaveBeenCalled()
+  expect(spy.initialize).toBeCalledTimes(1)
   component.update()
-  expect(mermaid.render).toBeCalledTimes(1)
-  expect(mermaid.initialize).toBeCalledTimes(1)
+  expect(spy.render).toBeCalledTimes(1)
+  expect(spy.initialize).toBeCalledTimes(1)
 })
 
 it('renders with mermaid config', () => {
@@ -81,14 +93,15 @@ it('renders with mermaid config', () => {
       A-->C;
       B-->D;
       C-->D;`} config={{ mermaid: { theme: 'dark' } } } />)
-  expect(mermaid.initialize).toBeCalledTimes(0)
-  expect(mermaid.render).toBeCalledTimes(0)
+  expect(component.toJSON()).toMatchSnapshot()
+  expect(spy.initialize).toBeCalledTimes(0)
+  expect(spy.render).toBeCalledTimes(0)
   component.update()
-  expect(mermaid.render).toHaveBeenCalled()
-  expect(mermaid.initialize).toHaveBeenNthCalledWith(1, { startOnLoad: true, theme: 'dark' })
+  expect(spy.render).toHaveBeenCalled()
+  expect(spy.initialize).toHaveBeenNthCalledWith(1, { startOnLoad: true, theme: 'dark' })
   component.update()
-  expect(mermaid.render).toBeCalledTimes(1)
-  expect(mermaid.initialize).toBeCalledTimes(1)
+  expect(spy.render).toBeCalledTimes(1)
+  expect(spy.initialize).toBeCalledTimes(1)
 })
 
 it('re-renders mermaid theme on html data-theme attribute change', async () => {
