@@ -8,6 +8,8 @@
 
 /*! ../../diagrams/common/common */
 
+/*! ../../interactionDb */
+
 /*! ../../logger */
 
 /*! ../../mermaidAPI */
@@ -31,12 +33,6 @@
 /*! ../package.json */
 
 /*! ../utils */
-
-/*! ./../../../../node_modules/process/browser.js */
-
-/*! ./../../../../node_modules/webpack/buildin/module.js */
-
-/*! ./../process/browser.js */
 
 /*! ./classDb */
 
@@ -164,6 +160,8 @@
 
 /*! ./infoDb */
 
+/*! ./interactionDb */
+
 /*! ./intersect-circle.js */
 
 /*! ./intersect-ellipse */
@@ -256,7 +254,7 @@
 
 /*! @braintree/sanitize-url */
 
-/*! @license DOMPurify 2.3.0 | (c) Cure53 and other contributors | Released under the Apache license 2.0 and Mozilla Public License 2.0 | github.com/cure53/DOMPurify/blob/2.3.0/LICENSE */
+/*! @license DOMPurify 2.3.4 | (c) Cure53 and other contributors | Released under the Apache license 2.0 and Mozilla Public License 2.0 | github.com/cure53/DOMPurify/blob/2.3.4/LICENSE */
 
 /*! Check if previously processed */
 
@@ -270,84 +268,6 @@
 
 /*! dompurify */
 
-/*! exports provided: LEVELS, log, setLogLevel */
-
-/*! exports provided: addClasses, addRelations, setConf, drawOld, draw, default */
-
-/*! exports provided: addToRender, addToRenderV2, default */
-
-/*! exports provided: bounds, drawActors, setConf, draw, default */
-
-/*! exports provided: calcThemeVariables, default */
-
-/*! exports provided: clear, insertEdgeLabel, positionEdgeLabel, intersection, insertEdge */
-
-/*! exports provided: clusterDb, clear, extractDecendants, validate, findNonClusterChild, adjustClustersAndEdges, extractor, sortNodesByHierarchy */
-
-/*! exports provided: default */
-
-/*! exports provided: defaultConfig, updateCurrentConfig, setSiteConfig, saveConfigFromInitilize, updateSiteConfig, getSiteConfig, setConfig, getConfig, sanitize, addDirective, reset */
-
-/*! exports provided: detectInit, detectDirective, detectType, isSubstringInArray, interpolateToCurve, formatUrl, runFunc, getStylesFromArray, generateId, random, assignWithDepth, getTextObj, drawSimpleText, wrapLabel, calculateTextHeight, calculateTextWidth, calculateTextDimensions, calculateSvgSizeAttrs, configureSvgSize, initIdGeneratior, entityDecode, default */
-
-/*! exports provided: draw, default */
-
-/*! exports provided: drawEdge, drawClass, parseMember, default */
-
-/*! exports provided: drawRect, drawFace, drawCircle, drawText, drawLabel, drawSection, drawTask, drawBackgroundRect, getTextObj, getNoteRect, default */
-
-/*! exports provided: drawRect, drawText, drawLabel, drawActor, anchorElement, drawActivation, drawLoop, drawBackgroundRect, insertArrowHead, insertArrowFilledHead, insertSequenceNumber, insertArrowCrossHead, getTextObj, getNoteRect, default */
-
-/*! exports provided: drawStartState, drawDivider, drawSimpleState, drawDescrState, addTitleAndBox, drawText, drawNote, drawState, drawEdge */
-
-/*! exports provided: encodeEntities, decodeEntities, default */
-
-/*! exports provided: getRows, removeScript, sanitizeText, lineBreakRegex, hasBreaks, splitBreaks, evaluate, default */
-
-/*! exports provided: getThemeVariables */
-
-/*! exports provided: insertCluster, getClusterTitleWidth, clear, positionCluster */
-
-/*! exports provided: insertNode, setNodeElem, clear, positionNode */
-
-/*! exports provided: labelHelper, updateNodeBounds, insertPolygonShape */
-
-/*! exports provided: mkBorder */
-
-/*! exports provided: name, version, description, main, keywords, scripts, repository, author, license, standard, dependencies, devDependencies, files, yarn-upgrade-all, sideEffects, husky, default */
-
-/*! exports provided: parseDirective, addActor, addMessage, addSignal, getMessages, getActors, getActor, getActorKeys, getTitle, getTitleWrapped, enableSequenceNumbers, showSequenceNumbers, setWrap, autoWrap, clear, parseMessage, LINETYPE, ARROWTYPE, PLACEMENT, addNote, setTitle, apply, default */
-
-/*! exports provided: parseDirective, addClass, lookUpDomId, clear, getClass, getClasses, getRelations, addRelation, addAnnotation, addMember, addMembers, cleanupLabel, setCssClass, setLink, setClickEvent, bindFunctions, lineType, relationType, default */
-
-/*! exports provided: parseDirective, addState, clear, getState, getStates, logDocuments, getRelations, addRelation, cleanupLabel, lineType, relationType, default */
-
-/*! exports provided: parseDirective, clear, setAxisFormat, getAxisFormat, setTodayMarker, getTodayMarker, setDateFormat, enableInclusiveEndDates, endDatesAreInclusive, enableTopAxis, topAxisEnabled, getDateFormat, setExcludes, getExcludes, setTitle, getTitle, addSection, getSections, getTasks, addTask, findTaskById, addTaskOrg, setLink, setClass, setClickEvent, bindFunctions, default */
-
-/*! exports provided: parseDirective, clear, setTitle, getTitle, addSection, getSections, getTasks, addTask, addTaskOrg, default */
-
-/*! exports provided: parseDirective, default */
-
-/*! exports provided: parseDirective, lookUpDomId, addVertex, addSingleLink, addLink, updateLinkInterpolate, updateLink, addClass, setDirection, setClass, setLink, getTooltip, setClickEvent, bindFunctions, getDirection, getVertices, getEdges, getClasses, clear, setGen, defaultStyle, addSubGraph, getDepthFirstPos, indexNodes, getSubGraphs, firstGraph, default */
-
-/*! exports provided: render */
-
-/*! exports provided: set, get, keys, size, default */
-
-/*! exports provided: setConf, addVertices, addEdges, getClasses, draw, default */
-
-/*! exports provided: setConf, draw, bounds, drawTasks, default */
-
-/*! exports provided: setConf, draw, default */
-
-/*! exports provided: setConf, drawReqs, drawElements, draw, default */
-
-/*! exports provided: setConf, getClasses, draw, default */
-
-/*! exports provided: setDirection, setOptions, getOptions, commit, branch, merge, checkout, reset, prettyPrint, clear, getBranchesAsObjArray, getBranches, getCommits, getCommitsArray, getCurrentBranch, getDirection, getHead, default */
-
-/*! exports provided: setMessage, getMessage, setInfo, getInfo, default */
-
 /*! fs */
 
 /*! graphlib */
@@ -356,13 +276,15 @@
 
 /*! moment-mini */
 
-/*! no static exports found */
-
 /*! path */
 
 /*! sequence config was passed as #1 */
 
 /*! stylis */
+
+/*!********************!*\
+  !*** fs (ignored) ***!
+  \********************/
 
 /*!*********************!*\
   !*** external "d3" ***!
@@ -433,6 +355,10 @@
   \******************************/
 
 /*!******************************!*\
+  !*** ./src/interactionDb.js ***!
+  \******************************/
+
+/*!******************************!*\
   !*** external "moment-mini" ***!
   \******************************/
 
@@ -447,10 +373,6 @@
 /*!**********************************!*\
   !*** ./src/themes/theme-dark.js ***!
   \**********************************/
-
-/*!***********************************!*\
-  !*** (webpack)/buildin/module.js ***!
-  \***********************************/
 
 /*!***********************************!*\
   !*** ./src/diagrams/er/styles.js ***!
@@ -559,10 +481,6 @@
 /*!****************************************!*\
   !*** ./src/diagrams/state/id-cache.js ***!
   \****************************************/
-
-/*!*****************************************!*\
-  !*** ./node_modules/process/browser.js ***!
-  \*****************************************/
 
 /*!*****************************************!*\
   !*** ./src/diagrams/git/gitGraphAst.js ***!
@@ -707,10 +625,6 @@
 /*!***************************************************!*\
   !*** ./src/diagrams/sequence/sequenceRenderer.js ***!
   \***************************************************/
-
-/*!******************************************************!*\
-  !*** ./node_modules/node-libs-browser/mock/empty.js ***!
-  \******************************************************/
 
 /*!******************************************************!*\
   !*** ./src/diagrams/class/parser/classDiagram.jison ***!
