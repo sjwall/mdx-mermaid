@@ -1,6 +1,6 @@
 {
   "name": "mdx-mermaid",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Display mermaid diagrams in mdx files.",
   "types": "index.d.ts",
   "main": "lib/mdxast-mermaid.js",
@@ -32,32 +32,32 @@
     "jsx"
   ],
   "peerDependencies": {
-    "mermaid": "^8.0.0",
+    "mermaid": ">= 8.11.0 < 8.12.0",
     "react": "^16.8.4 || ^17.0.0",
     "unist-util-visit": "^4.1.0"
   },
   "devDependencies": {
     "@mdx-js/mdx": "^1.6.22",
-    "@types/jest": "^26.0.24",
+    "@types/jest": "^27.4.0",
     "@types/mermaid": "^8.2.7",
-    "@types/react": "^17.0.15",
+    "@types/react": "^17.0.38",
     "@types/unist": "^2.0.6",
-    "@typescript-eslint/eslint-plugin": "^4.29.0",
-    "@typescript-eslint/parser": "^4.29.0",
-    "eslint": "^7.32.0",
+    "@typescript-eslint/eslint-plugin": "^5.9.0",
+    "@typescript-eslint/parser": "^5.9.0",
+    "eslint": "^8.6.0",
     "eslint-config-standard": "^16.0.3",
-    "eslint-plugin-import": "^2.23.4",
-    "eslint-plugin-jsdoc": "^37.0.3",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jsdoc": "^37.5.2",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^5.1.0",
-    "eslint-plugin-react": "^7.24.0",
-    "jest": "^27.0.6",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-react": "^7.28.0",
+    "jest": "^27.4.7",
     "mermaid": "^8.0.0",
     "react": "^17.0.1",
     "react-test-renderer": "^17.0.2",
     "rimraf": "^3.0.2",
-    "ts-jest": "^27.0.4",
-    "typescript": "^4.3.5",
+    "ts-jest": "^27.1.2",
+    "typescript": "^4.5.4",
     "unist-util-visit": "^4.1.0"
   }
 }

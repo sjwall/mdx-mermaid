@@ -7,7 +7,7 @@ export default {
           useESM: true
       }
   },
-  testEnvironment: 'node',
+  testEnvironment: 'jsdom',
   coverageThreshold: {
     global: {
       branches: 100,
