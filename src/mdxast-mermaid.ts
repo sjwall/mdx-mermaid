@@ -70,16 +70,14 @@ function plugin (config?: Config) {
       return ast
     }
 
-    let first = true
+    // Pass the config to the component
+    let configString = ''
+    if (typeof config !== 'undefined') {
+      configString = ` config={${JSON.stringify(config)}}`
+    }
+
     // Replace each Mermaid code block with the Mermaid component
     instances.forEach(([node, index, parent]) => {
-      // Pass the config to the component
-      let configString = ''
-      if (first && typeof config !== 'undefined') {
-        first = false
-        configString = ` config={${JSON.stringify(config)}}`
-      }
-
       parent.children.splice(index, 1, {
         type: 'jsx',
         value: `<Mermaid chart={\`${node.value}\`}${configString}/>`,

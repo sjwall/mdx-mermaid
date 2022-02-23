@@ -229,3 +229,57 @@ export default function MDXContent({
 ;
 MDXContent.isMDXComponent = true;`)
 })
+
+test('Config is passed for both charts', async () => {
+  const mdxCompiler = createTestCompiler({ mermaid: { theme: 'dark' } })
+  const result = await mdxCompiler.process(`# Heading 1\n
+\`\`\`mermaid
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+\`\`\`
+\`\`\`mermaid
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+\`\`\``)
+  expect(result.contents).toEqual(`import { Mermaid } from 'mdx-mermaid/lib/Mermaid';
+
+
+const layoutProps = {\n  \n};
+const MDXLayout = "wrapper"
+export default function MDXContent({
+  components,
+  ...props
+}) {
+  return <MDXLayout {...layoutProps} {...props} components={components} mdxType="MDXLayout">
+
+    <h1>{\`Heading 1\`}</h1>
+    <Mermaid chart={\`graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;\`} config={{
+      "mermaid": {
+        "theme": "dark"
+      }
+    }} mdxType="Mermaid" />
+    <Mermaid chart={\`graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;\`} config={{
+      "mermaid": {
+        "theme": "dark"
+      }
+    }} mdxType="Mermaid" />
+    </MDXLayout>;
+}
+
+;
+MDXContent.isMDXComponent = true;`)
+})
