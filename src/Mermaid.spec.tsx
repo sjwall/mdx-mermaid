@@ -18,7 +18,6 @@ import {
 } from './theme.helper'
 import * as ThemeHelper from './theme.helper'
 
-
 async function waitFor (ms: number) {
   return new Promise<void>(resolve => {
     setTimeout(() => resolve(), ms)
@@ -37,29 +36,13 @@ it('renders without diagram', () => {
   expect(mermaid.render).toBeCalledTimes(0)
   component.update()
   expect(mermaid.render).toHaveBeenCalled()
-  expect(mermaid.initialize).toBeCalledTimes(1)
+  expect(mermaid.initialize).toBeCalledTimes(0)
   component.update()
   expect(mermaid.render).toBeCalledTimes(1)
-  expect(mermaid.initialize).toBeCalledTimes(1)
+  expect(mermaid.initialize).toBeCalledTimes(0)
 })
 
 it('renders with diagram', () => {
-  const component = renderer.create(<Mermaid chart={`graph TD;
-      A-->B;
-      A-->C;
-      B-->D;
-      C-->D;`} />)
-  expect(mermaid.initialize).toBeCalledTimes(0)
-  expect(mermaid.render).toBeCalledTimes(0)
-  component.update()
-  expect(mermaid.render).toBeCalledTimes(1)
-  expect(mermaid.initialize).toBeCalledTimes(1)
-  component.update()
-  expect(mermaid.render).toBeCalledTimes(1)
-  expect(mermaid.initialize).toBeCalledTimes(1)
-})
-
-it('renders with config', () => {
   const component = renderer.create(<Mermaid chart={`graph TD;
       A-->B;
       A-->C;
@@ -68,10 +51,25 @@ it('renders with config', () => {
   expect(mermaid.initialize).toBeCalledTimes(0)
   expect(mermaid.render).toBeCalledTimes(0)
   component.update()
-  expect(mermaid.render).toHaveBeenCalled()
+  expect(mermaid.render).toBeCalledTimes(1)
   expect(mermaid.initialize).toBeCalledTimes(1)
   component.update()
   expect(mermaid.render).toBeCalledTimes(1)
+  expect(mermaid.initialize).toBeCalledTimes(1)
+})
+
+it('initializes only once', () => {
+  const component = renderer.create(<>
+        <Mermaid chart={'foo'} config={{}} />
+        <Mermaid chart={'bar'} />
+      </>)
+  expect(mermaid.initialize).toBeCalledTimes(0)
+  expect(mermaid.render).toBeCalledTimes(0)
+  component.update()
+  expect(mermaid.render).toBeCalledTimes(2)
+  expect(mermaid.initialize).toBeCalledTimes(1)
+  component.update()
+  expect(mermaid.render).toBeCalledTimes(2)
   expect(mermaid.initialize).toBeCalledTimes(1)
 })
 
@@ -98,7 +96,7 @@ it('re-renders mermaid theme on html data-theme attribute change', async () => {
             A-->B;
             A-->C;
             B-->D;
-            C-->D;`} />
+            C-->D;`} config={{}} />
     </html>)
   expect(mermaid.initialize).toBeCalledTimes(0)
   expect(mermaid.render).toBeCalledTimes(0)
@@ -115,7 +113,7 @@ it('re-renders mermaid theme on html data-theme attribute change', async () => {
             A-->B;
             A-->C;
             B-->D;
-            C-->D;`} />
+            C-->D;`} config={{}} />
         </html>)
 
   // Time for mutation observer to notice change.
@@ -139,7 +137,7 @@ it('renders the output of mermaid into the div', async () => {
             A-->B;
             A-->C;
             B-->D;
-            C-->D;`} />
+            C-->D;`} config={{}} />
     )
   })
 
@@ -170,7 +168,7 @@ describe('changing the theme at runtime', () => {
               A-->B;
               A-->C;
               B-->D;
-              C-->D;`} />
+              C-->D;`} config={{}} />
       )
     })
 
