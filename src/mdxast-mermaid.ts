@@ -65,10 +65,10 @@ function plugin (config?: Config) {
     visit<Literal<string> & { type: 'jsx' }>(ast, { type: 'jsx' }, (node, index, parent) => {
       if (/.*<Mermaid.*/.test(node.value)) {
         // If the component doesn't have config
-        if (typeof config !== 'undefined' && !/.*config={.*/.test(node.value)) {
+        if (!/.*config={.*/.test(node.value)) {
           const index = node.value.indexOf('<Mermaid') + 8
           node.value = node.value.substring(0, index) +
-          ` config={${JSON.stringify(config)}}` +
+          ` config={${JSON.stringify(config || {})}}` +
             node.value.substring(index)
         }
         insertImport(ast)

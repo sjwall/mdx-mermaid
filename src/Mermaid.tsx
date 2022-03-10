@@ -77,17 +77,23 @@ export const Mermaid = ({ chart, config }: MermaidProps): ReactElement<MermaidPr
   // When theme updates, rerender the SVG.
   const [svg, setSvg] = useState<string>('')
   useEffect(() => {
+    const render = () => {
+      mermaid.render(`mermaid-svg-${id.toString()}`, chart, (renderedSvg) => setSvg(renderedSvg))
+      id++
+    }
+
     if (config) {
       if (config.mermaid) {
         mermaid.initialize({ startOnLoad: true, ...config.mermaid, theme })
       } else {
         mermaid.initialize({ startOnLoad: true, theme })
       }
+      render()
+    } else {
+      // Is there a better way?
+      setTimeout(render, 0)
     }
-
-    mermaid.render(`mermaid-svg-${id.toString()}`, chart, (renderedSvg) => setSvg(renderedSvg))
-    id++
-  }, [theme])
+  }, [theme, chart])
 
   return <div dangerouslySetInnerHTML={{ __html: svg }}></div>
 }

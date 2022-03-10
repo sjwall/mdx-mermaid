@@ -31,15 +31,15 @@ afterEach(() => {
 })
 
 it('renders without diagram', () => {
-  const component = renderer.create(<Mermaid chart={''} />)
+  const component = renderer.create(<Mermaid chart={''} config={{}}  />)
   expect(mermaid.initialize).toBeCalledTimes(0)
   expect(mermaid.render).toBeCalledTimes(0)
   component.update()
-  expect(mermaid.render).toHaveBeenCalled()
-  expect(mermaid.initialize).toBeCalledTimes(0)
+  expect(mermaid.render).toBeCalledTimes(1)
+  expect(mermaid.initialize).toBeCalledTimes(1)
   component.update()
   expect(mermaid.render).toBeCalledTimes(1)
-  expect(mermaid.initialize).toBeCalledTimes(0)
+  expect(mermaid.initialize).toBeCalledTimes(1)
 })
 
 it('renders with diagram', () => {
@@ -58,13 +58,14 @@ it('renders with diagram', () => {
   expect(mermaid.initialize).toBeCalledTimes(1)
 })
 
-it('initializes only once', () => {
+it('initializes only once', async () => {
   const component = renderer.create(<>
         <Mermaid chart={'foo'} config={{}} />
         <Mermaid chart={'bar'} />
       </>)
   expect(mermaid.initialize).toBeCalledTimes(0)
   expect(mermaid.render).toBeCalledTimes(0)
+  await waitFor(1000)
   component.update()
   expect(mermaid.render).toBeCalledTimes(2)
   expect(mermaid.initialize).toBeCalledTimes(1)
