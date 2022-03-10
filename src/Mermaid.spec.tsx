@@ -188,7 +188,7 @@ describe('changing the theme at runtime', () => {
               A-->B;
               A-->C;
               B-->D;
-              C-->D;`} />
+              C-->D;`} config={{}} />
       )
     })
 
