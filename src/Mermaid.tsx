@@ -53,19 +53,26 @@ export const Mermaid = ({ chart, config }: MermaidProps): ReactElement<MermaidPr
   // Watch for changes in theme in the HTML attribute `data-theme`.
   const [theme, setTheme] = useState<mermaidAPI.Theme>(getTheme(html, config))
 
-  if (config) {
+  useEffect(() => {
     const observer = new MutationObserver((mutations) => {
       for (const mutation of mutations) {
         if (mutation.type !== 'attributes' || mutation.attributeName !== 'data-theme') {
           continue
         }
-
-        setTheme(getTheme(html, config))
+        setTheme(getTheme(mutation.target as HTMLHtmlElement, config))
+        break
       }
     })
 
     observer.observe(html, { attributes: true })
-  }
+    return () => {
+      try {
+        observer.disconnect()
+      } catch {
+        // Do nothing
+      }
+    }
+  }, [chart, config, theme])
 
   // When theme updates, rerender the SVG.
   const [svg, setSvg] = useState<string>('')
