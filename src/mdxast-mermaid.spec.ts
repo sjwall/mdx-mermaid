@@ -24,7 +24,7 @@ function createTestCompiler (config?: Config) {
 test('No mermaid', async () => {
   const mdxCompiler = createTestCompiler()
   const result = await mdxCompiler.process('# Heading 1\n\nNo Mermaid diagram :(')
-  expect(result.contents).toEqual("\n\n\nconst layoutProps = {\n  \n};\nconst MDXLayout = \"wrapper\"\nexport default function MDXContent({\n  components,\n  ...props\n}) {\n  return <MDXLayout {...layoutProps} {...props} components={components} mdxType=\"MDXLayout\">\n    <h1>{`Heading 1`}</h1>\n    <p>{`No Mermaid diagram :(`}</p>\n    </MDXLayout>;\n}\n\n;\nMDXContent.isMDXComponent = true;")
+  expect(result.contents).toEqual('\n\n\nconst layoutProps = {\n  \n};\nconst MDXLayout = "wrapper"\nexport default function MDXContent({\n  components,\n  ...props\n}) {\n  return <MDXLayout {...layoutProps} {...props} components={components} mdxType="MDXLayout">\n    <h1>{`Heading 1`}</h1>\n    <p>{`No Mermaid diagram :(`}</p>\n    </MDXLayout>;\n}\n\n;\nMDXContent.isMDXComponent = true;')
 })
 
 test('Basic', async () => {
@@ -178,15 +178,15 @@ export default function MDXContent({
   return <MDXLayout {...layoutProps} {...props} components={components} mdxType="MDXLayout">
 
     <h1>{\`Heading 1\`}</h1>
-    <Mermaid chart={\`graph TD;
-    A-->B;
-    A-->C;
-    B-->D;
-    C-->D;\`} config={{
+    <Mermaid config={{
       "mermaid": {
         "theme": "dark"
       }
-    }} mdxType="Mermaid" />
+    }} chart={\`graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;\`} mdxType="Mermaid" />
     </MDXLayout>;
 }
 
@@ -219,6 +219,54 @@ export default function MDXContent({
         "theme": "dark"
       }
     }} chart={\`graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;\`} mdxType="Mermaid" />
+    </MDXLayout>;
+}
+
+;
+MDXContent.isMDXComponent = true;`)
+})
+
+test('Mixed component and code block', async () => {
+  const mdxCompiler = createTestCompiler({ mermaid: { theme: 'dark' } })
+  const result = await mdxCompiler.process(`# Heading 1\n
+\`\`\`mermaid
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+\`\`\`
+<Mermaid chart={\`graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;\`}/>`)
+  expect(result.contents).toEqual(`import { Mermaid } from 'mdx-mermaid/lib/Mermaid';
+
+
+const layoutProps = {\n  \n};
+const MDXLayout = "wrapper"
+export default function MDXContent({
+  components,
+  ...props
+}) {
+  return <MDXLayout {...layoutProps} {...props} components={components} mdxType="MDXLayout">
+
+    <h1>{\`Heading 1\`}</h1>
+    <Mermaid config={{
+      "mermaid": {
+        "theme": "dark"
+      }
+    }} chart={\`graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;\`} mdxType="Mermaid" />
+    <Mermaid chart={\`graph TD;
     A-->B;
     A-->C;
     B-->D;
