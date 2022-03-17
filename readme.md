@@ -13,6 +13,8 @@ Use [Mermaid][mermaid] in `.md`, `.mdx`, `.jsx` and `.tsx` files with ease.
 
 Based off the answer [here][inspire] by unknown.
 
+More documentation available [here][documentation]
+
 ## Quick start with Docusaurus
 
 Install `mdx-mermaid` and `mermaid`
@@ -80,3 +82,5 @@ There are more examples [here][examples]
 [pr]: http://makeapullrequest.com
 
 [examples]: https://sjwall.github.io/mdx-mermaid/docs/examples/
+
+[documentation]: https://sjwall.github.io/mdx-mermaid/
