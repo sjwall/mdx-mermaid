@@ -31,6 +31,15 @@ export default function Home() {
     <Layout
       title={siteConfig.title}
       description="Display mermaid diagrams in mdx files.">
+      <div>
+        <div className={styles.banner}>
+          Support Ukraine 🇺🇦{' '}
+          <Link to="https://opensource.facebook.com/support-ukraine">
+            Help Provide Humanitarian Aid to Ukraine
+          </Link>
+          .
+        </div>
+      </div>
       <HomepageHeader />
       <main>
         <HomepageFeatures />
