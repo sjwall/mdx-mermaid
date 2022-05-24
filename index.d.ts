@@ -16,6 +16,4 @@ declare module 'mdx-mermaid' {
     export type Mermaid = typeof mMermaid
   }
   type mdxmermaid = typeof plugin
-
-  export = mdxmermaid
 }
