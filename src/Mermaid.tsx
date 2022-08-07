@@ -52,30 +52,48 @@ export const Mermaid = ({ chart, config }: MermaidProps): ReactElement<MermaidPr
 
   // Watch for changes in theme in the HTML attribute `data-theme`.
   const [theme, setTheme] = useState<mermaidAPI.Theme>(getTheme(html, config))
-  const observer = new MutationObserver((mutations) => {
-    for (const mutation of mutations) {
-      if (mutation.type !== 'attributes' || mutation.attributeName !== 'data-theme') {
-        continue
+
+  useEffect(() => {
+    const observer = new MutationObserver((mutations) => {
+      for (const mutation of mutations) {
+        if (mutation.type !== 'attributes' || mutation.attributeName !== 'data-theme') {
+          continue
+        }
+        setTheme(getTheme(mutation.target as HTMLHtmlElement, config))
+        break
       }
+    })
 
-      setTheme(getTheme(html, config))
+    observer.observe(html, { attributes: true })
+    return () => {
+      try {
+        observer.disconnect()
+      } catch {
+        // Do nothing
+      }
     }
-  })
-
-  observer.observe(html, { attributes: true })
+  }, [chart, config, theme])
 
   // When theme updates, rerender the SVG.
   const [svg, setSvg] = useState<string>('')
   useEffect(() => {
-    if (config && config.mermaid) {
-      mermaid.initialize({ startOnLoad: true, ...config.mermaid, theme })
-    } else {
-      mermaid.initialize({ startOnLoad: true, theme })
+    const render = () => {
+      mermaid.render(`mermaid-svg-${id.toString()}`, chart, (renderedSvg) => setSvg(renderedSvg))
+      id++
     }
 
-    mermaid.render(`mermaid-svg-${id.toString()}`, chart, (renderedSvg) => setSvg(renderedSvg))
-    id++
-  }, [theme])
+    if (config) {
+      if (config.mermaid) {
+        mermaid.initialize({ startOnLoad: true, ...config.mermaid, theme })
+      } else {
+        mermaid.initialize({ startOnLoad: true, theme })
+      }
+      render()
+    } else {
+      // Is there a better way?
+      setTimeout(render, 0)
+    }
+  }, [theme, chart])
 
   return <div dangerouslySetInnerHTML={{ __html: svg }}></div>
 }

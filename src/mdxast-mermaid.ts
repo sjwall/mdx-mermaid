@@ -51,44 +51,30 @@ export default function plugin (config?: Config) {
     visit(ast, { type: 'code', lang: 'mermaid' }, (node: CodeMermaid, index, parent) => {
       instances.push([node, index!, parent as Parent<Node<Data>, Data>])
     })
-    // If there are no code blocks return
-    if (!instances.length) {
-      // Look for any components
-      visit(ast, { type: 'jsx' }, (node: Literal<string> & { type: 'jsx' }, index, parent) => {
-        if (/.*<Mermaid.*/.test(node.value)) {
-          // If the component doesn't have config
-          if (typeof config !== 'undefined' && !/.*config={.*/.test(node.value)) {
-            const index = node.value.indexOf('<Mermaid') + 8
-            node.value = node.value.substring(0, index) +
-              ` config={${JSON.stringify(config)}}` +
-              node.value.substring(index)
-          }
-          insertImport(ast)
-          return EXIT
-        }
-      })
-      return ast
-    }
 
-    let first = true
     // Replace each Mermaid code block with the Mermaid component
     instances.forEach(([node, index, parent]) => {
-      // Pass the config to the component
-      let configString = ''
-      if (first && typeof config !== 'undefined') {
-        first = false
-        configString = ` config={${JSON.stringify(config)}}`
-      }
-
       parent.children.splice(index, 1, {
         type: 'jsx',
-        value: `<Mermaid chart={\`${node.value}\`}${configString}/>`,
+        value: `<Mermaid chart={\`${node.value}\`}/>`,
         position: node.position
       })
     })
 
-    insertImport(ast)
-
+    // Look for any components
+    visit(ast, { type: 'jsx' }, (node) => {
+      if (/.*<Mermaid.*/.test(node.value)) {
+        // If the component doesn't have config
+        if (!/.*config={.*/.test(node.value)) {
+          const index = node.value.indexOf('<Mermaid') + 8
+          node.value = node.value.substring(0, index) +
+          ` config={${JSON.stringify(config || {})}}` +
+            node.value.substring(index)
+        }
+        insertImport(ast)
+        return EXIT
+      }
+    })
     return ast
   }
 }

@@ -1,3 +1,4 @@
+import type mermaidAPI from 'mermaid/mermaidAPI'
 import { Config } from './config.model'
 import {
   DARK_THEME_KEY,
@@ -35,8 +36,8 @@ it('returns the configured light theme', () => {
 
   const config: Config = {
     theme: {
-      light: 'forest',
-      dark: 'default'
+      light: 'forest' as mermaidAPI.Theme,
+      dark: 'default' as mermaidAPI.Theme
     }
   }
 
@@ -49,8 +50,8 @@ it('returns the configured dark theme', () => {
 
   const config: Config = {
     theme: {
-      light: 'forest',
-      dark: 'default'
+      light: 'forest' as mermaidAPI.Theme,
+      dark: 'default' as mermaidAPI.Theme
     }
   }
 
@@ -63,7 +64,7 @@ it('returns the mermaid config theme', () => {
 
   const config: Config = {
     mermaid: {
-      theme: 'forest'
+      theme: 'forest' as mermaidAPI.Theme
     }
   }
 

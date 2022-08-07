@@ -8,7 +8,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <Mermaid chart={`sequenceDiagram
+        <Mermaid config={{mermaid: {theme: 'dark'}}} chart={`sequenceDiagram
           participant Mermaid
           participant React
           Mermaid->>React: Hello React, how are you?`} />

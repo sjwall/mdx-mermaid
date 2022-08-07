@@ -23,3 +23,12 @@
   align-items: center;
   justify-content: center;
 }
+
+.banner {
+  font-weight: bold;
+  font-size: 20px;
+  padding: 20px;
+  max-width: 768px;
+  margin: 0 auto;
+  text-align: center;
+}

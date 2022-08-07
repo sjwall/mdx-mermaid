@@ -6,7 +6,7 @@ sidebar_position: 2
 
 The documentation for this library is a working example.
 
-This file for has a diagram using the component and code block.
+This file, for example, has a diagram using the component and code block.
 
 ## Component
 
@@ -77,3 +77,9 @@ Mermaid config can be configured through the plugin config:
 ```js title=docusaurus.config.js
 remarkPlugins: [[require('mdx-mermaid'), { mermaid: { theme: 'dark' } }]],
 ```
+
+:::caution
+
+When passing config to the `<Mermaid>` component only the first instance should have the config passed to it.
+If no config is passed to any component then Mermaid will not initialize.
+This is not an issue when using in `.mdx` files as the parser will handle this.
