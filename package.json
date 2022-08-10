@@ -9,7 +9,7 @@
     "./Mermaid": "./lib/Mermaid.js",
     "./lib/Mermaid": "./lib/Mermaid.js"
   },
-  "author": "Sam Wall (oss@samuelwall.co.uk)",
+  "author": "Sam Wall (https://github.com/sjwall)",
   "license": "MIT",
   "type": "module",
   "scripts": {
@@ -60,5 +60,14 @@
     "ts-jest": "^28.0.7",
     "typescript": "^4.7.4",
     "unist-util-visit": "^4.1.0"
-  }
+  },
+  "contributors": [
+    "Samuel Wall (https://github.com/sjwall)",
+    "Craig Andrews (https://github.com/candrews)",
+    "Dávid Zsámboki (https://github.com/ddyfedd)",
+    "David Prothero (https://github.com/dprothero)",
+    "mzvast (https://github.com/mzvast)",
+    "Ramy (https://github.com/ramy.loveridge@appshack.se)",
+    "Taj Pereira (https://github.com/taj-p)"
+  ]
 }
