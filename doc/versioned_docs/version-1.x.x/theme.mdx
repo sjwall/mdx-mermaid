@@ -7,7 +7,7 @@ sidebar_position: 3
 The theme can be changed between dark and light themes by setting `theme` values in the configuration:
 
 ```js title=docusaurus.config.js
-remarkPlugins: [[mdxMermaid.default, {
+remarkPlugins: [[require('mdx-mermaid'), {
     theme: { light: 'neutral', dark: 'forest' }
   }]],
 ```

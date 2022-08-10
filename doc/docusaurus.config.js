@@ -31,6 +31,11 @@ async function createConfig() {
             // Please change this to your repo.
             editUrl:
               'https://github.com/sjwall/mdx-mermaid/edit/main/doc',
+            versions: {
+              current: {
+                label: '2.0.0-rc1 🚧',
+              },
+            },
           },
           theme: {
             customCss: require.resolve('./src/css/custom.css'),
@@ -54,6 +59,11 @@ async function createConfig() {
               docId: 'intro',
               position: 'left',
               label: 'Tutorial',
+            },
+            {
+              type: 'docsVersionDropdown',
+              position: 'right',
+              dropdownActiveClassDisabled: true,
             },
             {
               href: 'https://github.com/sjwall/mdx-mermaid',

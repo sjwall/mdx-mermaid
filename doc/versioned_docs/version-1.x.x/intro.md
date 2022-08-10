@@ -24,28 +24,21 @@ pnpm add mdx-mermaid mermaid
 
 ## Configure in Docusaurus
 
-Import the module and pass it to `remarkPlugins`:
+Add
+
+```js
+require('mdx-mermaid')
+```
+
+to `remarkPlugins`
 
 ```js title=docusaurus.config.js
-
-async function createConfig() {
-  const mdxMermaid = await import('mdx-mermaid')
-
-  return {
-    presets: [
-      [
-        'classic',
-        {
-          docs: {
-            remarkPlugins: [mdxMermaid.default],
-          }
-        }
-      ]
-    ]
-  }
-}
-
-module.exports = createConfig;
+presets: [
+    [
+      '@docusaurus/preset-classic',
+      {
+        docs: {
+          remarkPlugins: [require('mdx-mermaid')],
 ```
 
 ## Add a Diagram
