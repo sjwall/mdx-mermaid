@@ -1,17 +1,18 @@
 {
     "compilerOptions": {
         "declaration": true,
+        "allowSyntheticDefaultImports": true,
         "esModuleInterop": true,
         "jsx": "react",
         "lib": ["ESNext", "DOM"],
-        "module": "CommonJS",
+        "module": "ES2020",
         "moduleResolution": "node",
         "noImplicitAny": false,
         "outDir": "lib",
         "rootDir": "src",
         "sourceMap": true,
         "strict": true,
-        "target": "ES5"
+        "target": "ES2020"
     },
     "include": [
       "src/**/*.ts",

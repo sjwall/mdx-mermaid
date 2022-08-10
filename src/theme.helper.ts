@@ -1,5 +1,5 @@
-import mermaidAPI from 'mermaid/mermaidAPI'
-import { Config } from './config.model'
+import type mermaidAPI from 'mermaid/mermaidAPI'
+import type { Config } from './config.model'
 
 export const DEFAULT_DARK_THEME = 'dark'
 export const DEFAULT_LIGHT_THEME = 'default'

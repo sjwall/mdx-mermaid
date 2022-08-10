@@ -33,7 +33,7 @@ Update `docusaurus.config.js`
       '@docusaurus/preset-classic',
       {
         docs: {
-          remarkPlugins: [require('mdx-mermaid')],
+          remarkPlugins: [import('mdx-mermaid')],
 ```
 
 Use code blocks in `.md` or `.mdx` files:

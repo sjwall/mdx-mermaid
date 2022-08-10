@@ -7,8 +7,9 @@
 
 import { createCompiler } from '@mdx-js/mdx'
 import mermaid from './mdxast-mermaid'
+import type mermaidAPI from 'mermaid/mermaidAPI';
 
-import { Config } from './config.model'
+import type { Config } from './config.model'
 
 function createTestCompiler (config?: Config) {
   if (config) {
@@ -157,7 +158,7 @@ MDXContent.isMDXComponent = true;`)
 })
 
 test('Config', async () => {
-  const mdxCompiler = createTestCompiler({ mermaid: { theme: 'dark' } })
+  const mdxCompiler = createTestCompiler({ mermaid: { theme: 'dark' as mermaidAPI.Theme } })
   const result = await mdxCompiler.process(`# Heading 1\n
 \`\`\`mermaid
 graph TD;
@@ -195,7 +196,7 @@ MDXContent.isMDXComponent = true;`)
 })
 
 test('Config component', async () => {
-  const mdxCompiler = createTestCompiler({ mermaid: { theme: 'dark' } })
+  const mdxCompiler = createTestCompiler({ mermaid: { theme: 'dark' as mermaidAPI.Theme } })
   const result = await mdxCompiler.process(`# Heading 1\n
 <Mermaid chart={\`graph TD;
     A-->B;
@@ -231,7 +232,7 @@ MDXContent.isMDXComponent = true;`)
 })
 
 test('Mixed component and code block', async () => {
-  const mdxCompiler = createTestCompiler({ mermaid: { theme: 'dark' } })
+  const mdxCompiler = createTestCompiler({ mermaid: { theme: 'dark' as mermaidAPI.Theme } })
   const result = await mdxCompiler.process(`# Heading 1\n
 \`\`\`mermaid
 graph TD;

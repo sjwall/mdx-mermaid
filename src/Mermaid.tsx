@@ -7,10 +7,10 @@
 
 import React, { useEffect, useState, ReactElement } from 'react'
 import mermaid from 'mermaid'
-import mermaidAPI from 'mermaid/mermaidAPI'
+import type mermaidAPI from 'mermaid/mermaidAPI'
 
-import { Config } from './config.model'
-import { getTheme } from './theme.helper'
+import type { Config } from './config.model'
+import { getTheme } from './theme.helper.js'
 
 /**
  * Assign a unique ID to each mermaid svg as per requirements
