@@ -6,9 +6,9 @@
  */
 
 import { visit, EXIT } from 'unist-util-visit'
-import { Literal, Parent, Node, Data } from 'unist'
+import type { Literal, Parent, Node, Data } from 'unist'
 
-import { Config } from './config.model'
+import type { Config } from './config.model'
 
 type CodeMermaid = Literal<string> & {
   type: 'code'

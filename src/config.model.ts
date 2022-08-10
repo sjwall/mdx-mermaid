@@ -5,7 +5,7 @@
  * license file in the root directory of this source tree.
  */
 
-import mermaidAPI from 'mermaid/mermaidAPI'
+import type mermaidAPI from 'mermaid/mermaidAPI'
 
 /**
  * mdx-mermaid config
