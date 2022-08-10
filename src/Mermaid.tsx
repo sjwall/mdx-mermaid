@@ -10,7 +10,7 @@ import mermaid from 'mermaid'
 import type mermaidAPI from 'mermaid/mermaidAPI'
 
 import type { Config } from './config.model'
-import { getTheme } from './theme.helper'
+import { getTheme } from './theme.helper.js'
 
 /**
  * Assign a unique ID to each mermaid svg as per requirements

@@ -18,5 +18,8 @@ export default {
   },
   roots: [
     'src'
-  ]
+  ],
+  moduleNameMapper: {
+    "(.+)\\.js": "$1"
+  }
 }
