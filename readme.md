@@ -15,6 +15,8 @@ Based off the answer [here][inspire] by unknown.
 
 More documentation available [here][documentation]
 
+Use `v1.x.x` for CommonJS imports.
+
 ## Quick start with Docusaurus
 
 Install `mdx-mermaid` and `mermaid`
@@ -28,12 +30,24 @@ yarn add mdx-mermaid mermaid
 Update `docusaurus.config.js`
 
 ```js
- presets: [
-    [
-      '@docusaurus/preset-classic',
-      {
-        docs: {
-          remarkPlugins: [import('mdx-mermaid')],
+async function createConfig() {
+  const mdxMermaid = await import('mdx-mermaid')
+
+  return {
+    presets: [
+      [
+        'classic',
+        {
+          docs: {
+            remarkPlugins: [mdxMermaid.default],
+          }
+        }
+      ]
+    ]
+  }
+}
+
+module.exports = createConfig;
 ```
 
 Use code blocks in `.md` or `.mdx` files:
