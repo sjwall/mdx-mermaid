@@ -38,4 +38,15 @@ export type Config = {
    * Mermaid configuration.
    */
   mermaid?: mermaidAPI.Config
+
+  /**
+   * What format to output into the mdast tree as.
+   *
+   * jsx-react - v1 compatible, which imports the react component bundled with this package.
+   * ast - ast format where a `Mermaid` component must be supplied in the parser.
+   * svg - Converts the diagram to a jsx component that renders the svg.
+   *
+   * @default 'jsx-react'
+   */
+  output?: 'jsx-react' | 'ast' | 'svg'
 };

@@ -10,6 +10,7 @@
         "noImplicitAny": false,
         "outDir": "lib",
         "rootDir": "src",
+        "skipLibCheck": true,
         "sourceMap": true,
         "strict": true,
         "target": "ES2020"

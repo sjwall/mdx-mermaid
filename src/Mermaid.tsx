@@ -5,7 +5,7 @@
  * license file in the root directory of this source tree.
  */
 
-import React, { useEffect, useState, ReactElement } from 'react'
+import React, { useEffect, useState, ReactElement, ReactText } from 'react'
 import mermaid from 'mermaid'
 import type mermaidAPI from 'mermaid/mermaidAPI'
 
@@ -41,11 +41,10 @@ export type MermaidProps = {
  * @returns The component.
  */
 export const Mermaid = ({ chart, config }: MermaidProps): ReactElement<MermaidProps> => {
-  // Due to Docusaurus not correctly parsing client-side from server-side modules, use the provided workaround
-  // found in the accompanying issue: https://github.com/facebook/docusaurus/issues/4268#issuecomment-783553084
+  // Mermaid doesn't support server-side rendering
   /* istanbul ignore next */
   if (typeof window === 'undefined') {
-    return <div></div>
+    return <></>
   }
 
   const html: HTMLHtmlElement = document.querySelector('html')!
