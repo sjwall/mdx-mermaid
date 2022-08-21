@@ -7,21 +7,11 @@
  * This source code is licensed under the MIT license found in the
  * license file in the root directory of this source tree.
  */
+import React from 'react'
+import { act, render, RenderResult } from '@testing-library/react'
 import mermaid from 'mermaid'
 import type mermaidAPI from 'mermaid/mermaidAPI'
-import React from 'react'
-import renderer from 'react-test-renderer'
-
 import { jest } from '@jest/globals'
-
-const spy = {
-  initialize: jest.spyOn(mermaid, 'initialize').mockImplementation(jest.fn()),
-  render: jest.spyOn(mermaid, 'render').mockImplementation((id_, chart_, callback) => {
-    callback!('content', (element_) => {})
-    return 'content'
-  })
-}
-
 import { Mermaid } from './Mermaid'
 import {
   DARK_THEME_KEY,
@@ -29,163 +19,124 @@ import {
   LIGHT_THEME_KEY
 } from './theme.helper'
 
-async function waitFor(ms: number) {
-  return new Promise<void>(resolve => {
-    setTimeout(() => resolve(), ms)
-  })
-}
+describe('Mermaid', () => {
+  const spy = {
+    initialize: jest.spyOn(mermaid, 'initialize').mockImplementation(jest.fn()),
+    contentLoaded: jest.spyOn(mermaid, 'contentLoaded').mockImplementation(jest.fn())
+  }
 
-afterEach(() => {
-  jest.clearAllMocks()
-})
-
-it('renders without diagram', () => {
-  const component = renderer.create(<Mermaid chart={''} config={{}} />)
-  expect(spy.initialize).toBeCalledTimes(0)
-  expect(spy.render).toBeCalledTimes(0)
-  component.update()
-  expect(spy.render).toBeCalledTimes(1)
-  expect(spy.initialize).toBeCalledTimes(1)
-  component.update()
-  expect(spy.render).toBeCalledTimes(1)
-  expect(spy.initialize).toBeCalledTimes(1)
-})
-
-it('renders with diagram', () => {
-  const component = renderer.create(<Mermaid chart={`graph TD;
-      A-->B;
-      A-->C;
-      B-->D;
-      C-->D;`} config={{}} />)
-  expect(component.toJSON()).toMatchSnapshot()
-  expect(spy.initialize).toBeCalledTimes(0)
-  expect(spy.render).toBeCalledTimes(0)
-  component.update()
-  expect(spy.render).toBeCalledTimes(1)
-  expect(spy.initialize).toBeCalledTimes(1)
-  component.update()
-  expect(spy.render).toBeCalledTimes(1)
-  expect(spy.initialize).toBeCalledTimes(1)
-})
-
-it('initializes only once', async () => {
-  const component = renderer.create(<>
-    <Mermaid chart={'foo'} config={{}} />
-    <Mermaid chart={'bar'} />
-  </>)
-  expect(spy.initialize).toBeCalledTimes(0)
-  expect(spy.render).toBeCalledTimes(0)
-  await waitFor(1000)
-  component.update()
-  expect(spy.render).toBeCalledTimes(2)
-  expect(spy.initialize).toBeCalledTimes(1)
-  component.update()
-  expect(spy.render).toBeCalledTimes(2)
-  expect(spy.initialize).toBeCalledTimes(1)
-})
-
-it('renders with mermaid config', () => {
-  const component = renderer.create(<Mermaid chart={`graph TD;
-      A-->B;
-      A-->C;
-      B-->D;
-      C-->D;`} config={{ mermaid: { theme: 'dark' as mermaidAPI.Theme } }} />)
-  expect(component.toJSON()).toMatchSnapshot()
-  expect(spy.initialize).toBeCalledTimes(0)
-  expect(spy.render).toBeCalledTimes(0)
-  component.update()
-  expect(spy.render).toHaveBeenCalled()
-  expect(spy.initialize).toHaveBeenNthCalledWith(1, { startOnLoad: true, theme: 'dark' })
-  component.update()
-  expect(spy.render).toBeCalledTimes(1)
-  expect(spy.initialize).toBeCalledTimes(1)
-})
-
-it('re-renders mermaid theme on html data-theme attribute change', async () => {
-  const component = renderer.create(
-    <html data-theme='light'>
-      <Mermaid chart={`graph TD;
-            A-->B;
-            A-->C;
-            B-->D;
-            C-->D;`} config={{}} />
-    </html>)
-  expect(component.toJSON()).toMatchSnapshot()
-  expect(spy.initialize).toBeCalledTimes(0)
-  expect(spy.render).toBeCalledTimes(0)
-  component.update()
-  expect(spy.render).toBeCalledTimes(1)
-  expect(spy.initialize).toBeCalledTimes(1)
-  component.update()
-  expect(spy.render).toBeCalledTimes(1)
-  expect(spy.initialize).toBeCalledTimes(1)
-
-  component.update(
-    <html data-theme='dark'>
-      <Mermaid chart={`graph TD;
-            A-->B;
-            A-->C;
-            B-->D;
-            C-->D;`} config={{}} />
-    </html>)
-
-  // Time for mutation observer to notice change.
-  await waitFor(2000)
-
-  expect(spy.render).toBeCalledTimes(2)
-  expect(spy.initialize).toBeCalledTimes(2)
-})
-
-describe('changing the theme at runtime', () => {
-  let useRefSpy: unknown
-  let html: HTMLHtmlElement
-
-  beforeEach(() => {
-    html = document.createElement('html')
-    html.setAttribute(HTML_THEME_ATTRIBUTE, LIGHT_THEME_KEY)
-    useRefSpy = jest.spyOn(document, 'querySelector').mockReturnValue(html)
-  })
+  const diagram = `graph TD;
+  A-->B;
+  A-->C;
+  B-->D;
+  C-->D;`
 
   afterEach(() => {
-    expect(useRefSpy).toHaveBeenCalled()
+    jest.clearAllMocks()
   })
 
-  it('reacts to changed theme', async () => {
-    renderer.act(() => {
-      renderer.create(
-        <Mermaid chart={`graph TD;
-              A-->B;
-              A-->C;
-              B-->D;
-              C-->D;`} config={{}} />
-      )
+  const removeUniqueness = (element: Element) => {
+    element.querySelectorAll('style').forEach((v) => v.remove())
+    element.querySelectorAll('svg').forEach((v) => {
+      v.removeAttribute('id')
+      v.parentElement!.removeAttribute('id')
     })
+  }
 
-    await renderer.act(async () => {
-      html.setAttribute(HTML_THEME_ATTRIBUTE, DARK_THEME_KEY)
-      await waitFor(1000)
-    })
+  const expectMermaidMatch = (result: RenderResult) => {
+    removeUniqueness(result.baseElement)
+    expect(result.baseElement.parentElement).toMatchSnapshot()
+    return result
+  }
 
-    expect(spy.initialize).toHaveBeenNthCalledWith(1, {"startOnLoad": true, "theme": "default"})
-    expect(spy.initialize).toHaveBeenNthCalledWith(2, {"startOnLoad": true, "theme": "dark"})
+  it('renders without diagram', () => {
+    expectMermaidMatch(render(<Mermaid chart={''} config={{}} />))
   })
 
-  it('does not react to non-theme attribute changes of html', async () => {
-    renderer.act(() => {
-      renderer.create(
-        <Mermaid chart={`graph TD;
-              A-->B;
-              A-->C;
-              B-->D;
-              C-->D;`} config={{}} />
-      )
-    })
+  it('renders with diagram', () => {
+    expectMermaidMatch(render(<svg><Mermaid chart={diagram} config={{}} /></svg>))
+  })
 
-    await renderer.act(async () => {
-      html.setAttribute('manifest', 'some-value')
-      await waitFor(1000)
-    })
+  it('renders with diagram change', () => {
+    const config = {}
+    jest.useFakeTimers()
+    const view = expectMermaidMatch(render(<Mermaid chart={diagram} config={config} />))
+    view.rerender(<Mermaid chart={`graph TD;
+  D-->C;
+  D-->B;
+  C-->A;
+  B-->A;`} config={config} />)
+    jest.advanceTimersByTime(1000)
+    expectMermaidMatch(view)
+    jest.useRealTimers()
+    expect(spy.contentLoaded).toBeCalledTimes(1)
+    expect(spy.initialize).toBeCalledTimes(1)
+  })
 
-    expect(spy.initialize).toHaveBeenCalledWith({"startOnLoad": true, "theme": "default"})
+  it('initializes only once', () => {
+    expectMermaidMatch(render(<>
+      <Mermaid chart={'foo'} config={{}} />
+      <Mermaid chart={'bar'} />
+    </>))
+    expect(spy.contentLoaded).toBeCalledTimes(1)
+    expect(spy.initialize).toBeCalledTimes(1)
+  })
+
+  it('renders with mermaid config', () => {
+    expectMermaidMatch(render(<Mermaid chart={diagram} config={{ mermaid: { theme: 'dark' as mermaidAPI.Theme } }} />))
+    expect(spy.contentLoaded).toBeCalledTimes(1)
+    expect(spy.initialize).toBeCalledWith({ startOnLoad: true, theme: 'dark' })
+  })
+
+  it('renders with mermaid config change', () => {
+    const view = expectMermaidMatch(render(<Mermaid chart={diagram} config={{ mermaid: { theme: 'dark' as mermaidAPI.Theme } }} />))
+    view.baseElement.querySelectorAll('div.mermaid').forEach((v) => {
+      v.setAttribute('data-processed', 'true')
+    })
+    expect(spy.contentLoaded).toBeCalledTimes(1)
+    expect(spy.initialize).toBeCalledWith({ startOnLoad: true, theme: 'dark' })
+    view.rerender(<Mermaid chart={diagram} config={{ mermaid: { theme: 'forest' as mermaidAPI.Theme } }} />)
+    // await waitFor(1000)
+    expectMermaidMatch(view)
+    expect(spy.contentLoaded).toBeCalledTimes(2)
+    expect(spy.initialize).toHaveBeenNthCalledWith(2, { startOnLoad: true, theme: 'forest' })
+  })
+
+  it('renders with string mermaid config', () => {
+    expectMermaidMatch(render(<Mermaid chart={diagram} config={JSON.stringify({ mermaid: { theme: 'dark' } })} />))
+    expect(spy.contentLoaded).toBeCalledTimes(1)
+    expect(spy.initialize).toBeCalledWith({ startOnLoad: true, theme: 'dark' })
+  })
+
+  it('re-renders mermaid theme on html data-theme attribute change', () => {
+    const component = render(
+      <Mermaid chart={diagram} config={{}} />)
+
+    expectMermaidMatch(component)
+    expect(spy.contentLoaded).toBeCalledTimes(1)
+    expect(spy.initialize).toBeCalledTimes(1)
+
+    act(() => document.querySelector('html')!.setAttribute(HTML_THEME_ATTRIBUTE, DARK_THEME_KEY))
+
+    expectMermaidMatch(component)
+
+    expect(spy.contentLoaded).toBeCalledTimes(1)
+    expect(spy.initialize).toBeCalledTimes(1)
+
+    act(() => document.querySelector('html')!.setAttribute(HTML_THEME_ATTRIBUTE, LIGHT_THEME_KEY))
+
+    expectMermaidMatch(component)
+  })
+
+  it('does not react to non-theme attribute changes of html', () => {
+    const component = render(<Mermaid chart={diagram} config={{}} />)
+
+    expectMermaidMatch(component)
+    expect(spy.contentLoaded).toBeCalledTimes(1)
+    expect(spy.initialize).toBeCalledTimes(1)
+
+    act(() => document.querySelector('html')!.setAttribute('manifest', 'some-value'))
+
+    expectMermaidMatch(component)
   })
 })

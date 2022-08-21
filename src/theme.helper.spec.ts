@@ -9,64 +9,66 @@ import {
   LIGHT_THEME_KEY
 } from './theme.helper'
 
-it('returns the default light theme when data-theme is incorrectly configured', () => {
-  const html = document.createElement('html')
-  html.setAttribute(HTML_THEME_ATTRIBUTE, 'some bad key')
+describe('theme.helper', () => {
+  it('returns the default light theme when data-theme is incorrectly configured', () => {
+    const html = document.createElement('html')
+    html.setAttribute(HTML_THEME_ATTRIBUTE, 'some bad key')
 
-  expect(getTheme(html)).toEqual(DEFAULT_LIGHT_THEME)
-})
+    expect(getTheme(html)).toEqual(DEFAULT_LIGHT_THEME)
+  })
 
-it('returns the default light theme', () => {
-  const html = document.createElement('html')
-  html.setAttribute(HTML_THEME_ATTRIBUTE, LIGHT_THEME_KEY)
+  it('returns the default light theme', () => {
+    const html = document.createElement('html')
+    html.setAttribute(HTML_THEME_ATTRIBUTE, LIGHT_THEME_KEY)
 
-  expect(getTheme(html)).toEqual(DEFAULT_LIGHT_THEME)
-})
+    expect(getTheme(html)).toEqual(DEFAULT_LIGHT_THEME)
+  })
 
-it('returns the default dark theme', () => {
-  const html = document.createElement('html')
-  html.setAttribute(HTML_THEME_ATTRIBUTE, DARK_THEME_KEY)
+  it('returns the default dark theme', () => {
+    const html = document.createElement('html')
+    html.setAttribute(HTML_THEME_ATTRIBUTE, DARK_THEME_KEY)
 
-  expect(getTheme(html)).toEqual(DEFAULT_DARK_THEME)
-})
+    expect(getTheme(html)).toEqual(DEFAULT_DARK_THEME)
+  })
 
-it('returns the configured light theme', () => {
-  const html = document.createElement('html')
-  html.setAttribute(HTML_THEME_ATTRIBUTE, LIGHT_THEME_KEY)
+  it('returns the configured light theme', () => {
+    const html = document.createElement('html')
+    html.setAttribute(HTML_THEME_ATTRIBUTE, LIGHT_THEME_KEY)
 
-  const config: Config = {
-    theme: {
-      light: 'forest' as mermaidAPI.Theme,
-      dark: 'default' as mermaidAPI.Theme
+    const config: Config = {
+      theme: {
+        light: 'forest' as mermaidAPI.Theme,
+        dark: 'default' as mermaidAPI.Theme
+      }
     }
-  }
 
-  expect(getTheme(html, config)).toEqual(config.theme?.light)
-})
+    expect(getTheme(html, config)).toEqual(config.theme?.light)
+  })
 
-it('returns the configured dark theme', () => {
-  const html = document.createElement('html')
-  html.setAttribute(HTML_THEME_ATTRIBUTE, DARK_THEME_KEY)
+  it('returns the configured dark theme', () => {
+    const html = document.createElement('html')
+    html.setAttribute(HTML_THEME_ATTRIBUTE, DARK_THEME_KEY)
 
-  const config: Config = {
-    theme: {
-      light: 'forest' as mermaidAPI.Theme,
-      dark: 'default' as mermaidAPI.Theme
+    const config: Config = {
+      theme: {
+        light: 'forest' as mermaidAPI.Theme,
+        dark: 'default' as mermaidAPI.Theme
+      }
     }
-  }
 
-  expect(getTheme(html, config)).toEqual(config.theme?.dark)
-})
+    expect(getTheme(html, config)).toEqual(config.theme?.dark)
+  })
 
-it('returns the mermaid config theme', () => {
-  const html = document.createElement('html')
-  html.setAttribute(HTML_THEME_ATTRIBUTE, DARK_THEME_KEY)
+  it('returns the mermaid config theme', () => {
+    const html = document.createElement('html')
+    html.setAttribute(HTML_THEME_ATTRIBUTE, DARK_THEME_KEY)
 
-  const config: Config = {
-    mermaid: {
-      theme: 'forest' as mermaidAPI.Theme
+    const config: Config = {
+      mermaid: {
+        theme: 'forest' as mermaidAPI.Theme
+      }
     }
-  }
 
-  expect(getTheme(html, config)).toEqual(config.mermaid?.theme)
+    expect(getTheme(html, config)).toEqual(config.mermaid?.theme)
+  })
 })

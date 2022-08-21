@@ -20,6 +20,6 @@ export default {
     'src'
   ],
   moduleNameMapper: {
-    "(.+)\\.js": "$1"
+    "(./theme.helper)\\.js": "$1"
   }
 }
