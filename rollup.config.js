@@ -6,7 +6,7 @@ const createConfig = (path, x) => ({
   output: [
     { format: 'esm', file: `lib/${path}.mjs` },
     {
-      format: 'cjs', file: `lib/${path}.js`
+      format: 'cjs', file: `lib/${path}.cjs`
     }
   ],
   external: ['react', 'react-dom'],
