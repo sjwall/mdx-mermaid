@@ -75,7 +75,7 @@ Future task2               :         des4, after des3, 5d
 Mermaid config can be configured through the plugin config:
 
 ```js title=docusaurus.config.js
-remarkPlugins: [[await import('mdx-mermaid').default, { mermaid: { theme: 'dark' } }]],
+remarkPlugins: [[require('mdx-mermaid'), { mermaid: { theme: 'dark' } }]],
 ```
 
 :::caution

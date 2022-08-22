@@ -15,12 +15,12 @@
     "postinstall": "cd ../node_modules/react && yarn link && cd ../../doc && yarn link react"
   },
   "dependencies": {
-    "@docusaurus/core": "^2.0.0-beta.17",
-    "@docusaurus/preset-classic": "^2.0.0-beta.17",
+    "@docusaurus/core": "^2.0.0",
+    "@docusaurus/preset-classic": "^2.0.0",
     "@mdx-js/react": "^1.6.21",
     "clsx": "^1.1.1",
     "mdx-mermaid": "link:..",
-    "mermaid": "8.11.4",
+    "mermaid": "^9.1.6",
     "prism-react-renderer": "^1.2.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"

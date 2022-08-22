@@ -21,7 +21,7 @@ type CodeMermaid = Literal<string> & {
  * @param config Config passed in from parser.
  * @returns Function to transform mdxast.
  */
-function plugin (config?: Config) {
+export default function plugin (config?: Config) {
   /**
    * Insert the component import into the document.
    * @param ast The document to insert into.
@@ -78,5 +78,3 @@ function plugin (config?: Config) {
     return ast
   }
 }
-
-export = plugin

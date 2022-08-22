@@ -22,18 +22,30 @@ Install `mdx-mermaid` and `mermaid`
 `mermaid` is a peer dependency so you can specify the version to use
 
 ```bash
-yarn add mdx-mermaid mermaid
+yarn add mdx-mermaid@^v1.3.0 mermaid
 ```
 
 Update `docusaurus.config.js`
 
 ```js
- presets: [
-    [
-      '@docusaurus/preset-classic',
-      {
-        docs: {
-          remarkPlugins: [require('mdx-mermaid')],
+async function createConfig() {
+  const mdxMermaid = await import('mdx-mermaid')
+
+  return {
+    presets: [
+      [
+        'classic',
+        {
+          docs: {
+            remarkPlugins: [mdxMermaid.default],
+          }
+        }
+      ]
+    ]
+  }
+}
+
+module.exports = createConfig;
 ```
 
 Use code blocks in `.md` or `.mdx` files:

@@ -11,41 +11,34 @@ Setup mdx-mermaid in Docusaurus.
 Use your preferred package manager to install.
 
 ```shell title=NPM
-npm i mdx-mermaid@^1.3.0 mermaid
+npm i mdx-mermaid mermaid
 ```
 
 ```shell title=Yarn
-yarn add mdx-mermaid@^1.3.0 mermaid
+yarn add mdx-mermaid mermaid
 ```
 
 ```shell title=PNPM
-pnpm add mdx-mermaid@^1.3.0 mermaid
+pnpm add mdx-mermaid mermaid
 ```
 
 ## Configure in Docusaurus
 
-Import the module and pass it to `remarkPlugins`:
+Add
+
+```js
+require('mdx-mermaid')
+```
+
+to `remarkPlugins`
 
 ```js title=docusaurus.config.js
-
-async function createConfig() {
-  const mdxMermaid = await import('mdx-mermaid')
-
-  return {
-    presets: [
-      [
-        'classic',
-        {
-          docs: {
-            remarkPlugins: [mdxMermaid.default],
-          }
-        }
-      ]
-    ]
-  }
-}
-
-module.exports = createConfig;
+presets: [
+    [
+      '@docusaurus/preset-classic',
+      {
+        docs: {
+          remarkPlugins: [require('mdx-mermaid')],
 ```
 
 ## Add a Diagram
