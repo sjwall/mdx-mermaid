@@ -5,18 +5,11 @@
  * license file in the root directory of this source tree.
  */
 
-import React, { useEffect, useState, ReactElement } from 'react'
+import React, { useEffect, useState, ReactElement, useMemo } from 'react'
 import mermaid from 'mermaid'
-import mermaidAPI from 'mermaid/mermaidAPI'
 
 import { Config } from './config.model'
 import { getTheme } from './theme.helper'
-
-/**
- * Assign a unique ID to each mermaid svg as per requirements
- * of `mermaid.render`.
- */
-let id = 0
 
 /**
  * Properties for Mermaid component.
@@ -30,7 +23,7 @@ export type MermaidProps = {
   /**
    * Config to initialize mermaid with.
    */
-  config?: Config
+  config?: Config | string
 }
 
 /**
@@ -40,18 +33,21 @@ export type MermaidProps = {
  * @param param1 Config.
  * @returns The component.
  */
-export const Mermaid = ({ chart, config }: MermaidProps): ReactElement<MermaidProps> => {
+export const Mermaid = ({ chart, config: configSrc }: MermaidProps): ReactElement<MermaidProps> => {
   // Due to Docusaurus not correctly parsing client-side from server-side modules, use the provided workaround
   // found in the accompanying issue: https://github.com/facebook/docusaurus/issues/4268#issuecomment-783553084
   /* istanbul ignore next */
   if (typeof window === 'undefined') {
-    return <div></div>
+    return <div className="mermaid" data-mermaid-src={chart}>{chart}</div>
   }
+
+  const config: Config = useMemo(() => typeof configSrc === 'string' ? JSON.parse(configSrc) : configSrc, [configSrc])
 
   const html: HTMLHtmlElement = document.querySelector('html')!
 
-  // Watch for changes in theme in the HTML attribute `data-theme`.
-  const [theme, setTheme] = useState<mermaidAPI.Theme>(getTheme(html, config))
+  const [rerender, setRerender] = useState<boolean>(false)
+
+  const theme = useMemo(() => getTheme(html, config), [config, rerender])
 
   useEffect(() => {
     const observer = new MutationObserver((mutations) => {
@@ -59,7 +55,7 @@ export const Mermaid = ({ chart, config }: MermaidProps): ReactElement<MermaidPr
         if (mutation.type !== 'attributes' || mutation.attributeName !== 'data-theme') {
           continue
         }
-        setTheme(getTheme(mutation.target as HTMLHtmlElement, config))
+        setRerender((cur) => !cur)
         break
       }
     })
@@ -72,28 +68,26 @@ export const Mermaid = ({ chart, config }: MermaidProps): ReactElement<MermaidPr
         // Do nothing
       }
     }
-  }, [chart, config, theme])
+  }, [])
 
-  // When theme updates, rerender the SVG.
-  const [svg, setSvg] = useState<string>('')
   useEffect(() => {
-    const render = () => {
-      mermaid.render(`mermaid-svg-${id.toString()}`, chart, (renderedSvg) => setSvg(renderedSvg))
-      id++
-    }
-
     if (config) {
       if (config.mermaid) {
         mermaid.initialize({ startOnLoad: true, ...config.mermaid, theme })
       } else {
         mermaid.initialize({ startOnLoad: true, theme })
       }
-      render()
-    } else {
-      // Is there a better way?
-      setTimeout(render, 0)
+      document.querySelectorAll('div.mermaid[data-processed="true"]').forEach((v) => {
+        v.removeAttribute('data-processed')
+        v.innerHTML = v.getAttribute('data-mermaid-src') as string
+      })
+      mermaid.contentLoaded()
     }
-  }, [theme, chart])
+  }, [config, theme])
 
-  return <div dangerouslySetInnerHTML={{ __html: svg }}></div>
+  useEffect(() => {
+    setTimeout(() => mermaid.contentLoaded, 0)
+  }, [chart])
+
+  return <div className="mermaid" data-mermaid-src={chart}>{chart}</div>
 }

@@ -53,28 +53,20 @@ export default function plugin (config?: Config) {
     })
 
     // Replace each Mermaid code block with the Mermaid component
-    instances.forEach(([node, index, parent]) => {
+    instances.forEach(([node, index, parent], i) => {
       parent.children.splice(index, 1, {
-        type: 'jsx',
-        value: `<Mermaid chart={\`${node.value}\`}/>`,
-        position: node.position
+        type: 'mermaidCodeBlock',
+        data: {
+          hName: 'Mermaid',
+          hProperties: {
+            config: i > 0 ? undefined : JSON.stringify(config),
+            chart: node.value
+          }
+        }
       })
     })
 
-    // Look for any components
-    visit<Literal<string> & { type: 'jsx' }>(ast, { type: 'jsx' }, (node, index, parent) => {
-      if (/.*<Mermaid.*/.test(node.value)) {
-        // If the component doesn't have config
-        if (!/.*config={.*/.test(node.value)) {
-          const index = node.value.indexOf('<Mermaid') + 8
-          node.value = node.value.substring(0, index) +
-          ` config={${JSON.stringify(config || {})}}` +
-            node.value.substring(index)
-        }
-        insertImport(ast)
-        return visit.EXIT
-      }
-    })
+    insertImport(ast)
     return ast
   }
 }

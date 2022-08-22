@@ -1,11 +1,336 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders the output of mermaid into the div 1`] = `
-<div
-  dangerouslySetInnerHTML={
-    Object {
-      "__html": "mermaid output",
-    }
-  }
-/>
+exports[`does not react to non-theme attribute changes of html 1`] = `
+<html
+  data-theme="light"
+>
+  <head />
+  <body>
+    <div>
+      <div
+        class="mermaid"
+        data-mermaid-src="graph TD;
+A-->B;
+A-->C;
+B-->D;
+C-->D;"
+      >
+        graph TD;
+A--&gt;B;
+A--&gt;C;
+B--&gt;D;
+C--&gt;D;
+      </div>
+    </div>
+  </body>
+</html>
+`;
+
+exports[`does not react to non-theme attribute changes of html 2`] = `
+<html
+  data-theme="light"
+  manifest="some-value"
+>
+  <head />
+  <body>
+    <div>
+      <div
+        class="mermaid"
+        data-mermaid-src="graph TD;
+A-->B;
+A-->C;
+B-->D;
+C-->D;"
+      >
+        graph TD;
+A--&gt;B;
+A--&gt;C;
+B--&gt;D;
+C--&gt;D;
+      </div>
+    </div>
+  </body>
+</html>
+`;
+
+exports[`initializes only once 1`] = `
+<html>
+  <head />
+  <body>
+    <div>
+      <div
+        class="mermaid"
+        data-mermaid-src="foo"
+      >
+        foo
+      </div>
+      <div
+        class="mermaid"
+        data-mermaid-src="bar"
+      >
+        bar
+      </div>
+    </div>
+  </body>
+</html>
+`;
+
+exports[`re-renders mermaid theme on html data-theme attribute change 1`] = `
+<html>
+  <head />
+  <body>
+    <div>
+      <div
+        class="mermaid"
+        data-mermaid-src="graph TD;
+A-->B;
+A-->C;
+B-->D;
+C-->D;"
+      >
+        graph TD;
+A--&gt;B;
+A--&gt;C;
+B--&gt;D;
+C--&gt;D;
+      </div>
+    </div>
+  </body>
+</html>
+`;
+
+exports[`re-renders mermaid theme on html data-theme attribute change 2`] = `
+<html
+  data-theme="dark"
+>
+  <head />
+  <body>
+    <div>
+      <div
+        class="mermaid"
+        data-mermaid-src="graph TD;
+A-->B;
+A-->C;
+B-->D;
+C-->D;"
+      >
+        graph TD;
+A--&gt;B;
+A--&gt;C;
+B--&gt;D;
+C--&gt;D;
+      </div>
+    </div>
+  </body>
+</html>
+`;
+
+exports[`re-renders mermaid theme on html data-theme attribute change 3`] = `
+<html
+  data-theme="light"
+>
+  <head />
+  <body>
+    <div>
+      <div
+        class="mermaid"
+        data-mermaid-src="graph TD;
+A-->B;
+A-->C;
+B-->D;
+C-->D;"
+      >
+        graph TD;
+A--&gt;B;
+A--&gt;C;
+B--&gt;D;
+C--&gt;D;
+      </div>
+    </div>
+  </body>
+</html>
+`;
+
+exports[`renders with diagram 1`] = `
+<html>
+  <head />
+  <body>
+    <div>
+      <svg>
+        <div
+          class="mermaid"
+          data-mermaid-src="graph TD;
+A-->B;
+A-->C;
+B-->D;
+C-->D;"
+        >
+          graph TD;
+A--&gt;B;
+A--&gt;C;
+B--&gt;D;
+C--&gt;D;
+        </div>
+      </svg>
+    </div>
+  </body>
+</html>
+`;
+
+exports[`renders with diagram change 1`] = `
+<html>
+  <head />
+  <body>
+    <div>
+      <div
+        class="mermaid"
+        data-mermaid-src="graph TD;
+A-->B;
+A-->C;
+B-->D;
+C-->D;"
+      >
+        graph TD;
+A--&gt;B;
+A--&gt;C;
+B--&gt;D;
+C--&gt;D;
+      </div>
+    </div>
+  </body>
+</html>
+`;
+
+exports[`renders with diagram change 2`] = `
+<html>
+  <head />
+  <body>
+    <div>
+      <div
+        class="mermaid"
+        data-mermaid-src="graph TD;
+D-->C;
+D-->B;
+C-->A;
+B-->A;"
+      >
+        graph TD;
+D--&gt;C;
+D--&gt;B;
+C--&gt;A;
+B--&gt;A;
+      </div>
+    </div>
+  </body>
+</html>
+`;
+
+exports[`renders with mermaid config 1`] = `
+<html>
+  <head />
+  <body>
+    <div>
+      <div
+        class="mermaid"
+        data-mermaid-src="graph TD;
+A-->B;
+A-->C;
+B-->D;
+C-->D;"
+      >
+        graph TD;
+A--&gt;B;
+A--&gt;C;
+B--&gt;D;
+C--&gt;D;
+      </div>
+    </div>
+  </body>
+</html>
+`;
+
+exports[`renders with mermaid config change 1`] = `
+<html>
+  <head />
+  <body>
+    <div>
+      <div
+        class="mermaid"
+        data-mermaid-src="graph TD;
+A-->B;
+A-->C;
+B-->D;
+C-->D;"
+      >
+        graph TD;
+A--&gt;B;
+A--&gt;C;
+B--&gt;D;
+C--&gt;D;
+      </div>
+    </div>
+  </body>
+</html>
+`;
+
+exports[`renders with mermaid config change 2`] = `
+<html>
+  <head />
+  <body>
+    <div>
+      <div
+        class="mermaid"
+        data-mermaid-src="graph TD;
+A-->B;
+A-->C;
+B-->D;
+C-->D;"
+      >
+        graph TD;
+A--&gt;B;
+A--&gt;C;
+B--&gt;D;
+C--&gt;D;
+      </div>
+    </div>
+  </body>
+</html>
+`;
+
+exports[`renders with string mermaid config 1`] = `
+<html>
+  <head />
+  <body>
+    <div>
+      <div
+        class="mermaid"
+        data-mermaid-src="graph TD;
+A-->B;
+A-->C;
+B-->D;
+C-->D;"
+      >
+        graph TD;
+A--&gt;B;
+A--&gt;C;
+B--&gt;D;
+C--&gt;D;
+      </div>
+    </div>
+  </body>
+</html>
+`;
+
+exports[`renders without diagram 1`] = `
+<html>
+  <head />
+  <body>
+    <div>
+      <div
+        class="mermaid"
+        data-mermaid-src=""
+      />
+    </div>
+  </body>
+</html>
 `;

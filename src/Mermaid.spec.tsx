@@ -7,9 +7,8 @@
  * This source code is licensed under the MIT license found in the
  * license file in the root directory of this source tree.
  */
-import mermaid from 'mermaid'
 import React from 'react'
-import renderer from 'react-test-renderer'
+import { act, render, RenderResult } from '@testing-library/react'
 import { Mermaid } from './Mermaid'
 import {
   DARK_THEME_KEY,
@@ -18,185 +17,126 @@ import {
 } from './theme.helper'
 import * as ThemeHelper from './theme.helper'
 
-async function waitFor (ms: number) {
-  return new Promise<void>(resolve => {
-    setTimeout(() => resolve(), ms)
-  })
-}
-
 jest.mock('mermaid')
+
+// eslint-disable-next-line import/first
+import mermaid from 'mermaid'
+
+const getThemeSpy = jest.spyOn(ThemeHelper, 'getTheme')
+
+const diagram = `graph TD;
+A-->B;
+A-->C;
+B-->D;
+C-->D;`
 
 afterEach(() => {
   jest.clearAllMocks()
 })
 
+const removeUniqueness = (element: Element) => {
+  element.querySelectorAll('style').forEach((v) => v.remove())
+  element.querySelectorAll('svg').forEach((v) => {
+    v.removeAttribute('id')
+    v.parentElement!.removeAttribute('id')
+  })
+}
+
+const expectMermaidMatch = (result: RenderResult) => {
+  removeUniqueness(result.baseElement)
+  expect(result.baseElement.parentElement).toMatchSnapshot()
+  return result
+}
+
 it('renders without diagram', () => {
-  const component = renderer.create(<Mermaid chart={''} config={{}}  />)
-  expect(mermaid.initialize).toBeCalledTimes(0)
-  expect(mermaid.render).toBeCalledTimes(0)
-  component.update()
-  expect(mermaid.render).toBeCalledTimes(1)
-  expect(mermaid.initialize).toBeCalledTimes(1)
-  component.update()
-  expect(mermaid.render).toBeCalledTimes(1)
-  expect(mermaid.initialize).toBeCalledTimes(1)
+  expectMermaidMatch(render(<Mermaid chart={''} config={{}} />))
 })
 
 it('renders with diagram', () => {
-  const component = renderer.create(<Mermaid chart={`graph TD;
-      A-->B;
-      A-->C;
-      B-->D;
-      C-->D;`} config={{}} />)
-  expect(mermaid.initialize).toBeCalledTimes(0)
-  expect(mermaid.render).toBeCalledTimes(0)
-  component.update()
-  expect(mermaid.render).toBeCalledTimes(1)
-  expect(mermaid.initialize).toBeCalledTimes(1)
-  component.update()
-  expect(mermaid.render).toBeCalledTimes(1)
+  expectMermaidMatch(render(<svg><Mermaid chart={diagram} config={{}} /></svg>))
+})
+
+it('renders with diagram change', () => {
+  const config = {}
+  jest.useFakeTimers()
+  const view = expectMermaidMatch(render(<Mermaid chart={diagram} config={config} />))
+  view.rerender(<Mermaid chart={`graph TD;
+D-->C;
+D-->B;
+C-->A;
+B-->A;`} config={config} />)
+  jest.advanceTimersByTime(1000)
+  expectMermaidMatch(view)
+  jest.useRealTimers()
+  expect(mermaid.contentLoaded).toBeCalledTimes(1)
   expect(mermaid.initialize).toBeCalledTimes(1)
 })
 
-it('initializes only once', async () => {
-  const component = renderer.create(<>
-        <Mermaid chart={'foo'} config={{}} />
-        <Mermaid chart={'bar'} />
-      </>)
-  expect(mermaid.initialize).toBeCalledTimes(0)
-  expect(mermaid.render).toBeCalledTimes(0)
-  await waitFor(1000)
-  component.update()
-  expect(mermaid.render).toBeCalledTimes(2)
-  expect(mermaid.initialize).toBeCalledTimes(1)
-  component.update()
-  expect(mermaid.render).toBeCalledTimes(2)
+it('initializes only once', () => {
+  expectMermaidMatch(render(<>
+    <Mermaid chart={'foo'} config={{}} />
+    <Mermaid chart={'bar'} />
+  </>))
+  expect(mermaid.contentLoaded).toBeCalledTimes(1)
   expect(mermaid.initialize).toBeCalledTimes(1)
 })
 
 it('renders with mermaid config', () => {
-  const component = renderer.create(<Mermaid chart={`graph TD;
-      A-->B;
-      A-->C;
-      B-->D;
-      C-->D;`} config={{ mermaid: { theme: 'dark' } } } />)
-  expect(mermaid.initialize).toBeCalledTimes(0)
-  expect(mermaid.render).toBeCalledTimes(0)
-  component.update()
-  expect(mermaid.render).toHaveBeenCalled()
-  expect(mermaid.initialize).toHaveBeenNthCalledWith(1, { startOnLoad: true, theme: 'dark' })
-  component.update()
-  expect(mermaid.render).toBeCalledTimes(1)
-  expect(mermaid.initialize).toBeCalledTimes(1)
+  expectMermaidMatch(render(<Mermaid chart={diagram} config={{ mermaid: { theme: 'dark' } }} />))
+  expect(mermaid.contentLoaded).toBeCalledTimes(1)
+  expect(mermaid.initialize).toBeCalledWith({ startOnLoad: true, theme: 'dark' })
 })
 
-it('re-renders mermaid theme on html data-theme attribute change', async () => {
-  const component = renderer.create(
-    <html data-theme='light'>
-      <Mermaid chart={`graph TD;
-            A-->B;
-            A-->C;
-            B-->D;
-            C-->D;`} config={{}} />
-    </html>)
-  expect(mermaid.initialize).toBeCalledTimes(0)
-  expect(mermaid.render).toBeCalledTimes(0)
-  component.update()
-  expect(mermaid.render).toBeCalledTimes(1)
-  expect(mermaid.initialize).toBeCalledTimes(1)
-  component.update()
-  expect(mermaid.render).toBeCalledTimes(1)
-  expect(mermaid.initialize).toBeCalledTimes(1)
-
-  component.update(
-    <html data-theme='dark'>
-      <Mermaid chart={`graph TD;
-            A-->B;
-            A-->C;
-            B-->D;
-            C-->D;`} config={{}} />
-        </html>)
-
-  // Time for mutation observer to notice change.
-  await waitFor(2000)
-
-  expect(mermaid.render).toBeCalledTimes(2)
-  expect(mermaid.initialize).toBeCalledTimes(2)
+it('renders with mermaid config change', () => {
+  const view = expectMermaidMatch(render(<Mermaid chart={diagram} config={{ mermaid: { theme: 'dark' } }} />))
+  view.baseElement.querySelectorAll('div.mermaid').forEach((v) => {
+    v.setAttribute('data-processed', 'true')
+  })
+  expect(mermaid.contentLoaded).toBeCalledTimes(1)
+  expect(mermaid.initialize).toBeCalledWith({ startOnLoad: true, theme: 'dark' })
+  view.rerender(<Mermaid chart={diagram} config={{ mermaid: { theme: 'forest' } }} />)
+  // await waitFor(1000)
+  expectMermaidMatch(view)
+  expect(mermaid.contentLoaded).toBeCalledTimes(2)
+  expect(mermaid.initialize).toHaveBeenNthCalledWith(2, { startOnLoad: true, theme: 'forest' })
 })
 
-it('renders the output of mermaid into the div', async () => {
-  const expectedOutput = 'mermaid output'
-  mermaid.render = jest.fn((_, __, cb) => {
-    if (cb) cb(expectedOutput, () => 0)
-    return expectedOutput
-  })
-
-  let component: any
-  renderer.act(() => {
-    component = renderer.create(
-      <Mermaid chart={`graph TD;
-            A-->B;
-            A-->C;
-            B-->D;
-            C-->D;`} config={{}} />
-    )
-  })
-
-  expect(mermaid.initialize).toBeCalledTimes(1)
-  expect(mermaid.render).toBeCalledTimes(1)
-  expect(component.toJSON()).toMatchSnapshot()
+it('renders with string mermaid config', () => {
+  expectMermaidMatch(render(<Mermaid chart={diagram} config={JSON.stringify({ mermaid: { theme: 'dark' } })} />))
+  expect(mermaid.contentLoaded).toBeCalledTimes(1)
+  expect(mermaid.initialize).toBeCalledWith({ startOnLoad: true, theme: 'dark' })
 })
 
-describe('changing the theme at runtime', () => {
-  let useRefSpy: jest.SpyInstance
-  let html: HTMLHtmlElement
+it('re-renders mermaid theme on html data-theme attribute change', () => {
+  const component = render(
+    <Mermaid chart={diagram} config={{}} />)
 
-  beforeEach(() => {
-    html = document.createElement('html')
-    html.setAttribute(HTML_THEME_ATTRIBUTE, LIGHT_THEME_KEY)
-    useRefSpy = jest.spyOn(document, 'querySelector').mockReturnValue(html)
-  })
+  expectMermaidMatch(component)
+  expect(mermaid.contentLoaded).toBeCalledTimes(1)
+  expect(mermaid.initialize).toBeCalledTimes(1)
+  expect(getThemeSpy).toBeCalledTimes(1)
 
-  afterEach(() => {
-    expect(useRefSpy).toHaveBeenCalled()
-  })
+  act(() => document.querySelector('html')!.setAttribute(HTML_THEME_ATTRIBUTE, DARK_THEME_KEY))
 
-  it('reacts to changed theme', async () => {
-    const getThemeSpy = jest.spyOn(ThemeHelper, 'getTheme')
-    renderer.act(() => {
-      renderer.create(
-        <Mermaid chart={`graph TD;
-              A-->B;
-              A-->C;
-              B-->D;
-              C-->D;`} config={{}} />
-      )
-    })
+  expectMermaidMatch(component)
 
-    await renderer.act(async () => {
-      html.setAttribute(HTML_THEME_ATTRIBUTE, DARK_THEME_KEY)
-      await waitFor(1000)
-    })
+  expect(mermaid.contentLoaded).toBeCalledTimes(1)
+  expect(mermaid.initialize).toBeCalledTimes(1)
+  expect(getThemeSpy).toBeCalledTimes(1)
 
-    expect(getThemeSpy.mock.calls.length).toBeGreaterThan(2)
-  })
+  act(() => document.querySelector('html')!.setAttribute(HTML_THEME_ATTRIBUTE, LIGHT_THEME_KEY))
 
-  it('does not react to non-theme attribute changes of html', async () => {
-    const getThemeSpy = jest.spyOn(ThemeHelper, 'getTheme')
-    renderer.act(() => {
-      renderer.create(
-        <Mermaid chart={`graph TD;
-              A-->B;
-              A-->C;
-              B-->D;
-              C-->D;`} config={{}} />
-      )
-    })
+  expectMermaidMatch(component)
+})
 
-    await renderer.act(async () => {
-      html.setAttribute('manifest', 'some-value')
-      await waitFor(1000)
-    })
-    expect(getThemeSpy).toHaveBeenCalledTimes(2)
-  })
+it('does not react to non-theme attribute changes of html', () => {
+  const component = render(<Mermaid chart={diagram} config={{}} />)
+
+  expectMermaidMatch(component)
+  expect(mermaid.contentLoaded).toBeCalledTimes(1)
+  expect(mermaid.initialize).toBeCalledTimes(1)
+
+  act(() => document.querySelector('html')!.setAttribute('manifest', 'some-value'))
+
+  expectMermaidMatch(component)
 })
