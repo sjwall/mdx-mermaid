@@ -35,6 +35,12 @@ async function createConfig() {
             current: {
               label: '2.0.0-rc1 🚧',
             },
+            '1.3.0': {
+              label: '>= 1.3.0',
+            },
+            '1.2.3': {
+              label: '<= 1.2.3',
+            },
           },
         },
         theme: {
