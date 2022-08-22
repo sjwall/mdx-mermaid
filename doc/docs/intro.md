@@ -22,6 +22,18 @@ yarn add mdx-mermaid@^1.3.0 mermaid
 pnpm add mdx-mermaid@^1.3.0 mermaid
 ```
 
+:::danger
+
+For Docusaurus and @mdxjs/mdx v1 use version `^1.3.0`
+
+:::
+
+:::info
+
+For @mdxjs/mdx v2 use version `2.0.0-rc2`
+
+:::
+
 ## Configure in Docusaurus
 
 Import the module and pass it to `remarkPlugins`:
