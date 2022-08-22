@@ -15,7 +15,9 @@ Based off the answer [here][inspire] by unknown.
 
 More documentation available [here][documentation]
 
-Use `v1.x.x` for CommonJS imports.
+Use version `^1.3.0` for `@mdxjs/mdx` `v1` and `Docusaurus`.
+
+Use version `^2.0.0` for `@mdxjs/mdx` `v2`.
 
 ## Quick start with Docusaurus
 
@@ -24,7 +26,7 @@ Install `mdx-mermaid` and `mermaid`
 `mermaid` is a peer dependency so you can specify the version to use
 
 ```bash
-yarn add mdx-mermaid mermaid
+yarn add mdx-mermaid@^v1.3.0 mermaid
 ```
 
 Update `docusaurus.config.js`

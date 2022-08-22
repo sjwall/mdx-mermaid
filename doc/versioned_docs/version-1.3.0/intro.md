@@ -27,6 +27,7 @@ pnpm add mdx-mermaid@^1.3.0 mermaid
 Import the module and pass it to `remarkPlugins`:
 
 ```js title=docusaurus.config.js
+
 async function createConfig() {
   const mdxMermaid = await import('mdx-mermaid')
 

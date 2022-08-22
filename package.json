@@ -5,15 +5,24 @@
   "types": "index.d.ts",
   "main": "lib/mdxast-mermaid.js",
   "exports": {
-    ".": "./lib/mdxast-mermaid.js",
-    "./Mermaid": "./lib/Mermaid.js",
-    "./lib/Mermaid": "./lib/Mermaid.js"
+    ".": {
+      "require": "./lib/mdxast-mermaid.cjs",
+      "import": "./lib/mdxast-mermaid.mjs"
+    },
+    "./Mermaid": {
+      "require": "./lib/Mermaid.cjs",
+      "import": "./lib/Mermaid.mjs"
+    },
+    "./lib/Mermaid": {
+      "require": "./lib/Mermaid.cjs",
+      "import": "./lib/Mermaid.mjs"
+    }
   },
-  "author": "Sam Wall (https://github.com/sjwall)",
+  "author": "Sam Wall (oss@samuelwall.co.uk)",
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "build": "rimraf lib && tsc",
+    "build": "rimraf lib && tsc --declarationDir lib --declaration true --outDir temp && rimraf temp && rollup -c",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage"
   },
   "repository": {
@@ -32,12 +41,18 @@
     "jsx"
   ],
   "peerDependencies": {
-    "mermaid": ">= 8.12.0",
+    "mermaid": ">=8.11.0",
     "react": "^16.8.4 || ^17.0.0 || ^18.0.0",
     "unist-util-visit": "^4.1.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.18.10",
+    "@babel/preset-env": "^7.18.10",
+    "@babel/preset-react": "^7.18.6",
     "@mdx-js/mdx": "^1.6.22",
+    "@rollup/plugin-babel": "^5.3.1",
+    "@rollup/plugin-commonjs": "^22.0.2",
+    "@rollup/plugin-typescript": "^8.3.4",
     "@testing-library/react": "^11.1.0",
     "@types/jest": "^28.1.6",
     "@types/mermaid": "^8.2.9",
@@ -57,8 +72,8 @@
     "mermaid": "^9.1.4",
     "react": "^17.0.1",
     "react-dom": "^17.0.0",
-    "react-test-renderer": "^17.0.2",
     "rimraf": "^3.0.2",
+    "rollup": "^2.78.1",
     "ts-jest": "^28.0.7",
     "typescript": "^4.7.4",
     "unist-util-visit": "^4.1.0"

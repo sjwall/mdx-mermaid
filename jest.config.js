@@ -18,8 +18,5 @@ export default {
   },
   roots: [
     'src'
-  ],
-  moduleNameMapper: {
-    "(./theme.helper)\\.js": "$1"
-  }
+  ]
 }

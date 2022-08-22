@@ -9,7 +9,7 @@ import React, { useEffect, useState, ReactElement, useMemo } from 'react'
 import mermaid from 'mermaid'
 
 import type { Config } from './config.model'
-import { getTheme } from './theme.helper.js'
+import { getTheme } from './theme.helper'
 
 /**
 * Properties for Mermaid component.

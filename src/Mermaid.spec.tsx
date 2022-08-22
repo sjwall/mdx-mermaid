@@ -85,7 +85,7 @@ describe('Mermaid', () => {
   it('renders with mermaid config', () => {
     expectMermaidMatch(render(<Mermaid chart={diagram} config={{ mermaid: { theme: 'dark' as mermaidAPI.Theme } }} />))
     expect(spy.contentLoaded).toBeCalledTimes(1)
-    expect(spy.initialize).toBeCalledWith({ startOnLoad: true, theme: 'dark' })
+    expect(spy.initialize).toBeCalledWith({ startOnLoad: true, theme: 'dark' as mermaidAPI.Theme })
   })
 
   it('renders with mermaid config change', () => {

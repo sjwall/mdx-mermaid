@@ -9,7 +9,7 @@ import { createCompiler } from '@mdx-js/mdx'
 import mermaid from './mdxast-mermaid'
 
 import type { Config } from './config.model'
-import mermaidAPI from 'mermaid/mermaidAPI'
+import type mermaidAPI from 'mermaid/mermaidAPI'
 
 describe('mdxast-mermaid', () => {
   function createTestCompiler (config?: Config) {

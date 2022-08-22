@@ -8,5 +8,6 @@
 /.editorconfig
 /.eslintrc.js
 /changelog.md
-/jest.config.js
+/jest.config.cjs
+/rollup.config.js
 /tsconfig.json

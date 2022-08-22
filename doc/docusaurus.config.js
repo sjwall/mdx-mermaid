@@ -20,29 +20,29 @@ async function createConfig() {
     organizationName: 'sjwall', // Usually your GitHub org/user name.
     projectName: 'mdx-mermaid', // Usually your repo name.
 
-    presets: [
-      [
-        'classic',
-        /** @type {import('@docusaurus/preset-classic').Options} */
-        ({
-          docs: {
-            remarkPlugins: [mdxMermaid.default],
-            sidebarPath: require.resolve('./sidebars.js'),
-            // Please change this to your repo.
-            editUrl:
-              'https://github.com/sjwall/mdx-mermaid/edit/main/doc',
-            versions: {
-              current: {
-                label: '2.0.0-rc1 🚧',
-              },
+  presets: [
+    [
+      'classic',
+      /** @type {import('@docusaurus/preset-classic').Options} */
+      ({
+        docs: {
+          remarkPlugins: [mdxMermaid.default],
+          sidebarPath: require.resolve('./sidebars.js'),
+          // Please change this to your repo.
+          editUrl:
+            'https://github.com/sjwall/mdx-mermaid/edit/main/doc',
+          versions: {
+            current: {
+              label: '2.0.0-rc1 🚧',
             },
           },
-          theme: {
-            customCss: require.resolve('./src/css/custom.css'),
-          },
-        }),
-      ],
+        },
+        theme: {
+          customCss: require.resolve('./src/css/custom.css'),
+        },
+      }),
     ],
+  ],
 
     themeConfig:
       /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
