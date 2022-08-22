@@ -67,9 +67,9 @@ C-->A;
 B-->A;`} config={config} />)
   jest.advanceTimersByTime(1000)
   expectMermaidMatch(view)
-  jest.useRealTimers()
-  expect(mermaid.contentLoaded).toBeCalledTimes(1)
+  expect(mermaid.contentLoaded).toBeCalledTimes(3)
   expect(mermaid.initialize).toBeCalledTimes(1)
+  jest.useRealTimers()
 })
 
 it('initializes only once', () => {

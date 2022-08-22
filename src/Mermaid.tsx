@@ -86,7 +86,7 @@ export const Mermaid = ({ chart, config: configSrc }: MermaidProps): ReactElemen
   }, [config, theme])
 
   useEffect(() => {
-    setTimeout(() => mermaid.contentLoaded, 0)
+    setTimeout(mermaid.contentLoaded, 0)
   }, [chart])
 
   return <div className="mermaid" data-mermaid-src={chart}>{chart}</div>
