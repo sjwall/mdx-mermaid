@@ -68,9 +68,9 @@ describe('Mermaid', () => {
   B-->A;`} config={config} />)
     jest.advanceTimersByTime(1000)
     expectMermaidMatch(view)
-    jest.useRealTimers()
-    expect(spy.contentLoaded).toBeCalledTimes(1)
+    expect(spy.contentLoaded).toBeCalledTimes(3)
     expect(spy.initialize).toBeCalledTimes(1)
+    jest.useRealTimers()
   })
 
   it('initializes only once', () => {
