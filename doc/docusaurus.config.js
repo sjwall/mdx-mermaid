@@ -33,7 +33,7 @@ async function createConfig() {
             'https://github.com/sjwall/mdx-mermaid/edit/main/doc',
           versions: {
             current: {
-              label: '2.0.0-rc1 🚧',
+              label: '2.0.0-rc2 🚧',
             },
             '1.3.0': {
               label: '>= 1.3.0',
