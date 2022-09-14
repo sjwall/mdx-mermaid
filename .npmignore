@@ -3,6 +3,7 @@
 /.vscode
 /coverage
 /doc
+/mdx-example
 /react-example-app
 /src
 /.editorconfig
