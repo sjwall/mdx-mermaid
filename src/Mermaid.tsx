@@ -12,8 +12,8 @@ import type { Config } from './config.model'
 import { getTheme } from './theme.helper'
 
 /**
-* Properties for Mermaid component.
-*/
+ * Properties for Mermaid component.
+ */
 export type MermaidProps = {
   /**
    * Mermaid diagram.
@@ -34,8 +34,7 @@ export type MermaidProps = {
  * @returns The component.
  */
 export const Mermaid = ({ chart, config: configSrc }: MermaidProps): ReactElement<MermaidProps> => {
-  // Due to Docusaurus not correctly parsing client-side from server-side modules, use the provided workaround
-  // found in the accompanying issue: https://github.com/facebook/docusaurus/issues/4268#issuecomment-783553084
+  // Mermaid doesn't support server-side rendering
   /* istanbul ignore next */
   if (typeof window === 'undefined') {
     return <div className="mermaid" data-mermaid-src={chart}>{chart}</div>

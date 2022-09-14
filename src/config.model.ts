@@ -38,4 +38,14 @@ export type Config = {
    * Mermaid configuration.
    */
   mermaid?: mermaidAPI.Config
+
+  /**
+   * What format to output into the mdast tree as.
+   *
+   * ast - ast format where a `Mermaid` component must be supplied in the parser.
+   * svg - Converts the diagram to a jsx component that renders the svg.
+   *
+   * @default 'ast'
+   */
+  output?: 'ast' | 'svg'
 };
