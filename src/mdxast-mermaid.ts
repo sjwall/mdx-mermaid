@@ -90,7 +90,7 @@ const outputSVG: OutputFunc = async (node: CodeMermaid, index: number | null, pa
       jsxElement.openingElement.attributes.push({
         type: 'JSXAttribute',
         name: { type: 'JSXIdentifier', name: 'href' },
-        value: { type: 'Literal', value: `data:text/css;base64.${encoded}` }
+        value: { type: 'Literal', value: `data:text/css;base64,${encoded}` }
       },
         {
           type: 'JSXAttribute',
