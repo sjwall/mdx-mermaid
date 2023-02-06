@@ -5,7 +5,7 @@
  * license file in the root directory of this source tree.
  */
 
-import type mermaidAPI from 'mermaid/mermaidAPI'
+import type { MermaidConfig } from 'mermaid'
 
 /**
  * mdx-mermaid config
@@ -24,20 +24,20 @@ export type Config = {
      *
      * Defaults to `DEFAULT_LIGHT_THEME`.
      */
-    light: mermaidAPI.Theme
+    light: string
 
     /**
      * Theme to use when HTML data theme is 'dark'.
      *
      * Defaults to `DEFAULT_DARK_THEME`.
      */
-    dark: mermaidAPI.Theme
+    dark: string
   };
 
   /**
    * Mermaid configuration.
    */
-  mermaid?: mermaidAPI.Config
+  mermaid?: MermaidConfig
 
   /**
    * What format to output into the mdast tree as.

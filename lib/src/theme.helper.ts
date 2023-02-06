@@ -1,4 +1,3 @@
-import type mermaidAPI from 'mermaid/mermaidAPI'
 import type { Config } from './config.model'
 
 export const DEFAULT_DARK_THEME = 'dark'
@@ -15,7 +14,7 @@ export const HTML_THEME_ATTRIBUTE = 'data-theme'
  * @param html The HTML element of the page.
  * @param config The configuration for this chart.
  */
-export function getTheme (html: HTMLHtmlElement, config?: Config): mermaidAPI.Theme {
+export function getTheme (html: HTMLHtmlElement, config?: Config): string {
   let htmlTheme = html.getAttribute(HTML_THEME_ATTRIBUTE) ?? LIGHT_THEME_KEY
 
   if (!(htmlTheme === LIGHT_THEME_KEY || htmlTheme === DARK_THEME_KEY)) {

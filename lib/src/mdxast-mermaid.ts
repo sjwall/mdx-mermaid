@@ -5,10 +5,11 @@
  * license file in the root directory of this source tree.
  */
 
-import { visit, EXIT } from 'unist-util-visit'
+import { visit } from 'unist-util-visit'
 import type { Literal, Parent, Node, Data } from 'unist'
 import type { Parent as MdastParent } from 'mdast'
-import type mermaidAPI from 'mermaid/mermaidAPI'
+import type mermaid from 'mermaid'
+import type { MermaidConfig } from 'mermaid'
 import type { Config } from './config.model'
 import type { JSXElement, JSXExpressionContainer, JSXIdentifier } from 'estree-jsx'
 
@@ -18,7 +19,7 @@ type CodeMermaid = Literal<string> & {
 }
 
 /* istanbul ignore next */
-const renderToSvg = async (id: string, src: string, config: mermaidAPI.Config, url: string = 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js'): Promise<string> => {
+const renderToSvg = async (id: string, src: string, config: MermaidConfig, url: string = 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js'): Promise<string> => {
   const puppeteer = await import('puppeteer')
   let browser = await puppeteer.launch({ args: ["--no-sandbox"] })
   try {
@@ -28,9 +29,9 @@ const renderToSvg = async (id: string, src: string, config: mermaidAPI.Config, u
     )
     return await page.evaluate(
       (diagramId, mermaidDiagram, config) => {
-        (window.mermaid as any).initialize({ startOnLoad: false, ...config })
+        ((window as any).mermaid as typeof mermaid).initialize({ startOnLoad: false, ...config })
         try {
-          return (window.mermaid as any).mermaidAPI.render(diagramId, mermaidDiagram)
+          return ((window as any).mermaid as typeof mermaid).mermaidAPI.render(diagramId, mermaidDiagram)
         } catch (error) {
           return JSON.stringify(error)
         }
