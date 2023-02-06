@@ -20,14 +20,16 @@ jobs:
       - name: Build
         run: |
           yarn install --frozen-lockfile
+          cd lib
           yarn build
+          cd ..
       - name: Test
         run: |
+          cd lib
           yarn test
       - name: Build docs
         run: |
           cd doc
-          yarn install --frozen-lockfile
           yarn build
           cd ..
       - name: Upload coverage to Codecov
@@ -53,7 +55,5 @@ jobs:
           git config --global user.email "oss@samuelwall.co.uk"
           git config --global user.name "sjwall"
           yarn install --frozen-lockfile
-          yarn build
           cd doc
-          yarn install --frozen-lockfile
           yarn deploy
