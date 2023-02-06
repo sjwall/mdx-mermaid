@@ -3,7 +3,13 @@
 {
 	"name": "mdx-mermaid",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	"image": "mcr.microsoft.com/devcontainers/typescript-node:0-18",
+  "build": {
+		"dockerfile": "Dockerfile",
+		// Update 'VARIANT' to pick a Node version: 12, 14, 16
+		"args": {
+			"VARIANT": "18"
+		}
+	},
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
@@ -12,7 +18,7 @@
 	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "git config commit.gpgsign true && yarn install",
+  "postCreateCommand": "git config commit.gpgsign true && yarn config set --home enableTelemetry 0 && yarn install",
   "postStartCommand": "git config --global gpg.program $(which gpg)",
 
 	// Configure tool-specific properties.
@@ -30,8 +36,8 @@
 				"orta.vscode-jest"
 			]
 		}
-	}
+	},
 
 	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-	// "remoteUser": "root"
+	"remoteUser": "node"
 }
