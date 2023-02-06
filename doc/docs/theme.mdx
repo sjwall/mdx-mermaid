@@ -6,22 +6,8 @@ sidebar_position: 3
 
 The theme can be changed between dark and light themes by setting `theme` values in the configuration:
 
-```js title=docusaurus.config.js
-remarkPlugins: [[await import('mdx-mermaid'), {
-    theme: { light: 'neutral', dark: 'forest' }
-  }]],
+```js
+{
+  theme: { light: 'neutral', dark: 'forest' }
+}
 ```
-
-Toggle the theme in the top right corner to change this diagrams theme between `neutral` and `forest`:
-
-<Mermaid chart={`sequenceDiagram
-    participant Alice
-    participant Bob
-    Alice->>John: Hello John, how are you?
-    loop Healthcheck
-        John->>John: Fight against hypochondria
-    end
-    Note right of John: Rational thoughts <br/>prevail!
-    John-->>Alice: Great!
-    John->>Bob: How about you?
-    Bob-->>John: Jolly good!`} config={ { theme: { light: 'neutral', dark: 'forest' } } } />
