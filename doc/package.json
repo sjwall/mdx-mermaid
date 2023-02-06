@@ -11,15 +11,14 @@
     "clear": "docusaurus clear",
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",
-    "write-heading-ids": "docusaurus write-heading-ids",
-    "postinstall": "cd ../node_modules/react && yarn link && cd ../../doc && yarn link react"
+    "write-heading-ids": "docusaurus write-heading-ids"
   },
   "dependencies": {
     "@docusaurus/core": "^2.0.0",
     "@docusaurus/preset-classic": "^2.0.0",
+    "@docusaurus/theme-mermaid": "^2.3.1",
     "@mdx-js/react": "^1.6.21",
     "clsx": "^1.1.1",
-    "mdx-mermaid": "^1.3.2",
     "mermaid": "^9.1.6",
     "prism-react-renderer": "^1.2.1",
     "react": "^17.0.1",

@@ -19,6 +19,10 @@ async function createConfig() {
     trailingSlash: true,
     organizationName: 'sjwall', // Usually your GitHub org/user name.
     projectName: 'mdx-mermaid', // Usually your repo name.
+    markdown: {
+      mermaid: true,
+    },
+    themes: ['@docusaurus/theme-mermaid'],
 
   presets: [
     [

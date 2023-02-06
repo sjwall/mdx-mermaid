@@ -1,101 +1,20 @@
 {
-  "name": "mdx-mermaid",
-  "version": "2.0.0-rc4",
-  "description": "Display mermaid diagrams in mdx files.",
-  "types": "index.d.ts",
-  "main": "lib/mdxast-mermaid.js",
-  "exports": {
-    ".": {
-      "require": "./lib/mdxast-mermaid.cjs",
-      "import": "./lib/mdxast-mermaid.mjs"
-    },
-    "./Mermaid": {
-      "require": "./lib/Mermaid.cjs",
-      "import": "./lib/Mermaid.mjs"
-    },
-    "./lib/Mermaid": {
-      "require": "./lib/Mermaid.cjs",
-      "import": "./lib/Mermaid.mjs"
-    }
-  },
-  "author": "Sam Wall (oss@samuelwall.co.uk)",
-  "license": "MIT",
-  "type": "module",
-  "scripts": {
-    "build": "rimraf lib && tsc --declarationDir lib --declaration true --outDir temp && rimraf temp && rollup -c",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/sjwall/mdx-mermaid.git"
-  },
-  "homepage": "https://sjwall.github.io/mdx-mermaid",
-  "bugs": "https://github.com/sjwall/mdx-mermaid/issues",
-  "keywords": [
-    "mdx",
-    "markdown",
-    "mermaid",
-    "docusaurus",
-    "mdxast",
-    "react",
-    "jsx"
+  "name": "mdx-mermaid-workspace",
+  "version": "0.0.0",
+  "packageManager": "yarn@3.4.1",
+  "private": true,
+  "workspaces": [
+    "doc",
+    "examples/*",
+    "lib"
   ],
-  "peerDependencies": {
-    "estree-util-to-js": "^1.1.0",
-    "estree-util-visit": "^1.2.0",
-    "hast-util-to-estree": "^2.1.0",
-    "mdast-util-from-markdown": "^1.2.0",
-    "mdast-util-mdx": "^2.0.0",
-    "mermaid": ">=8.11.0",
-    "micromark-extension-mdxjs": "^1.0.0",
-    "puppeteer": "^16.1.1",
-    "react": "^16.8.4 || ^17.0.0 || ^18.0.0",
-    "unist-util-visit": "^4.1.0"
-  },
   "devDependencies": {
-    "@babel/core": "^7.19.0",
-    "@babel/preset-env": "^7.19.0",
-    "@babel/preset-react": "^7.18.6",
-    "@mdx-js/mdx": "^2.1.3",
-    "@rollup/plugin-babel": "^5.3.1",
-    "@rollup/plugin-commonjs": "^22.0.2",
-    "@rollup/plugin-typescript": "^8.5.0",
-    "@testing-library/react": "^11.1.0",
-    "@types/jest": "^28.1.6",
-    "@types/mermaid": "^8.2.9",
-    "@types/react": "^17.0.38",
-    "@types/unist": "^2.0.6",
-    "@typescript-eslint/eslint-plugin": "^5.33.1",
-    "@typescript-eslint/parser": "^5.33.1",
-    "eslint": "^8.22.0",
-    "eslint-config-standard": "^17.0.0",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-jsdoc": "^39.3.6",
-    "eslint-plugin-n": "^15.0.0",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^6.0.1",
-    "eslint-plugin-react": "^7.30.1",
-    "hast-util-from-html": "^1.0.0",
-    "hast-util-to-mdast": "^8.3.1",
-    "jest": "^28.1.3",
-    "jest-environment-jsdom": "^28.1.3",
-    "mermaid": "^9.1.5",
-    "puppeteer": "^16.1.1",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.0",
-    "rimraf": "^3.0.2",
-    "rollup": "^2.78.1",
-    "ts-jest": "^28.0.7",
-    "typescript": "^4.7.4",
-    "unist-util-visit": "^4.1.1"
+    "commitizen": "^4.3.0",
+    "cz-conventional-changelog": "^3.3.0"
   },
-  "contributors": [
-    "Samuel Wall (https://github.com/sjwall)",
-    "Craig Andrews (https://github.com/candrews)",
-    "Dávid Zsámboki (https://github.com/ddyfedd)",
-    "David Prothero (https://github.com/dprothero)",
-    "mzvast (https://github.com/mzvast)",
-    "Ramy (https://github.com/ramy.loveridge@appshack.se)",
-    "Taj Pereira (https://github.com/taj-p)"
-  ]
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
 }

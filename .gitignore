@@ -1,12 +1,11 @@
 
 # Dependencies
-/node_modules
+node_modules
 
-# Production
-/lib
-
-# Testing
-/coverage
+/lib/lib
+/lib/dist
+/lib/coverage
+/lib/temp
 
 # Misc
 .DS_Store
@@ -18,3 +17,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+.yarn/cache
+.yarn/install-state.gz
