@@ -46,7 +46,6 @@ const renderToSvg = async (id: string, src: string, config: MermaidConfig, url: 
 }
 
 type OutputResult = (Node<Data> | Literal<unknown, Data>)[]
-type OutputFunc = (node: CodeMermaid, index: number | null, parent: Parent<Node<Data>, Data>, config?: Config) => Promise<OutputResult>
 
 const createMermaidNode = (node: CodeMermaid, hName: string, config?: Config): OutputResult => {
   return [{
@@ -61,12 +60,12 @@ const createMermaidNode = (node: CodeMermaid, hName: string, config?: Config): O
   }]
 }
 
-const outputAST: OutputFunc = async (node: CodeMermaid, index: number | null, parent: Parent<Node<Data>, Data>, config?: Config): Promise<OutputResult> => {
+const outputAST = (node: CodeMermaid, index: number | null, parent: Parent<Node<Data>, Data>, config?: Config): OutputResult => {
   return createMermaidNode(node, 'mermaid', config)
 }
 
 /* istanbul ignore next */
-const outputSVG: OutputFunc = async (node: CodeMermaid, index: number | null, parent: Parent<Node<Data>, Data>, config?: Config): Promise<OutputResult> => {
+const outputSVG = async (node: CodeMermaid, index: number | null, parent: Parent<Node<Data>, Data>, config?: Config): Promise<OutputResult> => {
   const value = await renderToSvg(`mermaid-svg-${index}`, node.value, config && config.mermaid ? config.mermaid : {})
   const { fromHtml } = await import('hast-util-from-html')
   const { toEstree } = await import('hast-util-to-estree')
@@ -120,6 +119,14 @@ const outputSVG: OutputFunc = async (node: CodeMermaid, index: number | null, pa
   return (tree.children[0] as MdastParent).children
 }
 
+const findInstances = (ast: any) => {
+  const instances: [Literal, number, Parent<Node<Data> | Literal, Data>][] = []
+  visit(ast, { type: 'code', lang: 'mermaid' }, (node: CodeMermaid, index, parent) => {
+    instances.push([node, index!, parent as Parent<Node<Data>, Data>])
+  })
+  return instances
+}
+
 /**
  * mdx-mermaid plugin.
  *
@@ -127,27 +134,32 @@ const outputSVG: OutputFunc = async (node: CodeMermaid, index: number | null, pa
  * @returns Function to transform mdxast.
  */
 export default function plugin(config?: Config) {
-  // Determine which format to output in
-  let output: OutputFunc = outputAST
-
   /* istanbul ignore next */
   if (config?.output === 'svg') {
-    output = outputSVG
+    return async function transformer(ast: any): Promise<Parent> {
+      // Find all the mermaid diagram code blocks. i.e. ```mermaid
+      const instances = findInstances(ast)
+
+      // Replace each Mermaid code block with the Mermaid component
+      for (let i = 0; i < instances.length; i++) {
+        const [node, index, parent] = instances[i]
+        const result = await outputSVG(node as any, index, parent, config);
+        Array.prototype.splice.apply(parent.children, [index, 1, ...result])
+      }
+      return ast
+    }
   }
 
-  return async function transformer(ast: any): Promise<Parent> {
+  return function transformer(ast: any): Parent {
     // Find all the mermaid diagram code blocks. i.e. ```mermaid
-    const instances: [Literal, number, Parent<Node<Data> | Literal, Data>][] = []
-    visit(ast, { type: 'code', lang: 'mermaid' }, (node: CodeMermaid, index, parent) => {
-      instances.push([node, index!, parent as Parent<Node<Data>, Data>])
-    })
+    const instances = findInstances(ast)
 
     // Replace each Mermaid code block with the Mermaid component
     for (let i = 0; i < instances.length; i++) {
       const [node, index, parent] = instances[i]
       /* istanbul ignore next */
-      const passConfig = i == 0 || config?.output === 'svg' ? config : undefined
-      const result = await output(node as any, index, parent, passConfig);
+      const passConfig = i == 0 ? config : undefined
+      const result = outputAST(node as any, index, parent, passConfig);
       Array.prototype.splice.apply(parent.children, [index, 1, ...result])
     }
     return ast
