@@ -13437,7 +13437,7 @@ __metadata:
     "@docusaurus/theme-mermaid": ^2.3.1
     "@mdx-js/react": ^1.6.21
     clsx: ^1.2.1
-    mdx-mermaid: "workspace:*"
+    mdx-mermaid: ^1.3.2
     mermaid: ^9.3.0
     prism-react-renderer: ^1.3.5
     react: ^17.0.2
@@ -13495,6 +13495,17 @@ __metadata:
     cz-conventional-changelog: ^3.3.0
   languageName: unknown
   linkType: soft
+
+"mdx-mermaid@npm:^1.3.2":
+  version: 1.3.2
+  resolution: "mdx-mermaid@npm:1.3.2"
+  peerDependencies:
+    mermaid: ">=8.11.0"
+    react: ^16.8.4 || ^17.0.0 || ^18.0.0
+    unist-util-visit: ^2.0.0
+  checksum: f4fde2b5de6408167e240288c977e776a45a5c146510747461c49410855cf3ff59699d8ecb2b189f6a9dd477a08f55c324a1288ad917f15897b637a3f5613174
+  languageName: node
+  linkType: hard
 
 "mdx-mermaid@workspace:*, mdx-mermaid@workspace:lib":
   version: 0.0.0-use.local
