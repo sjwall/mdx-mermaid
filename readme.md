@@ -28,6 +28,7 @@ Install `mdx-mermaid` and `mermaid`
 ```bash
 yarn add mdx-mermaid mermaid
 ```
+
 Configure the plugin:
 
 ```js

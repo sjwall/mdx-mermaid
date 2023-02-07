@@ -34,6 +34,20 @@ For @mdxjs/mdx v2 use version `mdx-mermaid@^2.0.0`
 
 :::
 
+## Configure
+
+Configure the plugin:
+
+```js
+import mdxMermaid from 'mdx-mermaid'
+import {Mermaid} from 'mdx-mermaid/lib/Mermaid'
+
+{
+  remarkPlugins: [[mdxMermaid.default, {output: 'svg'}]],
+  components: {mermaid: Mermaid, Mermaid}
+}
+```
+
 ## Add a Diagram
 
 Add a Mermaid diagram to a `.md` or `.mdx` file.
