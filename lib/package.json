@@ -24,7 +24,7 @@
   "scripts": {
     "build": "rimraf lib && tsc --declarationDir lib --declaration true --outDir temp && rimraf temp && rollup -c",
     "test": "node --experimental-vm-modules ../node_modules/jest/bin/jest.js --coverage --config=./jest.config.js",
-    "dist": "mkdir dist && mkdir dist/lib && cp -r lib dist/ && cp package.json dist && cp ../readme.md dist && cp ../license dist && cp index.d.ts dist"
+    "dist": "rimraf dist && mkdir dist && mkdir dist/lib && cp -r lib dist/ && cp package.json dist && cp ../readme.md dist && cp ../license dist && cp index.d.ts dist"
   },
   "repository": {
     "type": "git",
