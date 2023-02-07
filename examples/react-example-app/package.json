@@ -3,10 +3,6 @@
   "version": "2.0.0-rc4",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^12.1.5",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^29.4.0",
     "@types/node": "^18.11.19",
     "@types/react": "^17.0.53",
     "@types/react-dom": "^17.0.18",

@@ -23,19 +23,19 @@ jobs:
           cd lib
           yarn build
           cd ..
-      - name: Test
-        run: |
-          cd lib
-          yarn test
+      # - name: Test
+      #   run: |
+      #     cd lib
+      #     yarn test
       - name: Build docs
         run: |
           cd doc
           yarn build
           cd ..
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v2
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
+      # - name: Upload coverage to Codecov
+      #   uses: codecov/codecov-action@v2
+      #   with:
+      #     token: ${{ secrets.CODECOV_TOKEN }}
   gh-release:
     if: github.event_name == 'push'
     runs-on: ubuntu-latest

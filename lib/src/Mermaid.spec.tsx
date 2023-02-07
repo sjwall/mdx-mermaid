@@ -10,7 +10,6 @@
 import React from 'react'
 import { act, render, RenderResult } from '@testing-library/react'
 import mermaid from 'mermaid'
-import type mermaidAPI from 'mermaid/mermaidAPI'
 import { jest } from '@jest/globals'
 import { Mermaid } from './Mermaid'
 import {
@@ -83,19 +82,19 @@ describe('Mermaid', () => {
   })
 
   it('renders with mermaid config', () => {
-    expectMermaidMatch(render(<Mermaid chart={diagram} config={{ mermaid: { theme: 'dark' as mermaidAPI.Theme } }} />))
+    expectMermaidMatch(render(<Mermaid chart={diagram} config={{ mermaid: { theme: 'dark' } }} />))
     expect(spy.contentLoaded).toBeCalledTimes(1)
-    expect(spy.initialize).toBeCalledWith({ startOnLoad: true, theme: 'dark' as mermaidAPI.Theme })
+    expect(spy.initialize).toBeCalledWith({ startOnLoad: true, theme: 'dark' })
   })
 
   it('renders with mermaid config change', () => {
-    const view = expectMermaidMatch(render(<Mermaid chart={diagram} config={{ mermaid: { theme: 'dark' as mermaidAPI.Theme } }} />))
+    const view = expectMermaidMatch(render(<Mermaid chart={diagram} config={{ mermaid: { theme: 'dark' } }} />))
     view.baseElement.querySelectorAll('div.mermaid').forEach((v) => {
       v.setAttribute('data-processed', 'true')
     })
     expect(spy.contentLoaded).toBeCalledTimes(1)
     expect(spy.initialize).toBeCalledWith({ startOnLoad: true, theme: 'dark' })
-    view.rerender(<Mermaid chart={diagram} config={{ mermaid: { theme: 'forest' as mermaidAPI.Theme } }} />)
+    view.rerender(<Mermaid chart={diagram} config={{ mermaid: { theme: 'forest' } }} />)
     // await waitFor(1000)
     expectMermaidMatch(view)
     expect(spy.contentLoaded).toBeCalledTimes(2)
