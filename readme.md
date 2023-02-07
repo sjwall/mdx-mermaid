@@ -26,7 +26,7 @@ Install `mdx-mermaid` and `mermaid`
 `mermaid` is a peer dependency so you can specify the version to use
 
 ```bash
-yarn add mdx-mermaid@^v1.3.0 mermaid
+yarn add mdx-mermaid mermaid
 ```
 Configure the plugin:
 
