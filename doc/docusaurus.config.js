@@ -5,8 +5,6 @@ const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 async function createConfig() {
-  const mdxMermaid = await import('mdx-mermaid')
-
   /** @type {import('@docusaurus/types').Config} */
   return {
     title: 'mdx-mermaid',
@@ -30,7 +28,6 @@ async function createConfig() {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          remarkPlugins: [mdxMermaid.default],
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           editUrl:
