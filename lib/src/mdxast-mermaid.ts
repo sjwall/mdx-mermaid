@@ -138,13 +138,18 @@ export default function plugin(config?: Config) {
   if (config?.output === 'svg') {
     return async function transformer(ast: any): Promise<Parent> {
       // Find all the mermaid diagram code blocks. i.e. ```mermaid
-      const instances = findInstances(ast)
+      let instances = findInstances(ast);
 
       // Replace each Mermaid code block with the Mermaid component
-      for (let i = 0; i < instances.length; i++) {
-        const [node, index, parent] = instances[i]
+      // Here we iterate over the instances and replace them with the SVG
+      // and run findInstances again to get the next set instances. We do this
+      // because the replacement process can change the AST and cause
+      // the indexes to be incorrect.
+      while (instances.length > 0) {
+        const [node, index, parent] = instances[0];
         const result = await outputSVG(node as any, index, parent, config);
-        Array.prototype.splice.apply(parent.children, [index, 1, ...result])
+        Array.prototype.splice.apply(parent.children, [index, 1, ...result]);
+        instances = findInstances(ast);
       }
       return ast
     }

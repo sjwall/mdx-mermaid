@@ -79,4 +79,29 @@ function MDXContent(props = {}) {
 export default MDXContent;
 `)
   })
+
+  test('multiple mermaid instances in svg don\'t clobber previous node', async () => {
+    const result = await compileMdx(
+      `## Framework AARRR
+
+    Some content
+
+    \`\`\`mermaid
+    graph TD;
+      A-->B;
+    \`\`\`
+
+    And some more:
+
+
+    \`\`\`mermaid
+    graph TD;
+      A-->B;
+    \`\`\``,
+      { output: 'svg' }
+    );
+    expect(result.value).toContain('And some more');
+  })
 })
+
+
