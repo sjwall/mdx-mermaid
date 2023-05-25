@@ -5,127 +5,171 @@
  * license file in the root directory of this source tree.
  */
 
-import { visit } from 'unist-util-visit'
-import type { Literal, Parent, Node, Data } from 'unist'
-import type { Parent as MdastParent } from 'mdast'
-import type mermaid from 'mermaid'
-import type { MermaidConfig } from 'mermaid'
-import type { Config } from './config.model'
-import type { JSXElement, JSXExpressionContainer, JSXIdentifier } from 'estree-jsx'
+import { visit } from "unist-util-visit";
+import type { Literal, Parent, Node, Data } from "unist";
+import type { Parent as MdastParent } from "mdast";
+import type mermaid from "mermaid";
+import type { MermaidConfig } from "mermaid";
+import type { Config } from "./config.model";
+import type {
+  JSXElement,
+  JSXExpressionContainer,
+  JSXIdentifier,
+} from "estree-jsx";
 
 type CodeMermaid = Literal<string> & {
-  type: 'code'
-  lang: 'mermaid'
-}
+  type: "code";
+  lang: "mermaid";
+};
 
 /* istanbul ignore next */
-const renderToSvg = async (id: string, src: string, config: MermaidConfig, url: string = 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js'): Promise<string> => {
-  const puppeteer = await import('puppeteer')
-  let browser = await puppeteer.launch({ args: ["--no-sandbox"] })
+const renderToSvg = async (
+  id: string,
+  src: string,
+  config: MermaidConfig,
+  url: string = "https://cdn.jsdelivr.net/npm/mermaid@9.3.0/dist/mermaid.min.js"
+): Promise<string> => {
+  const puppeteer = await import("puppeteer");
+  let browser = await puppeteer.launch({ args: ["--no-sandbox"] });
   try {
-    let page = await browser.newPage()
+    let page = await browser.newPage();
     await page.goto(
       `data:text/html,<!DOCTYPE html><script src="${url}"></script>`
-    )
+    );
     return await page.evaluate(
       (diagramId, mermaidDiagram, config) => {
-        ((window as any).mermaid as typeof mermaid).initialize({ startOnLoad: false, ...config })
+        ((window as any).mermaid as typeof mermaid).initialize({
+          startOnLoad: false,
+          ...config,
+        });
         try {
-          return ((window as any).mermaid as typeof mermaid).mermaidAPI.render(diagramId, mermaidDiagram)
+          return ((window as any).mermaid as typeof mermaid).mermaidAPI.render(
+            diagramId,
+            mermaidDiagram
+          );
         } catch (error) {
-          return JSON.stringify(error)
+          return JSON.stringify(error);
         }
       },
       id,
       src,
-      config,
-    )
+      config
+    );
   } finally {
-    await browser.close()
+    await browser.close();
   }
-}
+};
 
-type OutputResult = (Node<Data> | Literal<unknown, Data>)[]
+type OutputResult = (Node<Data> | Literal<unknown, Data>)[];
 
-const createMermaidNode = (node: CodeMermaid, hName: string, config?: Config): OutputResult => {
-  return [{
-    type: 'mermaidCodeBlock',
-    data: {
-      hName,
-      hProperties: {
-        config: JSON.stringify(config),
-        chart: node.value,
+const createMermaidNode = (
+  node: CodeMermaid,
+  hName: string,
+  config?: Config
+): OutputResult => {
+  return [
+    {
+      type: "mermaidCodeBlock",
+      data: {
+        hName,
+        hProperties: {
+          config: JSON.stringify(config),
+          chart: node.value,
+        },
       },
     },
-  }]
-}
+  ];
+};
 
-const outputAST = (node: CodeMermaid, index: number | null, parent: Parent<Node<Data>, Data>, config?: Config): OutputResult => {
-  return createMermaidNode(node, 'mermaid', config)
-}
+const outputAST = (
+  node: CodeMermaid,
+  index: number | null,
+  parent: Parent<Node<Data>, Data>,
+  config?: Config
+): OutputResult => {
+  return createMermaidNode(node, "mermaid", config);
+};
 
 /* istanbul ignore next */
-const outputSVG = async (node: CodeMermaid, index: number | null, parent: Parent<Node<Data>, Data>, config?: Config): Promise<OutputResult> => {
-  const value = await renderToSvg(`mermaid-svg-${index}`, node.value, config && config.mermaid ? config.mermaid : {})
-  const { fromHtml } = await import('hast-util-from-html')
-  const { toEstree } = await import('hast-util-to-estree')
-  const { toJs, jsx } = await import('estree-util-to-js')
-  const { fromMarkdown } = await import('mdast-util-from-markdown')
-  const { mdxjs } = await import('micromark-extension-mdxjs')
-  const { mdxFromMarkdown } = await import('mdast-util-mdx')
-  const { visit } = await import('estree-util-visit')
+const outputSVG = async (
+  node: CodeMermaid,
+  index: number | null,
+  parent: Parent<Node<Data>, Data>,
+  config?: Config
+): Promise<OutputResult> => {
+  const value = await renderToSvg(
+    `mermaid-svg-${index}`,
+    node.value,
+    config && config.mermaid ? config.mermaid : {}
+  );
+  const { fromHtml } = await import("hast-util-from-html");
+  const { toEstree } = await import("hast-util-to-estree");
+  const { toJs, jsx } = await import("estree-util-to-js");
+  const { fromMarkdown } = await import("mdast-util-from-markdown");
+  const { mdxjs } = await import("micromark-extension-mdxjs");
+  const { mdxFromMarkdown } = await import("mdast-util-mdx");
+  const { visit } = await import("estree-util-visit");
+  console.log({ value, nodeV: node.value });
   const hast = fromHtml(value, {
     fragment: true,
-    space: 'svg'
-  })
-  const estree = toEstree(hast)
+    space: "svg",
+  });
+  const estree = toEstree(hast);
   visit(estree, (node, key, index, ancestors) => {
-    const jsxElement = node as JSXElement
-    if (node.type === 'JSXElement' && (jsxElement.openingElement.name as JSXIdentifier).name === 'style') {
-      const styleExpression = jsxElement.children[0] as JSXExpressionContainer
-      const css = (styleExpression.expression as Literal).value as string
-      const buffer = Buffer.from(css)
-      const encoded = buffer.toString('base64')
-      jsxElement.children = []
-      jsxElement.openingElement.attributes.push({
-        type: 'JSXAttribute',
-        name: { type: 'JSXIdentifier', name: 'href' },
-        value: { type: 'Literal', value: `data:text/css;base64,${encoded}` }
-      },
+    const jsxElement = node as JSXElement;
+    if (
+      node.type === "JSXElement" &&
+      (jsxElement.openingElement.name as JSXIdentifier).name === "style"
+    ) {
+      const styleExpression = jsxElement.children[0] as JSXExpressionContainer;
+      const css = (styleExpression.expression as Literal).value as string;
+      const buffer = Buffer.from(css);
+      const encoded = buffer.toString("base64");
+      jsxElement.children = [];
+      jsxElement.openingElement.attributes.push(
         {
-          type: 'JSXAttribute',
-          name: { type: 'JSXIdentifier', name: 'rel' },
-          value: { type: 'Literal', value: `stylesheet` }
+          type: "JSXAttribute",
+          name: { type: "JSXIdentifier", name: "href" },
+          value: { type: "Literal", value: `data:text/css;base64,${encoded}` },
         },
         {
-          type: 'JSXAttribute',
-          name: { type: 'JSXIdentifier', name: 'type' },
-          value: { type: 'Literal', value: `text/css` }
+          type: "JSXAttribute",
+          name: { type: "JSXIdentifier", name: "rel" },
+          value: { type: "Literal", value: `stylesheet` },
+        },
+        {
+          type: "JSXAttribute",
+          name: { type: "JSXIdentifier", name: "type" },
+          value: { type: "Literal", value: `text/css` },
         }
       );
-      (jsxElement.openingElement.name as JSXIdentifier).name = 'link';
-      jsxElement.openingElement.selfClosing = true
-      jsxElement.closingElement = null
-      const parent = ancestors[ancestors.length - 1] as any
-      parent.children.splice(parent.children.indexOf(node), 1)
-        ; (estree.body[0] as any).expression.children.push(node)
+      (jsxElement.openingElement.name as JSXIdentifier).name = "link";
+      jsxElement.openingElement.selfClosing = true;
+      jsxElement.closingElement = null;
+      const parent = ancestors[ancestors.length - 1] as any;
+      parent.children.splice(parent.children.indexOf(node), 1);
+      (estree.body[0] as any).expression.children.push(node);
     }
-  })
-  const js = toJs(estree, { handlers: jsx })
+  });
+  const js = toJs(estree, { handlers: jsx });
   const tree = fromMarkdown(js.value.substring(2, js.value.length - 5), {
     extensions: [mdxjs()],
-    mdastExtensions: [mdxFromMarkdown()]
-  })
-  return (tree.children[0] as MdastParent).children
-}
+    mdastExtensions: [mdxFromMarkdown()],
+  });
+  return (tree.children[0] as MdastParent).children;
+};
 
 const findInstances = (ast: any) => {
-  const instances: [Literal, number, Parent<Node<Data> | Literal, Data>][] = []
-  visit(ast, { type: 'code', lang: 'mermaid' }, (node: CodeMermaid, index, parent) => {
-    instances.push([node, index!, parent as Parent<Node<Data>, Data>])
-  })
-  return instances
-}
+  const instances: [Literal, number, Parent<Node<Data> | Literal, Data>][] = [];
+  visit(
+    ast,
+    { type: "code", lang: "mermaid" },
+    (node: CodeMermaid, index, parent) => {
+      instances.push([node, index!, parent as Parent<Node<Data>, Data>]);
+    }
+  );
+  return instances;
+};
 
 /**
  * mdx-mermaid plugin.
@@ -135,7 +179,7 @@ const findInstances = (ast: any) => {
  */
 export default function plugin(config?: Config) {
   /* istanbul ignore next */
-  if (config?.output === 'svg') {
+  if (config?.output === "svg") {
     return async function transformer(ast: any): Promise<Parent> {
       // Find all the mermaid diagram code blocks. i.e. ```mermaid
       let instances = findInstances(ast);
@@ -151,22 +195,22 @@ export default function plugin(config?: Config) {
         Array.prototype.splice.apply(parent.children, [index, 1, ...result]);
         instances = findInstances(ast);
       }
-      return ast
-    }
+      return ast;
+    };
   }
 
   return function transformer(ast: any): Parent {
     // Find all the mermaid diagram code blocks. i.e. ```mermaid
-    const instances = findInstances(ast)
+    const instances = findInstances(ast);
 
     // Replace each Mermaid code block with the Mermaid component
     for (let i = 0; i < instances.length; i++) {
-      const [node, index, parent] = instances[i]
+      const [node, index, parent] = instances[i];
       /* istanbul ignore next */
-      const passConfig = i == 0 ? config : undefined
+      const passConfig = i == 0 ? config : undefined;
       const result = outputAST(node as any, index, parent, passConfig);
-      Array.prototype.splice.apply(parent.children, [index, 1, ...result])
+      Array.prototype.splice.apply(parent.children, [index, 1, ...result]);
     }
-    return ast
-  }
+    return ast;
+  };
 }
