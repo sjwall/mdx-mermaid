@@ -19,7 +19,7 @@ type CodeMermaid = Literal<string> & {
 }
 
 /* istanbul ignore next */
-const renderToSvg = async (id: string, src: string, config: MermaidConfig, url: string = 'https://cdn.jsdelivr.net/npm/mermaid@9.3.0/dist/mermaid.min.js'): Promise<string> => {
+const renderToSvg = async (id: string, src: string, config: MermaidConfig, url: string): Promise<string> => {
   const puppeteer = await import('puppeteer')
   let browser = await puppeteer.launch({ args: ["--no-sandbox"] })
   try {
@@ -66,7 +66,8 @@ const outputAST = (node: CodeMermaid, index: number | null, parent: Parent<Node<
 
 /* istanbul ignore next */
 const outputSVG = async (node: CodeMermaid, index: number | null, parent: Parent<Node<Data>, Data>, config?: Config): Promise<OutputResult> => {
-  const value = await renderToSvg(`mermaid-svg-${index}`, node.value, config && config.mermaid ? config.mermaid : {})
+  const value = await renderToSvg(`mermaid-svg-${index}`, node.value, config && config.mermaid ? config.mermaid : {},
+    config?.svgMermaidSrc ?? 'https://cdn.jsdelivr.net/npm/mermaid@9.3.0/dist/mermaid.min.js')
   const { fromHtml } = await import('hast-util-from-html')
   const { toEstree } = await import('hast-util-to-estree')
   const { toJs, jsx } = await import('estree-util-to-js')
