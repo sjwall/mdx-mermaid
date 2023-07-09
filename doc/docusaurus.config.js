@@ -32,9 +32,10 @@ async function createConfig() {
           // Please change this to your repo.
           editUrl:
             'https://github.com/sjwall/mdx-mermaid/edit/main/doc',
+          lastVersion: 'current',
           versions: {
             current: {
-              label: '2.0.0-rc7 🚧',
+              label: '2.0.0',
             },
             '1.3.0': {
               label: '>= 1.3.0',

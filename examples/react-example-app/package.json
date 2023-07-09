@@ -1,6 +1,6 @@
 {
   "name": "mdx-mermaid-react-example-app",
-  "version": "2.0.0-rc7",
+  "version": "2.0.0",
   "private": true,
   "dependencies": {
     "@types/node": "^18.11.19",
