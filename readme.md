@@ -19,6 +19,11 @@ Use version `^1.3.0` for `@mdxjs/mdx` `v1`.
 
 Use version `^2.0.0` for `@mdxjs/mdx` `v2`.
 
+> **Warning**:
+> [`rehype-mermaidjs`](https://github.com/remcohaszing/rehype-mermaidjs) and
+> [`remark-mermaidjs`](https://github.com/remcohaszing/remark-mermaidjs)
+> may better suit your use case.
+
 ## Quick start
 
 Install `mdx-mermaid` and `mermaid`
