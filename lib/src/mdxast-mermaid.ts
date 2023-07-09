@@ -19,7 +19,7 @@ type CodeMermaid = Literal<string> & {
 }
 
 /* istanbul ignore next */
-const renderToSvg = async (id: string, src: string, config: MermaidConfig, url: string = 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js'): Promise<string> => {
+const renderToSvg = async (id: string, src: string, config: MermaidConfig, url: string = 'https://cdn.jsdelivr.net/npm/mermaid@9.3.0/dist/mermaid.min.js'): Promise<string> => {
   const puppeteer = await import('puppeteer')
   let browser = await puppeteer.launch({ args: ["--no-sandbox"] })
   try {
