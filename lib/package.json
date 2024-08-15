@@ -1,6 +1,6 @@
 {
   "name": "mdx-mermaid",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Display mermaid diagrams in mdx files.",
   "types": "index.d.ts",
   "main": "lib/mdxast-mermaid.js",
@@ -95,6 +95,7 @@
     "Samuel Wall (https://github.com/sjwall)",
     "Craig Andrews (https://github.com/candrews)",
     "Dávid Zsámboki (https://github.com/ddyfedd)",
+    "David Ivanov (https://github.com/DavidIvanov)",
     "David Prothero (https://github.com/dprothero)",
     "G (https://github.com/genert)",
     "johackim (https://github.com/johackim)",
