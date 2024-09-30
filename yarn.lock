@@ -13696,7 +13696,7 @@ __metadata:
     puppeteer: ^22.13.1
     react: ^17.0.2
     react-dom: ^17.0.2
-    rollup: ^3.14.0
+    rollup: ^3.29.5
   languageName: unknown
   linkType: soft
 
@@ -13777,7 +13777,7 @@ __metadata:
     react: ^17.0.2
     react-dom: ^17.0.2
     rimraf: ^3.0.2
-    rollup: ^3.14.0
+    rollup: ^3.29.5
     ts-jest: ^28.0.7
     typescript: ^4.9.5
     unist-util-visit: ^4.1.2
@@ -17503,9 +17503,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rollup@npm:^3.14.0":
-  version: 3.14.0
-  resolution: "rollup@npm:3.14.0"
+"rollup@npm:^3.29.5":
+  version: 3.29.5
+  resolution: "rollup@npm:3.29.5"
   dependencies:
     fsevents: ~2.3.2
   dependenciesMeta:
@@ -17513,7 +17513,7 @@ __metadata:
       optional: true
   bin:
     rollup: dist/bin/rollup
-  checksum: 48f4da224753b8022529256243b74b3f6f41d9b4358ba079ac42f2a2cf07e4bd01b5d94579338194238e3c575487974ca508e144cf6195123293e7fdf82506cb
+  checksum: 6f8304e58ac8170a715e61e46c4aa674b2ae2587ed2a712dab58f72e5e54803ae40b485fbe6b3e6a694f4c8f7a59ab936ccf9f6b686c7cfd1f1970fa9ecadf1a
   languageName: node
   linkType: hard
 
