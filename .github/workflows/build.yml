@@ -19,7 +19,7 @@ jobs:
           node-version: '16.x'
       - name: Build
         run: |
-          yarn install --frozen-lockfile
+          yarn install --immutable
           cd lib
           yarn build
           cd ..
@@ -54,6 +54,6 @@ jobs:
         run: |
           git config --global user.email "oss@samuelwall.co.uk"
           git config --global user.name "sjwall"
-          yarn install --frozen-lockfile
+          yarn install --immutable
           cd doc
           yarn deploy
