@@ -7,15 +7,18 @@
   "exports": {
     ".": {
       "require": "./lib/mdxast-mermaid.cjs",
-      "import": "./lib/mdxast-mermaid.mjs"
+      "import": "./lib/mdxast-mermaid.mjs",
+      "types": "./index.d.ts"
     },
     "./Mermaid": {
       "require": "./lib/Mermaid.cjs",
-      "import": "./lib/Mermaid.mjs"
+      "import": "./lib/Mermaid.mjs",
+      "types": "./lib/Mermaid.d.ts"
     },
     "./lib/Mermaid": {
       "require": "./lib/Mermaid.cjs",
-      "import": "./lib/Mermaid.mjs"
+      "import": "./lib/Mermaid.mjs",
+      "types": "./lib/Mermaid.d.ts"
     }
   },
   "author": "Sam Wall (oss@samuelwall.co.uk)",
