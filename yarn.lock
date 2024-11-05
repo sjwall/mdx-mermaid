@@ -420,7 +420,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/core@npm:^7.1.0, @babel/core@npm:^7.11.1, @babel/core@npm:^7.11.6, @babel/core@npm:^7.12.3, @babel/core@npm:^7.16.0, @babel/core@npm:^7.18.6, @babel/core@npm:^7.19.6, @babel/core@npm:^7.20.12, @babel/core@npm:^7.7.2, @babel/core@npm:^7.8.0":
+"@babel/core@npm:^7.1.0, @babel/core@npm:^7.11.1, @babel/core@npm:^7.11.6, @babel/core@npm:^7.12.3, @babel/core@npm:^7.16.0, @babel/core@npm:^7.18.6, @babel/core@npm:^7.19.6, @babel/core@npm:^7.26.0, @babel/core@npm:^7.7.2, @babel/core@npm:^7.8.0":
   version: 7.26.0
   resolution: "@babel/core@npm:7.26.0"
   dependencies:
@@ -1817,7 +1817,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/preset-env@npm:^7.11.0, @babel/preset-env@npm:^7.12.1, @babel/preset-env@npm:^7.16.4, @babel/preset-env@npm:^7.18.6, @babel/preset-env@npm:^7.19.4, @babel/preset-env@npm:^7.20.2":
+"@babel/preset-env@npm:^7.11.0, @babel/preset-env@npm:^7.12.1, @babel/preset-env@npm:^7.16.4, @babel/preset-env@npm:^7.18.6, @babel/preset-env@npm:^7.19.4, @babel/preset-env@npm:^7.26.0":
   version: 7.26.0
   resolution: "@babel/preset-env@npm:7.26.0"
   dependencies:
@@ -1909,7 +1909,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/preset-react@npm:^7.12.5, @babel/preset-react@npm:^7.16.0, @babel/preset-react@npm:^7.18.6":
+"@babel/preset-react@npm:^7.12.5, @babel/preset-react@npm:^7.16.0, @babel/preset-react@npm:^7.18.6, @babel/preset-react@npm:^7.25.9":
   version: 7.25.9
   resolution: "@babel/preset-react@npm:7.25.9"
   dependencies:
@@ -2288,7 +2288,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/core@npm:2.4.3, @docusaurus/core@npm:^2.3.1":
+"@docusaurus/core@npm:2.4.3, @docusaurus/core@npm:^2.4.3":
   version: 2.4.3
   resolution: "@docusaurus/core@npm:2.4.3"
   dependencies:
@@ -2596,7 +2596,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/preset-classic@npm:^2.3.1":
+"@docusaurus/preset-classic@npm:^2.4.3":
   version: 2.4.3
   resolution: "@docusaurus/preset-classic@npm:2.4.3"
   dependencies:
@@ -2695,7 +2695,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/theme-mermaid@npm:^2.3.1":
+"@docusaurus/theme-mermaid@npm:^2.4.3":
   version: 2.4.3
   resolution: "@docusaurus/theme-mermaid@npm:2.4.3"
   dependencies:
@@ -3508,7 +3508,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mdx-js/mdx@npm:^2.2.1":
+"@mdx-js/mdx@npm:^2.3.0":
   version: 2.3.0
   resolution: "@mdx-js/mdx@npm:2.3.0"
   dependencies:
@@ -3533,7 +3533,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mdx-js/react@npm:^1.6.21, @mdx-js/react@npm:^1.6.22":
+"@mdx-js/react@npm:^1.6.22":
   version: 1.6.22
   resolution: "@mdx-js/react@npm:1.6.22"
   peerDependencies:
@@ -3693,7 +3693,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rollup/plugin-babel@npm:^6.0.3":
+"@rollup/plugin-babel@npm:^6.0.4":
   version: 6.0.4
   resolution: "@rollup/plugin-babel@npm:6.0.4"
   dependencies:
@@ -3712,7 +3712,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rollup/plugin-commonjs@npm:^24.0.1":
+"@rollup/plugin-commonjs@npm:^24.1.0":
   version: 24.1.0
   resolution: "@rollup/plugin-commonjs@npm:24.1.0"
   dependencies:
@@ -3759,7 +3759,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rollup/plugin-typescript@npm:^11.0.0":
+"@rollup/plugin-typescript@npm:^11.1.6":
   version: 11.1.6
   resolution: "@rollup/plugin-typescript@npm:11.1.6"
   dependencies:
@@ -4562,7 +4562,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jest@npm:^28.1.6":
+"@types/jest@npm:^28.1.8":
   version: 28.1.8
   resolution: "@types/jest@npm:28.1.8"
   dependencies:
@@ -4661,7 +4661,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^18.11.19":
+"@types/node@npm:^18.19.64":
   version: 18.19.64
   resolution: "@types/node@npm:18.19.64"
   dependencies:
@@ -4726,7 +4726,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:^17.0.18":
+"@types/react-dom@npm:^17.0.25":
   version: 17.0.25
   resolution: "@types/react-dom@npm:17.0.25"
   dependencies:
@@ -4777,7 +4777,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:^17, @types/react@npm:^17.0.53":
+"@types/react@npm:^17, @types/react@npm:^17.0.83":
   version: 17.0.83
   resolution: "@types/react@npm:17.0.83"
   dependencies:
@@ -4896,7 +4896,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/unist@npm:^2, @types/unist@npm:^2.0.0, @types/unist@npm:^2.0.2, @types/unist@npm:^2.0.3, @types/unist@npm:^2.0.6":
+"@types/unist@npm:^2, @types/unist@npm:^2.0.0, @types/unist@npm:^2.0.11, @types/unist@npm:^2.0.2, @types/unist@npm:^2.0.3":
   version: 2.0.11
   resolution: "@types/unist@npm:2.0.11"
   checksum: 6d436e832bc35c6dde9f056ac515ebf2b3384a1d7f63679d12358766f9b313368077402e9c1126a14d827f10370a5485e628bf61aa91117cf4fc882423191a4e
@@ -4955,7 +4955,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@npm:^5.5.0, @typescript-eslint/eslint-plugin@npm:^5.50.0":
+"@typescript-eslint/eslint-plugin@npm:^5.5.0, @typescript-eslint/eslint-plugin@npm:^5.62.0":
   version: 5.62.0
   resolution: "@typescript-eslint/eslint-plugin@npm:5.62.0"
   dependencies:
@@ -4990,7 +4990,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:^5.5.0, @typescript-eslint/parser@npm:^5.50.0":
+"@typescript-eslint/parser@npm:^5.5.0, @typescript-eslint/parser@npm:^5.62.0":
   version: 5.62.0
   resolution: "@typescript-eslint/parser@npm:5.62.0"
   dependencies:
@@ -7067,7 +7067,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commitizen@npm:^4.0.3, commitizen@npm:^4.3.0":
+"commitizen@npm:^4.0.3, commitizen@npm:^4.3.1":
   version: 4.3.1
   resolution: "commitizen@npm:4.3.1"
   dependencies:
@@ -9179,7 +9179,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-standard@npm:^17.0.0":
+"eslint-config-standard@npm:^17.1.0":
   version: 17.1.0
   resolution: "eslint-config-standard@npm:17.1.0"
   peerDependencies:
@@ -9252,7 +9252,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-import@npm:^2.25.3, eslint-plugin-import@npm:^2.27.5":
+"eslint-plugin-import@npm:^2.25.3, eslint-plugin-import@npm:^2.31.0":
   version: 2.31.0
   resolution: "eslint-plugin-import@npm:2.31.0"
   dependencies:
@@ -9298,7 +9298,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-jsdoc@npm:^39.8.0":
+"eslint-plugin-jsdoc@npm:^39.9.1":
   version: 39.9.1
   resolution: "eslint-plugin-jsdoc@npm:39.9.1"
   dependencies:
@@ -9340,7 +9340,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-n@npm:^15.6.1":
+"eslint-plugin-n@npm:^15.7.0":
   version: 15.7.0
   resolution: "eslint-plugin-n@npm:15.7.0"
   dependencies:
@@ -9374,7 +9374,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-promise@npm:^6.1.1":
+"eslint-plugin-promise@npm:^6.6.0":
   version: 6.6.0
   resolution: "eslint-plugin-promise@npm:6.6.0"
   peerDependencies:
@@ -9392,7 +9392,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-react@npm:^7.27.1, eslint-plugin-react@npm:^7.32.2":
+"eslint-plugin-react@npm:^7.27.1, eslint-plugin-react@npm:^7.37.2":
   version: 7.37.2
   resolution: "eslint-plugin-react@npm:7.37.2"
   dependencies:
@@ -9508,7 +9508,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:^8.3.0, eslint@npm:^8.33.0":
+"eslint@npm:^8.3.0, eslint@npm:^8.57.1":
   version: 8.57.1
   resolution: "eslint@npm:8.57.1"
   dependencies:
@@ -9646,7 +9646,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"estree-util-to-js@npm:^1.1.0":
+"estree-util-to-js@npm:^1.1.0, estree-util-to-js@npm:^1.2.0":
   version: 1.2.0
   resolution: "estree-util-to-js@npm:1.2.0"
   dependencies:
@@ -9657,7 +9657,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"estree-util-visit@npm:^1.0.0, estree-util-visit@npm:^1.2.0":
+"estree-util-visit@npm:^1.0.0, estree-util-visit@npm:^1.2.1":
   version: 1.2.1
   resolution: "estree-util-visit@npm:1.2.1"
   dependencies:
@@ -10848,7 +10848,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hast-util-from-html@npm:^1.0.1":
+"hast-util-from-html@npm:^1.0.2":
   version: 1.0.2
   resolution: "hast-util-from-html@npm:1.0.2"
   dependencies:
@@ -10984,7 +10984,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hast-util-to-estree@npm:^2.0.0, hast-util-to-estree@npm:^2.1.0":
+"hast-util-to-estree@npm:^2.0.0, hast-util-to-estree@npm:^2.3.3":
   version: 2.3.3
   resolution: "hast-util-to-estree@npm:2.3.3"
   dependencies:
@@ -14115,7 +14115,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mdast-util-from-markdown@npm:^1.0.0, mdast-util-from-markdown@npm:^1.1.0, mdast-util-from-markdown@npm:^1.2.0":
+"mdast-util-from-markdown@npm:^1.0.0, mdast-util-from-markdown@npm:^1.1.0, mdast-util-from-markdown@npm:^1.3.1":
   version: 1.3.1
   resolution: "mdast-util-from-markdown@npm:1.3.1"
   dependencies:
@@ -14168,7 +14168,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mdast-util-mdx@npm:^2.0.0":
+"mdast-util-mdx@npm:^2.0.0, mdast-util-mdx@npm:^2.0.1":
   version: 2.0.1
   resolution: "mdast-util-mdx@npm:2.0.1"
   dependencies:
@@ -14293,13 +14293,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "mdx-mermaid-doc@workspace:doc"
   dependencies:
-    "@docusaurus/core": ^2.3.1
-    "@docusaurus/preset-classic": ^2.3.1
-    "@docusaurus/theme-mermaid": ^2.3.1
-    "@mdx-js/react": ^1.6.21
+    "@docusaurus/core": ^2.4.3
+    "@docusaurus/preset-classic": ^2.4.3
+    "@docusaurus/theme-mermaid": ^2.4.3
+    "@mdx-js/react": ^1.6.22
     clsx: ^1.2.1
     mdx-mermaid: ^1.3.2
-    mermaid: ^9.3.0
+    mermaid: ^9.4.3
     prism-react-renderer: ^1.3.5
     react: ^17.0.2
     react-dom: ^17.0.2
@@ -14310,20 +14310,20 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "mdx-mermaid-example@workspace:examples/mdx-example"
   dependencies:
-    "@babel/core": ^7.20.12
-    "@babel/preset-env": ^7.20.2
-    "@babel/preset-react": ^7.18.6
-    "@mdx-js/mdx": ^2.2.1
-    "@rollup/plugin-babel": ^6.0.3
-    "@rollup/plugin-commonjs": ^24.0.1
-    eslint: ^8.33.0
+    "@babel/core": ^7.26.0
+    "@babel/preset-env": ^7.26.0
+    "@babel/preset-react": ^7.25.9
+    "@mdx-js/mdx": ^2.3.0
+    "@rollup/plugin-babel": ^6.0.4
+    "@rollup/plugin-commonjs": ^24.1.0
+    eslint: ^8.57.1
     eslint-config-airbnb-base: ^15.0.0
-    eslint-plugin-import: ^2.27.5
-    hast-util-from-html: ^1.0.1
+    eslint-plugin-import: ^2.31.0
+    hast-util-from-html: ^1.0.2
     hast-util-to-html: ^8.0.4
     hast-util-to-mdast: ^8.4.1
     mdx-mermaid: "workspace:*"
-    puppeteer: ^22.13.1
+    puppeteer: ^22.15.0
     react: ^17.0.2
     react-dom: ^17.0.2
     rollup: ^3.29.5
@@ -14334,17 +14334,17 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "mdx-mermaid-react-example-app@workspace:examples/react-example-app"
   dependencies:
-    "@types/node": ^18.11.19
-    "@types/react": ^17.0.53
-    "@types/react-dom": ^17.0.18
+    "@types/node": ^18.19.64
+    "@types/react": ^17.0.83
+    "@types/react-dom": ^17.0.25
     mdx-mermaid: "workspace:*"
-    mermaid: ^9.3.0
+    mermaid: ^9.4.3
     react: ^17.0.2
     react-dom: ^17.0.2
-    react-markdown: ^8.0.5
+    react-markdown: ^8.0.7
     react-scripts: 5.0.1
     typescript: ^4.9.5
-    web-vitals: ^3.1.1
+    web-vitals: ^3.5.2
   languageName: unknown
   linkType: soft
 
@@ -14352,7 +14352,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "mdx-mermaid-workspace@workspace:."
   dependencies:
-    commitizen: ^4.3.0
+    commitizen: ^4.3.1
     cz-conventional-changelog: ^3.3.0
   languageName: unknown
   linkType: soft
@@ -14372,43 +14372,43 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "mdx-mermaid@workspace:lib"
   dependencies:
-    "@babel/core": ^7.20.12
-    "@babel/preset-env": ^7.20.2
-    "@babel/preset-react": ^7.18.6
-    "@mdx-js/mdx": ^2.2.1
-    "@rollup/plugin-babel": ^6.0.3
-    "@rollup/plugin-commonjs": ^24.0.1
-    "@rollup/plugin-typescript": ^11.0.0
+    "@babel/core": ^7.26.0
+    "@babel/preset-env": ^7.26.0
+    "@babel/preset-react": ^7.25.9
+    "@mdx-js/mdx": ^2.3.0
+    "@rollup/plugin-babel": ^6.0.4
+    "@rollup/plugin-commonjs": ^24.1.0
+    "@rollup/plugin-typescript": ^11.1.6
     "@testing-library/react": ^11.2.7
-    "@types/jest": ^28.1.6
-    "@types/react": ^17.0.53
-    "@types/unist": ^2.0.6
-    "@typescript-eslint/eslint-plugin": ^5.50.0
-    "@typescript-eslint/parser": ^5.50.0
-    eslint: ^8.33.0
-    eslint-config-standard: ^17.0.0
-    eslint-plugin-import: ^2.27.5
-    eslint-plugin-jsdoc: ^39.8.0
-    eslint-plugin-n: ^15.6.1
+    "@types/jest": ^28.1.8
+    "@types/react": ^17.0.83
+    "@types/unist": ^2.0.11
+    "@typescript-eslint/eslint-plugin": ^5.62.0
+    "@typescript-eslint/parser": ^5.62.0
+    eslint: ^8.57.1
+    eslint-config-standard: ^17.1.0
+    eslint-plugin-import: ^2.31.0
+    eslint-plugin-jsdoc: ^39.9.1
+    eslint-plugin-n: ^15.7.0
     eslint-plugin-node: ^11.1.0
-    eslint-plugin-promise: ^6.1.1
-    eslint-plugin-react: ^7.32.2
-    estree-util-to-js: ^1.1.0
-    estree-util-visit: ^1.2.0
-    hast-util-from-html: ^1.0.1
-    hast-util-to-estree: ^2.1.0
+    eslint-plugin-promise: ^6.6.0
+    eslint-plugin-react: ^7.37.2
+    estree-util-to-js: ^1.2.0
+    estree-util-visit: ^1.2.1
+    hast-util-from-html: ^1.0.2
+    hast-util-to-estree: ^2.3.3
     jest: ^28.1.3
     jest-environment-jsdom: ^28.1.3
-    mdast-util-from-markdown: ^1.2.0
-    mdast-util-mdx: ^2.0.0
-    mermaid: ^9.3.0
-    micromark-extension-mdxjs: ^1.0.0
-    puppeteer: ^22.13.1
+    mdast-util-from-markdown: ^1.3.1
+    mdast-util-mdx: ^2.0.1
+    mermaid: ^9.4.3
+    micromark-extension-mdxjs: ^1.0.1
+    puppeteer: ^22.15.0
     react: ^17.0.2
     react-dom: ^17.0.2
     rimraf: ^3.0.2
     rollup: ^3.29.5
-    ts-jest: ^28.0.7
+    ts-jest: ^28.0.8
     typescript: ^4.9.5
     unist-util-visit: ^4.1.2
   peerDependencies:
@@ -14479,7 +14479,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mermaid@npm:^9.2.2, mermaid@npm:^9.3.0":
+"mermaid@npm:^9.2.2, mermaid@npm:^9.4.3":
   version: 9.4.3
   resolution: "mermaid@npm:9.4.3"
   dependencies:
@@ -14594,7 +14594,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"micromark-extension-mdxjs@npm:^1.0.0":
+"micromark-extension-mdxjs@npm:^1.0.0, micromark-extension-mdxjs@npm:^1.0.1":
   version: 1.0.1
   resolution: "micromark-extension-mdxjs@npm:1.0.1"
   dependencies:
@@ -17174,7 +17174,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"puppeteer@npm:^22.13.1":
+"puppeteer@npm:^22.15.0":
   version: 22.15.0
   resolution: "puppeteer@npm:22.15.0"
   dependencies:
@@ -17468,7 +17468,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-markdown@npm:^8.0.5":
+"react-markdown@npm:^8.0.7":
   version: 8.0.7
   resolution: "react-markdown@npm:8.0.7"
   dependencies:
@@ -19830,7 +19830,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-jest@npm:^28.0.7":
+"ts-jest@npm:^28.0.8":
   version: 28.0.8
   resolution: "ts-jest@npm:28.0.8"
   dependencies:
@@ -20803,7 +20803,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"web-vitals@npm:^3.1.1":
+"web-vitals@npm:^3.5.2":
   version: 3.5.2
   resolution: "web-vitals@npm:3.5.2"
   checksum: 4c208bb9384073c772055e9265a4cad4560dbbaeb111ec615ee23e71bbb952aacdf4e6bb8ffbfbe02b23540ac4f08d569d49fc0cd1e5d29c6c0ced566965320a
