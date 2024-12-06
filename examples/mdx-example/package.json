@@ -1,6 +1,6 @@
 {
   "name": "mdx-mermaid-example",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "module": "dist/esm/index.mjs",
   "type": "module",
   "scripts": {

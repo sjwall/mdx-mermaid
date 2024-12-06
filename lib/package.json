@@ -1,6 +1,6 @@
 {
   "name": "mdx-mermaid",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Display mermaid diagrams in mdx files.",
   "types": "index.d.ts",
   "main": "lib/mdxast-mermaid.js",
