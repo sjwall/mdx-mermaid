@@ -85,3 +85,30 @@ Mermaid config can be configured through the plugin config:
 When passing config to the `<Mermaid>` component only the first instance should have the config passed to it.
 If no config is passed to any component then Mermaid will not initialize.
 This is not an issue when using in `.mdx` files as the parser will handle this.
+
+:::
+
+## SVG Output
+
+It is possible to render the diagrams to an SVG at build time.
+This is useful for server-side rendering (SSR) and to display diagrams to users without JavaScript.
+
+This mode requires the `optionalDependencies` to be installed.
+
+```sh
+yarn add puppeteer estree-util-to-js estree-util-visit hast-util-from-html hast-util-to-estree mdast-util-from-markdown mdast-util-mdx micromark-extension-mdxjs
+```
+
+Then in your config, add the `output` option:
+
+```js title=docusaurus.config.js
+{
+  mermaid: { output: 'svg' }
+}
+```
+
+:::caution
+
+This documentation website uses the component mode, so a live example of an SVG rendered diagram cannot be shown.
+
+:::

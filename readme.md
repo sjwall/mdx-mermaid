@@ -73,6 +73,26 @@ import { Mermaid } from 'mdx-mermaid/Mermaid';
 
 There are more examples [here][examples]
 
+## SVG output
+
+For server-side rendering, the output mode can be set to `svg`.
+This renders the diagram at build time using `puppeteer`.
+This mode requires the `optionalDependencies` to be installed.
+
+```sh
+yarn add puppeteer estree-util-to-js estree-util-visit hast-util-from-html hast-util-to-estree mdast-util-from-markdown mdast-util-mdx micromark-extension-mdxjs
+```
+
+Configure the plugin:
+
+```js
+import mdxMermaid from 'mdx-mermaid'
+
+export default {
+  remarkPlugins: [[mdxMermaid.default, {output: 'svg'}]]
+}
+```
+
 ## License
 
 [MIT][license] © [Samuel Wall][author]
