@@ -4,11 +4,7 @@
 	"name": "mdx-mermaid",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
   "build": {
-		"dockerfile": "Dockerfile",
-		// Update 'VARIANT' to pick a Node version: 12, 14, 16
-		"args": {
-			"VARIANT": "18"
-		}
+		"dockerfile": "Dockerfile"
 	},
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
